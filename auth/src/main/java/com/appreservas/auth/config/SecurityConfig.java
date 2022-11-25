@@ -54,7 +54,7 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable()) //disable cross site scripting
                 .authorizeRequests(auth -> auth
-                        .mvcMatchers("/token", "/register").permitAll()
+                        .mvcMatchers("/login", "/register", "/forgotpassword").permitAll()
                         .anyRequest().authenticated()) //request auth in all requests
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //disable session manager
