@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: com.appreservas.AppreservasApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 4.884 s <<< FAILURE! - in com.appreservas.AppreservasApplicationTests
+contextLoads  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityConfig' defined in file [C:\IPCA\AppReservas\appreservas\target\classes\com\appreservas\security\SecurityConfig.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.boot.context.properties.ConfigurationPropertiesBindException: Error creating bean with name 'rsa-com.appreservas.security.RsaKeyProperties': Could not bind properties to 'RsaKeyProperties' : prefix=rsa, ignoreInvalidFields=false, ignoreUnknownFields=true; nested exception is org.springframework.boot.context.properties.bind.BindException: Failed to bind properties under 'rsa.public-key' to java.security.interfaces.RSAPublicKey
+Caused by: org.springframework.boot.context.properties.ConfigurationPropertiesBindException: Error creating bean with name 'rsa-com.appreservas.security.RsaKeyProperties': Could not bind properties to 'RsaKeyProperties' : prefix=rsa, ignoreInvalidFields=false, ignoreUnknownFields=true; nested exception is org.springframework.boot.context.properties.bind.BindException: Failed to bind properties under 'rsa.public-key' to java.security.interfaces.RSAPublicKey
+Caused by: org.springframework.boot.context.properties.bind.BindException: Failed to bind properties under 'rsa.public-key' to java.security.interfaces.RSAPublicKey
+Caused by: org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [java.security.interfaces.RSAPublicKey] for value 'classpath:certs/public.pem'; nested exception is java.io.UncheckedIOException: java.io.FileNotFoundException: class path resource [certs/public.pem] cannot be opened because it does not exist
+Caused by: java.io.UncheckedIOException: java.io.FileNotFoundException: class path resource [certs/public.pem] cannot be opened because it does not exist
+Caused by: java.io.FileNotFoundException: class path resource [certs/public.pem] cannot be opened because it does not exist
+
