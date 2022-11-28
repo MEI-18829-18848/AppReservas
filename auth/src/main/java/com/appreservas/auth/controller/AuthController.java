@@ -55,8 +55,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity token(@RequestBody LoginRequest userLogin){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userLogin.username(), userLogin.password()));
+        Map<String, Object> response = Map.of("token",tokenService.generateToken(authentication, jpaUserDetailsService.loadUserByUsername(userLogin.username())));
+        LOG.info("Valid Login for user: "+ userLogin.username());
         return ResponseEntity.status(HttpStatus.OK).body(
-            Map.of("token",tokenService.generateToken(authentication, jpaUserDetailsService.loadUserByUsername(userLogin.username())))
+                response
         );
     }
 
@@ -107,7 +109,7 @@ public class AuthController {
 
     private EmailDetails buildForgotPasswordEmail(String username, String newPassword, String userEmail){
         EmailDetails ed = new EmailDetails();
-        ed.setMsgBody("Looks like you forgot your password.\nHere is your new password for the username"+ username+ "\nNew Password: "+newPassword);
+        ed.setMsgBody("Looks like you forgot your password.\nHere is your new password for the username "+ username+ "\nNew Password: "+newPassword);
         ed.setSubject("Your new AppReservas Password");
         ed.setRecipient(userEmail);
         return ed;
