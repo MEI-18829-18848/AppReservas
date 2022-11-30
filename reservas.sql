@@ -1,26 +1,3 @@
-CREATE DATABASE appreservas;
-
-\c appreservas;
-
-CREATE SCHEMA IF NOT EXISTS auth;
-
-SET search_path TO auth;
-
-DROP TABLE IF EXISTS users;
-
-CREATE TABLE IF NOT EXISTS users(
-  appuserid SERIAL PRIMARY KEY,
-  username VARCHAR(45) NOT NULL,
-  email VARCHAR(45) NOT NULL,
-  firstname VARCHAR(45) ,
-  lastname VARCHAR(45) ,
-  roles VARCHAR(45) NOT NULL,
-  password VARCHAR(255) NOT NULL
-);
-
-CREATE SCHEMA IF NOT EXISTS reservas;
-
-SET search_path TO reservas;
 
 DROP TABLE IF EXISTS Utilizador;
 CREATE TABLE IF NOT EXISTS Utilizador (
