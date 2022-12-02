@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+        "target": "https://quiet-crag-88107.herokuapp.com",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

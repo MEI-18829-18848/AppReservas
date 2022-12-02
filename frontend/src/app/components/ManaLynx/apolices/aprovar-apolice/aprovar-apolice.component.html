@@ -1,0 +1,101 @@
+<div class="grid">
+    <div class="col-12 md:col-8">
+        <div class="card p-fluid">
+            <h5>Apolice - {{id}}</h5>
+            <div class="field">
+                <label>Tipo de Seguro</label>
+                <input type="text" pInputText [(ngModel)]="tipoSeguro" readonly/>
+            </div>
+            <div class="field">
+                <label>Seguro</label>
+                <input type="text" pInputText [(ngModel)]="seguro" readonly/>
+            </div>
+            <div class="field" >
+                <label>Agente</label>
+                <input type="text" pInputText [(ngModel)]="agente" readonly/>
+            </div>
+            <div class="field">
+                <label>Cliente</label>
+                <input type="text" pInputText [(ngModel)]="cliente" readonly/>
+            </div>
+
+            <div class="field">
+                <label>Fracionamento</label>
+                <input type="text" pInputText [(ngModel)]="fracionamento" readonly/>
+            </div>
+        </div>
+        <div class="card p-fluid" *ngIf="tipoSeguro=='Veiculo'">
+            <h5>Apolice Veiculo</h5>
+            <div class="p-formgrid grid">
+                <div class="field col">
+                    <label htmlFor="name2">Data Carta Condução</label>
+                    <input type="text" pInputText [(ngModel)]="dataCartaConducao" readonly/>
+                </div>
+                <div class="field col">
+                    <label htmlFor="acidentes-recentes">Acidentes Recentes</label>
+                    <input type="text" pInputText [(ngModel)]="acidentesRecentes" readonly/>
+                </div>
+            </div>
+            <div class="field">
+                <label>Categoria Veiculo</label>
+                <input type="text" pInputText [(ngModel)]="categoriaVeiculo" readonly/>
+            </div>
+            <div class="field">
+                <label>Veiculo</label>
+                <input type="text" pInputText [(ngModel)]="veiculo" readonly/>
+            </div>
+        </div>
+        <div class="card p-fluid" *ngIf="tipoSeguro=='Pessoal'">
+            <h5>Apolice Pessoal</h5>
+            <div class="field">
+                <label htmlFor="valor-apolice-pessoal">Valor</label>
+                <input type="text" pInputText [(ngModel)]="valorPessoal" readonly/>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 md:col-4">
+        <div class="card ">
+            <h5>Valor Estimado</h5>
+            <div class=" grid">
+                <div class="col-7 text-blue-500">
+                    <h1 class="mt-1" style="text-align:right">{{valor | number:'1.2-2'}}€</h1>
+                </div>
+                <div class="col-5">
+                    <h3 class="mt-3"
+                        *ngIf="fracionamento!=undefined">{{fracionamento}}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="card p-fluid">
+            <h5>Coberturas</h5>
+            <p-table [value]="coberturas" scrollDirection="both" [scrollable]="true" styleClass="mt-3"
+                     responsiveLayout="scroll">
+                <ng-template pTemplate="body" let-cobertura>
+                    <tr>
+                        <td style="width: 20%">
+                            <div class="field-checkbox mb-0">
+                                <i class="pi pi-check text-blue-500 text-xl"></i>
+                            </div>
+                        </td>
+                        <td style="width: 80%">{{cobertura.descricaoCobertura}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+        <div class="md:col-2">
+            <!-- Spacer -->
+        </div>
+        <div class="col-12 md:col-4" style="display: flex;align-items: center;justify-content: center;">
+            <button pButton pRipple type="button" label="Cancelar" (click)="cancelarApolice()" class="p-button-danger mr-2 mb-2" style="width:100%"></button>
+        </div>
+        <div class="col-12 md:col-4" style="display: flex;align-items: center;justify-content: center;">
+            <button pButton pRipple type="button" label="Aprovar" (click)="aprovarApolice()" class="mr-2 mb-2" style="width:100%"></button>
+        </div>
+        <div class="md:col-2">
+            <!-- Spacer -->
+        </div>
+</div>
+

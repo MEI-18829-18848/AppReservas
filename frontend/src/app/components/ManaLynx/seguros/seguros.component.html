@@ -1,0 +1,93 @@
+<div class="grid">
+    <div class="col-12 lg:col-8">
+
+        <div class="card p-fluid">
+            <h5>Novo Seguro</h5>
+            <div class="p-formgrid grid">
+                <div class="field col-12 md:col-5">
+                    <label htmlFor="seguroNome">Tipo Seguro</label>
+                    <p-dropdown [options]="tipos_seguro" [(ngModel)]="tipo_seguro"></p-dropdown>
+                </div>
+                <div class="field col-12 md:col-7">
+                    <label htmlFor="seguroNome">Nome do Seguro</label>
+                    <input pInputText id="seguroNome" type="text" [(ngModel)]="nome_seguro"/>
+                </div>
+                <div class="col-3"></div>
+                <div class="col-6" style="display: flex;align-items: center;justify-content: center;">
+                    <button (click)="postSeguro()" pButton pRipple label="Criar Seguro"></button>
+                </div>
+                <div class="col-3"></div>
+            </div>
+        </div>
+
+        <div class="card p-fluid">
+            <h5>Associar Coberturas</h5>
+            <div class="p-formgrid grid">
+                <div class="field col-12">
+                    <label htmlFor="seguroSubtipo3">Nome do Seguro</label>
+                    <p-dropdown [options]="tipos_seguro" [(ngModel)]="cobertura_seguro" placeholder="Selecionar Tipo" [showClear]="true"></p-dropdown>
+                </div>
+                <div class="col-3"></div>
+                <div class="col-6" style="display: flex;align-items: center;justify-content: center;">
+                    <button pButton pRipple label="Adicionar Coberturas"></button>
+                </div>
+                <div class="col-3"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-12 lg:col-4">
+    <div class="card p-fluid">
+        <h5>Seguros</h5>
+        <p-table #dt1 [value]="seguros" dataKey="id" [rows]="8" [rowHover]="true" [paginator]="true" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Tipo
+                            <p-column type="text" field="name"></p-column>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Seguro
+                            <p-column type="text" field="name"></p-column>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Eliminar
+                            <p-column type="text" field="name"></p-column>
+                        </div>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-seguro>
+                <tr>
+                    <td style="min-width: 10rem;">
+                        {{seguro.tipo}}
+                    </td>
+                    <td style="min-width: 12rem;">
+                        {{seguro.nome}}
+                    </td>
+                    <td style="min-width: 6rem;">
+			            <button (click)="removeSeguro(seguro)" pButton pRipple type="button" class="p-button-danger p-button-text mr-2 mb-2"><i class="pi pi-times"></i></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">No customers found.</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="loadingbody">
+                <tr>
+                    <td colspan="7">Loading customers data. Please wait.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+    </div>
+</div>
