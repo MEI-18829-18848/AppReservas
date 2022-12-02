@@ -1,0 +1,44 @@
+<div class="layout-topbar">
+    <a class="layout-topbar-logo pl-1" style="width: 175px;"  routerLink="">
+        <img src="assets/layout/images/{{appMain.config.dark ? 'logo' : 'logo'}}.png" alt="logo">
+        <span>ManaLynx</span>
+        <h6 class="mb-5" style="font-size: 0.75rem; color: var(--yellow-500)">{{this.dashboardRole}}</h6>
+    </a>
+
+    <a class="p-link layout-menu-button layout-topbar-button" href="#" (click)="appMain.toggleMenu($event)">
+        <i *ngIf="appMain.staticMenuInactive" class="pi pi-chevron-right"></i>
+        <i *ngIf="!appMain.staticMenuInactive" class="pi pi-chevron-right" style="transform: rotate(180deg);" ></i>
+
+    </a>
+
+    <a class="p-link layout-topbar-menu-button layout-topbar-button" href="#" (click)="appMain.toggleTopMenu($event)">
+        <i class="pi pi-ellipsis-v"></i>
+    </a>
+
+    <div class="layout-topbar-name">
+        <span *ngIf="this.name">
+            {{this.name}}
+        </span>
+        <span *ngIf="!this.name">
+            Could not get name
+        </span>
+    </div>
+
+    <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active':appMain.topMenuActive}">
+        <a class="p-link layout-topbar-button"  (click)="onConfigButtonClick($event)">
+            <i class="pi pi-cog" ></i>
+            <span>Settings</span>
+        </a>
+        <a class="p-link layout-topbar-button" (click)="menu.toggle($event)">
+            <img src={{this.image}} alt="">
+            <span>Profile</span>
+            <p-overlayPanel #menu>
+                <div>
+                    <button pButton pRipple type="button" icon="pi pi-user-edit" label="Dados Pessoais" iconPos="right" class="p-button-secondary p-button-text mr-2 mb-2" routerLink="/dadospessoais"></button>
+                    <button pButton pRipple type="button" label="Logout" icon="pi pi-power-off" iconPos="right"  class="p-button-danger mr-2 mb-2" (click)="logout()"></button>
+                </div>
+            </p-overlayPanel>
+        </a>
+    </div>
+</div>
+ 

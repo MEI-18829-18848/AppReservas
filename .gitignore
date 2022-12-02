@@ -25,3 +25,4 @@ hs_err_pid*
 /db-data/*
 /elasticsearch-data-volume/*
 /portainer-data/*
+/frontend/node-modules/*

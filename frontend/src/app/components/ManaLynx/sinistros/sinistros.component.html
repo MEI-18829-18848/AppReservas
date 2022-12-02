@@ -1,0 +1,324 @@
+<div class="grid">
+    <div class="col-12 lg:col-6">
+            <p-dialog header="Dialog" [(visible)]="display" modal="modal" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px': '75vw'}">
+                <p class="line-height-3 m-0">
+                    {{display_content}}
+                </p>
+                <ng-template pTemplate="footer">
+                        <button pButton icon="pi pi-check" (click)="display=false" label="Fechar" class="p-button-outlined"></button>
+                </ng-template>
+            </p-dialog>
+
+        <div *ngIf="role != 'Cliente'" class="card p-fluid">
+            <h5>Detalhes do Sinistro</h5>
+            <div class="p-formgrid grid">
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="apoliceNome">Data do sinistro</label>
+                    <input pInputText id="apoliceNome" type="text" disabled [(ngModel)]="data"/>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="apoliceNome">Estado</label>
+                    <input pInputText type="text" disabled [(ngModel)]="estado" disabled/>
+                </div>
+                <div class="field col-12">
+                    <label htmlFor="apoliceTipo">Descricao</label>
+                    <textarea pInputText id="apoliceTipo" type="text" style="resize: none;" [(ngModel)]="descricao" rows="3"></textarea>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="apoliceAgente">Reembolso</label>
+                    <input pInputText id="apoliceAgente" type="text" [(ngModel)]="reembolso"/>
+                </div>
+                <div class="field col-12 md:col-3">
+                    <label htmlFor="apoliceAgente">Valido?</label>
+                    <p-dropdown [options]="sn" [(ngModel)]="valido" ></p-dropdown>
+                </div>
+                <div class="field col-12 md:col-3">
+                    <label htmlFor="apoliceAgente">Deferido?</label>
+                    <p-dropdown [options]="sn" [(ngModel)]="deferido"></p-dropdown>
+                </div> 
+                <div *ngIf="id != null" class="col-12 md:col-6" style="display: flex;align-items: center;justify-content: center;">
+                    <button (click)="putSinistro()" pButton pRipple label="Atualizar Sinistro" class="p-button mr-2 mb-2"></button>
+                </div>
+                <div *ngIf="id != null" class="col-12 md:col-6" style="display: flex;align-items: center;justify-content: center;">
+                    <button (click)="toggleProva()" pButton pRipple label="Adicionar Prova" class="p-button-secondary mr-2 mb-2"></button>
+                </div>
+                <div *ngIf="id != null && role == 'Admin'" class="col-12" style="display: flex;align-items: center;justify-content: center;">
+                    <button (click)="toggleRelatorio()" pButton pRipple label="Adicionar Relatório" class="p-button-danger mr-2 mb-2"></button>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="role == 'Cliente'" class="card p-fluid">
+            <h5>Detalhes do Sinistro</h5>
+            <div class="p-formgrid grid">
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="apoliceNome">Data do sinistro</label>
+                    <input pInputText id="apoliceNome" type="text" disabled [(ngModel)]="data"/>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="apoliceNome">Estado</label>
+                    <input pInputText type="text" [(ngModel)]="estado" disabled/>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="apoliceAgente">Reembolso</label>
+                    <input pInputText id="apoliceAgente" type="text" [(ngModel)]="reembolso" disabled />
+                </div>
+                <div class="field col-12">
+                    <label htmlFor="apoliceTipo">Descricao</label>
+                    <textarea pInputText id="apoliceTipo" type="text" style="resize: none;" [(ngModel)]="descricao" rows="3"></textarea>
+                </div>
+                <!-- validate if is user or not -->
+                    <div *ngIf="id != null" class="col-12 md:col-6" style="display: flex;align-items: center;justify-content: center;">
+                        <button (click)="putSinistro()" pButton pRipple label="Atualizar Sinistro" class="p-button mr-2 mb-2"></button>
+                    </div>
+                    <div *ngIf="id != null" class="col-12 md:col-6" style="display: flex;align-items: center;justify-content: center;">
+                        <button (click)="toggleProva()" pButton pRipple label="Adicionar Prova" class="p-button-secondary mr-2 mb-2"></button>
+                    </div>
+            </div>
+        </div>
+
+        <div *ngIf="table_prova == true" class="card p-fluid">
+            <h5>Adicionar Prova</h5>
+            <div class="p-formgrid grid">
+                <div class="field col-12">
+                    <label htmlFor="apoliceTipo">Descricao</label>
+                    <textarea pInputText id="apoliceTipo" type="text" style="resize: none;" [(ngModel)]="descricao_prova" rows="3"></textarea>
+                </div>
+                <div  class="col-12" style="display: flex;align-items: center;justify-content: center;">
+                    <button (click)="submitProva()" pButton pRipple label="Adicionar Prova" class="p-button mr-2 mb-2"></button>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="table_relatorio == true && role == 'Admin'" class="card p-fluid">
+            <h5>Adicionar Relatório</h5>
+            <div class="p-formgrid grid">
+                <div class="field col-12">
+                    <label htmlFor="apoliceTipo">Descricao</label>
+                    <textarea pInputText id="apoliceTipo" type="text" style="resize: none;" [(ngModel)]="descricao_relatorio" rows="3"></textarea>
+                </div>
+                <div class="field col-12">
+                    <label htmlFor="apoliceNome">Deferido?</label>
+                    <p-dropdown [options]="is_deferido" [(ngModel)]="descricao_deferido" ></p-dropdown>
+                </div>
+                <div  class="col-12" style="display: flex;align-items: center;justify-content: center;">
+                    <button (click)="submitRelatorio()" pButton pRipple label="Adicionar Relatório" class="p-button mr-2 mb-2"></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-12 lg:col-6">
+        <div class="card p-fluid">
+            <h5>Detalhes do Sinistro</h5>
+            <p-table #dt1 [value]="sinistros" dataKey="id" [rows]="3" [rowHover]="true" [paginator]="true" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                ID
+                                <p-column type="text" field="name"></p-column>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                Seguro
+                                <p-column type="text" field="name"></p-column>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                Estado
+                                <p-column type="text" field="name"></p-column>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                Mais Info
+                                <p-column type="text" field="name"></p-column>
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-sinistro>
+                    <tr>
+                        <td style="min-width: 2rem;">
+                            {{sinistro.id}}
+                        </td>
+                        <td style="min-width: 10rem;">
+                            {{sinistro.estado}}
+                        </td>
+                        <td style="min-width: 10rem;">
+                            {{sinistro.estado}}
+                        </td>
+                        <td style="min-width: 2rem;">
+                            <button (click)="getThisSinistro(sinistro)" pButton pRipple type="button" class="p-button-secondary p-button-text mr-2 mb-2"><i class="pi pi-eye"></i></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">No sinistros found.</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="loadingbody">
+                    <tr>
+                        <td colspan="7">Loading sinistros data. Please wait.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+            <div *ngIf="id != null">
+                <br />
+                <h5>Detalhes das Provas</h5>
+                <p-table #dt1 [value]="provas" dataKey="id" [rows]="1" [rowHover]="true" [paginator]="true" responsiveLayout="scroll">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>
+                                <div class="flex justify-content-between align-items-center">
+                                    ID
+                                    <p-column type="text" field="name"></p-column>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-between align-items-center">
+                                    Prova
+                                    <p-column type="text" field="name"></p-column>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-between align-items-center">
+                                    Data
+                                    <p-column type="text" field="name"></p-column>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-between align-items-center">
+                                    Mais Info
+                                    <p-column type="text" field="name"></p-column>
+                                </div>
+                            </th>
+                            <th *ngIf="role == 'Admin'">
+                                <div class="flex justify-content-between align-items-center">
+                                    Eliminar
+                                    <p-column type="text" field="name"></p-column>
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-provas>
+                        <tr>
+                            <td style="min-width: 2rem;">
+                                {{provas.id}}
+                            </td>
+                            <td style="min-width: 10rem;">
+                                {{provas.conteudo | slice:0:30}} ...
+                            </td>
+                            <td style="min-width: 10rem;">
+                                {{provas.dataSubmissao | slice:0:10}}
+                            </td>
+                            <td style="min-width: 2rem;">
+                                <button (click)="display=true; display_content = provas.conteudo" pButton pRipple type="button" class="p-button-secondary p-button-text mr-2 mb-2"><i class="pi pi-eye"></i></button>
+                            </td>
+                            <td *ngIf="role == 'Admin'" style="min-width: 2rem;">
+                                <button (click)="deleteThisProva(provas.id)" pButton pRipple type="button" class="p-button-danger p-button-text mr-2 mb-2"><i class="pi pi-times"></i></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="7">No provas found.</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="loadingbody">
+                        <tr>
+                            <td colspan="7">Loading provas data. Please wait.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+
+            <div *ngIf="id != null">
+                <br />
+                <h5>Detalhes dos Relatórios</h5>
+                <p-table #dt1 [value]="relatorios" dataKey="id" [rows]="1" [rowHover]="true" [paginator]="true" responsiveLayout="scroll">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>
+                                <div class="flex justify-content-between align-items-center">
+                                    ID
+                                    <p-column type="text" field="name"></p-column>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-between align-items-center">
+                                    Relatório
+                                    <p-column type="text" field="name"></p-column>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-between align-items-center">
+                                    Data
+                                    <p-column type="text" field="name"></p-column>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-between align-items-center">
+                                    Deferido?
+                                    <p-column type="text" field="name"></p-column>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-between align-items-center">
+                                    Mais Info
+                                    <p-column type="text" field="name"></p-column>
+                                </div>
+                            </th>
+                            <th *ngIf="role == 'Admin'">
+                                <div class="flex justify-content-between align-items-center">
+                                    Eliminar
+                                    <p-column type="text" field="name"></p-column>
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-relatorio>
+                        <tr>
+                            <td style="min-width: 2rem;">
+                                {{relatorio.id}}
+                            </td>
+                            <td style="min-width: 10rem;">
+                                {{relatorio.conteudo | slice:0:20}} ...
+                            </td>
+                            <td style="min-width: 10rem;">
+                                {{relatorio.dataRelatorio | slice:0:10}}
+                            </td>
+                            <td style="min-width: 10rem;">
+                                {{relatorio.deferido}}
+                            </td>
+                            <td style="min-width: 2rem;">
+                                <button (click)="display=true; display_content = relatorio.conteudo" pButton pRipple type="button" class="p-button-secondary p-button-text mr-2 mb-2"><i class="pi pi-eye"></i></button>
+                            </td>
+                            <td *ngIf="role == 'Admin'" style="min-width: 2rem;">
+                                <button (click)="deleteThisRelatorio(relatorio.id)" pButton pRipple type="button" class="p-button-danger p-button-text mr-2 mb-2"><i class="pi pi-times"></i></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="7">No relatorios found.</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="loadingbody">
+                        <tr>
+                            <td colspan="7">Loading relatorios data. Please wait.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+
+        </div>
+        
+    </div>
+</div>
