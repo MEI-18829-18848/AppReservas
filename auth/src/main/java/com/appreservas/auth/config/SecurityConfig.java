@@ -15,7 +15,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
@@ -24,7 +23,6 @@ import com.appreservas.auth.service.JpaUserDetailsService;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.web.SecurityFilterChain;
-import static org.springframework.security.config.Customizer.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -54,8 +52,8 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable()) //disable cross site scripting
                 .authorizeRequests(auth -> auth
-                        .mvcMatchers("/login", "/register", "/forgotpassword").permitAll()
-                        .anyRequest().authenticated()) //request auth in all requests
+                        .mvcMatchers("/changePassword", "/home").authenticated()
+                        .anyRequest().permitAll()) //request auth in remaining requests
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //disable session manager
                 .userDetailsService(myUserDetailsService)
