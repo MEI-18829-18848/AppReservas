@@ -1,0 +1,32 @@
+<div class="flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden" style="background: -webkit-linear-gradient(top left, #36cced, #0749d9)">
+    <div class="grid justify-content-center p-2 lg:p-0" style="min-width:60%">
+        <div class="col-12 xl:col-6 card mt-2 mb-2" style="border-radius:56px; padding:0.3rem;">
+            <div class="col-12 mt-5 text-center">
+                <img src="favicon.ico" alt="ManaLynx logo" class="" style="width: 175px; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; border-radius:15px;">
+            </div>
+            <div class="h-full w-full m-0 py-7 px-4" style="border-radius:53px; ">
+                <div class="text-center mb-5">
+                    <div class="text-900 text-3xl font-medium mb-3">Bem Vindo!</div>
+                    <span class="text-600 font-medium">Sign in para continuar</span>
+                </div>
+
+                <div class="w-full md:w-10 mx-auto">
+                    <label for="username" class="block text-900 text-xl font-medium mb-2">Username</label>
+                    <input id="username" [(ngModel)]="username" type="text" placeholder="Nome de utilizador" pInputText class="w-full mb-3" style="padding:1rem;">
+
+                    <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
+                    <p-password id="password1" [(ngModel)]="password" placeholder="Password" [toggleMask]="true" [feedback]=false styleClass="w-full mb-3"></p-password>
+
+                    <div class="flex align-items-center justify-content-center mb-5">
+                        <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Esqueceu-se da password?</a>
+                    </div>
+                    <button pButton pRipple label="Sign In" (click)="logIn()" class="w-full p-3 text-xl"></button>
+
+                    <div class="flex align-items-center justify-content-center mt-2">
+                        <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)" routerLink="/pages/register">Criar Conta</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

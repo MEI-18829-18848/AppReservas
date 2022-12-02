@@ -1,0 +1,166 @@
+<div class="grid">
+    <div class="col-12 xl:col-6" >
+        <div class="card" *ngIf="!this.formState">
+            <h5>Adicionar Equipa</h5>
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-12">
+                    <label htmlFor="nameEquipa">Nome</label>
+                    <input pInputText id="nameEquipa" type="text" maxlength="40" [(ngModel)] = "submitEquipaObj.nome"/>
+                </div>
+                <div class="field col-12">
+                    <label htmlFor="regiao">Região</label>
+                    <input pInputText id="regiao" type="text"  maxlength="40" [(ngModel)] = "submitEquipaObj.regiao"/>
+                </div>
+                <div class="card col-12" >
+                    <h6 *ngIf="!this.currentAgente" class="text-600">Selecione um Agente para Gestor da nova Equipa</h6>
+                    <h6 *ngIf="this.currentAgente" class="text-600">Agente Selecionado</h6>
+                    <h6 *ngIf="this.currentAgente">ID: {{this.currentAgente.id}}</h6>
+                    <h6 *ngIf="this.currentAgente">Nome: {{this.currentAgente.nome}}</h6>
+                    <h6 *ngIf="this.currentAgente">NAgente: {{this.currentAgente.nagente}}</h6>
+                    <h6 *ngIf="this.currentAgente">Apolices: {{this.currentAgente.apolices}}</h6>
+                </div>
+                <div class="col-12" style="display: flex;align-items: center;justify-content: center;">
+                    <p-toast></p-toast>
+                    <button (click)="confirmEquipa($event)" pButton icon="pi pi-plus" label="Adicionar Equipa"></button>
+                    <p-confirmPopup key="confirmEquipa"></p-confirmPopup>
+                </div>
+            </div>
+        </div>
+        <div class="card"  *ngIf="this.formState">
+            <h5>Adicionar Agente a {{this.currentEquipa.nome}}</h5>
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-12">
+                    <label htmlFor="name">Nome</label>
+                    <input pInputText id="name" type="text" maxlength="40" [(ngModel)]="submitAgenteObj.pessoa.nome"/>
+                </div>
+                <div class="field col-8">
+                    <label htmlFor="username">Username</label>
+                    <input pInputText id="username" type="text" maxlength="20" [(ngModel)] = "submitGestorObj.username"/>
+                </div>
+                <div class="field col-4">
+                    <label htmlFor="NAgente">Nº Agente</label>
+                    <p-inputNumber [showButtons]="true" [min]="0" [max]="999999999"
+                                   [(ngModel)]="submitAgenteObj.nAgente" id="nAgente">
+                    </p-inputNumber>
+                </div>
+                <div class="field col-12">
+                    <label htmlFor="password">Password</label>
+                    <input pInputText id="password" type="password" maxlength="20" [(ngModel)] = "submitGestorObj.password"/>
+                </div>
+                <div class="field col-12">
+                    <label htmlFor="email">Email</label>
+                    <input pInputText id="email" type="text" maxlength="40" ngModel email [(ngModel)] = "submitGestorObj.email"/>
+                </div>
+                <div class="field col-12 md:col-7">
+                    <label htmlFor="nacionality">Nacionalidade</label>
+                    <input pInputTextarea id="nacionality" maxlength="40" type="text" [(ngModel)]="submitAgenteObj.pessoa.nacionalidade"/>
+                </div>
+                <div class="field col-12 md:col-5">
+                    <label htmlFor="birth">Data de Nascimento</label>
+                    <input pInputTextarea id="birth" type="date" [(ngModel)]="submitAgenteObj.pessoa.dataNascimento"/>
+                </div>
+                <div class="field col-12 md:col-7">
+                    <label htmlFor="address">Cartão de Cidadão (CC)</label>
+                    <input pInputText ngModel maxlength="8" id="address" type="text" [(ngModel)]="submitAgenteObj.pessoa.cc"/>
+                </div>
+                <div class="field col-12 md:col-5">
+                    <label htmlFor="expire">Data de Validade</label>
+                    <input pInputTextarea id="expire" type="date" [(ngModel)]="submitAgenteObj.pessoa.validadeCc"/>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="nif">NIF</label>
+                    <input pInputText ngModel maxlength="9" id="nif" type="text" [(ngModel)]="submitAgenteObj.pessoa.nif"/>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="nss">NSS</label>
+                    <input pInputText ngModel maxlength="11" id="nss" type="text" [(ngModel)]="submitAgenteObj.pessoa.nss"/>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="nus">NUS</label>
+                    <input pInputText ngModel maxlength="9" id="nus" type="text" [(ngModel)]="submitAgenteObj.pessoa.nus"/>
+                </div>
+                <p-dropdown class="field col-12" [options]="estadosCivis" [(ngModel)]="submitAgenteObj.pessoa.estadoCivil"  placeholder="Selecione um Estado civil"
+                [showClear]="true"></p-dropdown>
+                <div class="col-12" style="display: flex;align-items: center;justify-content: center;">
+                    <p-toast></p-toast>
+                    <button (click)="confirmAgente($event)" pButton icon="pi pi-plus" label="Adicionar Agente"></button>
+                    <p-confirmPopup key="confirmAgente"></p-confirmPopup>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 xl:col-6">
+        <div class="card">
+            <h5>Lista de Equipas</h5> 
+            <p-table [value]="this.equipas" rowGroupMode="subheader" groupRowsBy="representative.name" sortField="representative.name" responsiveLayout="scroll" [scrollable]="true" scrollHeight="300px">
+                <ng-template pTemplate="header">
+                    <tr style="height: 50px;">
+                        <th style="width: 50px;"><button pButton pRipple icon="pi pi-plus" class="p-button-rounded p-button-success" (click)="changeFormState(false)" style="height: 30px;width:30px;" [disabled]="!this.formState"></button></th>
+                        <th style="min-width: 100px;">ID</th>
+                        <th style="min-width: 100px;">Nome</th>
+                        <th style="min-width: 100px;">Região</th>
+                        <th style="min-width: 100px;">Gestor</th>
+                        <th style="min-width: 80px;">Elementos</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-equipa let-rowIndex="rowIndex">
+                    <tr style="height: 50px;">
+                        <td style="width: 50px;">
+                            <button pButton pRipple icon="pi pi-chevron-down" class="p-button-rounded" style="height: 30px;width:30px;" (click)="getAgentesFromEquipa(equipa.id, equipa.nome)"></button>
+                            <!--<button pButton pRipple icon="pi pi-chevron-left" class="p-button-rounded" disabled="true"></button>-->
+                        </td>
+                        <td style="min-width: 100px;">
+                            {{equipa.id}}
+                        </td>
+                        <td style="min-width: 100px;">
+                            {{equipa.nome}}
+                        </td>
+                        <td style="min-width: 100px;">
+                            {{equipa.regiao}}
+                        </td>
+                        <td style="min-width: 100px;">
+                            {{equipa.gestorId}}
+                        </td>
+                        <td style="min-width: 80px;">
+                            {{equipa.elementos}}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <div *ngIf="this.currentEquipa.id != 0">
+                <h5>Lista de Agentes da Equipa</h5> 
+                <p-table [value]="this.agentes" rowGroupMode="subheader" groupRowsBy="representative.name" sortField="representative.name" responsiveLayout="scroll" [scrollable]="true" scrollHeight="375px">
+                    <ng-template pTemplate="header">
+                        <tr style="height: 50px;">
+                            <th style="width: 50px;"><button pButton pRipple icon="pi pi-plus" class="p-button-rounded p-button-success" (click)="changeFormState(true)" style="height: 30px;width:30px;" [disabled]="this.formState"></button></th>
+                            <th style="min-width: 100px;">ID</th>
+                            <th style="min-width: 180px;">Nome</th>
+                            <th style="min-width: 100px;">NAgente</th>
+                            <th style="min-width: 50px;">Apolices</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-agente let-rowIndex="rowIndex">
+                        <tr style="height: 50px;">
+                            <td style="width: 50px;">
+                                <button pButton pRipple icon="pi pi-chevron-left" class="p-button-rounded" style="height: 30px;width:30px;" [disabled]="agente.isGestor ||this.buttonAgenteState" (click)="changeCurrentAgente(agente)"></button>
+                            </td>
+                            <td style="min-width: 100px; ">
+                                {{agente.id}}
+                            </td>
+                            <td style="min-width: 180px;">
+                                {{agente.nome}}
+                            </td>
+                            <td style="min-width: 100px;">
+                                {{agente.nagente}}
+                            </td>
+                            <td style="min-width: 50px;">
+                                {{agente.apolices}}
+                            </td>
+                            
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

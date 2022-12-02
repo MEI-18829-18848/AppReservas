@@ -1,0 +1,225 @@
+<div class="grid">
+    <div class="col-12 lg:col-6">
+        <div class="card p-fluid">
+            <h5>Detalhes da Apólice</h5>
+            <div class="p-formgrid grid">
+                <div class="field col-12">
+                    <label htmlFor="apoliceNome">Tipo da Apólice</label>
+                    <input pInputText id="apoliceNome" type="text" disabled [(ngModel)]="tipo"/>
+                </div>
+                <div class="field col-12">
+                    <label htmlFor="apoliceTipo">Seguro Apólice</label>
+                    <input pInputText id="apoliceTipo" type="text" disabled [(ngModel)]="seguro"/>
+                </div>
+                <div *ngIf="role != 'Agente'" class="field col-12">
+                    <label htmlFor="apoliceAgente">Agente Responsável</label>
+                    <input pInputText id="apoliceAgente" type="text" disabled [(ngModel)]="agente"/>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="apoliceFracionamento">Fracionamento</label>
+                    <input pInputText id="apoliceFracionamento" type="text" disabled [(ngModel)]="fracionamento"/>
+                </div>
+                <div class="field col-12 md:col-5 sm:col-6">
+                    <label htmlFor="apoliceData">Data limite de pagamento</label>
+                    <input pInputText id="apoliceData" type="datetime" disabled [(ngModel)]="data"/>
+                </div>
+                <div class="field col-12 md:col-3 sm:col-6">
+                    <label htmlFor="apoliceValor">Valor a pagar</label>
+                    <input pInputText id="apoliceValor" type="text" disabled [(ngModel)]="valor"/>
+                </div>
+                <div *ngIf="(tipo == 'Pessoal' || tipo == 'Veiculo') && estadoSimulacao == 'Pagamento Emitido'" class="col-12 md:col-6"
+                     style="display: flex;align-items: center;justify-content: center;">
+                    <button (click)="reportarSinistro()" pButton pRipple label="Reportar Sinistro"
+                            class="p-button-danger mr-2 mb-2"></button>
+                </div>
+                <div class="col-12 md:col-6" style="display: flex;align-items: center;justify-content: center;"
+                     *ngIf="estadoSimulacao == 'Validada' ">
+                    <button (click)="aprovarApoliceButtonClick()" pButton pRipple label="Aprovar Apólice"
+                            class="p-button-success mr-2 mb-2"></button>
+                </div>
+                <div class="col-12 md:col-6" style="display: flex;align-items: center;justify-content: center;"
+                     *ngIf="role != 'Cliente' && estadoSimulacao == 'Não Validada'">
+                    <button (click)="validarApoliceButtonClick()" pButton pRipple label="Validar Apólice"
+                            class="p-button-primary mr-2 mb-2"></button>
+                </div>
+                <div class="col-12 md:col-6" style="display: flex;align-items: center;justify-content: center;"
+                     *ngIf="(role == 'Gestor' || role == 'Admin') && agente == ''">
+                    <button (click)="atribuirAgenteButtonClick()" pButton pRipple label="Atribuir Agente"
+                            class="p-button-primary mr-2 mb-2"></button>
+                </div>
+                <div class="col-12 md:col-6" style="display: flex;align-items: center;justify-content: center;">
+                    <button (click)="cancelarApolice()" pButton pRipple label="Cancelar Apólice"
+                            class="p-button-danger mr-2 mb-2"></button>
+                </div>
+                <div class="col-12 md:col-6" style="display: flex;align-items: center;justify-content: center;">
+                    <button (click)="pagarApolice()" pButton pRipple label="Pagar Apólice"
+                            class="p-button-primary mr-2 mb-2"></button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="is_reportarSinistro == true" class="card p-fluid">
+            <h5>Reportar Sinistro</h5>
+            <div class="p-formgrid grid">
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="apoliceNome">Tipo da Apólice</label>
+                    <input pInputText id="apoliceNomeSinistro" type="text" disabled [(ngModel)]="tipo"/>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="apoliceTipo">Seguro Apólice</label>
+                    <input pInputText id="apoliceTipoSinistro" type="text" disabled [(ngModel)]="seguro"/>
+                </div>
+                <div class="field col-12">
+                    <label htmlFor="descricao">Descrição</label>
+                    <textarea pInputText id="apoliceTipo" type="text" style="resize: none;" [(ngModel)]="descricao"
+                              rows="3"></textarea>
+                </div>
+                <div class="field col-12">
+                    <label htmlFor="apoliceData">Data do sinistro</label>
+                    <input pInputText id="apoliceDataSinistro" type="date" [(ngModel)]="dataSinistro"/>
+                </div>
+                <div class="col-0 md:col-3"></div>
+                <div class="col-12 md:col-6" style="display: flex;align-items: center;justify-content: center;">
+                    <button (click)="submeterSinistro($event)" pButton pRipple label="Submeter Sinistro"
+                            class="p-button mr-2 mb-2"></button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="atribuirAgenteStatus == true" class="card p-fluid">
+            <h5>Atribuir Agente</h5>
+            <p-table #dt1 [value]="currentAgenteList" dataKey="id" [rows]="4" [rowHover]="true" [paginator]="true"
+                    responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>
+                            <div style="min-width: 3rem;">
+
+                                <p-column type="text" field="name">Selecionar</p-column>
+                            </div>
+                        </th>
+                        <th>
+                            <div style="min-width: 2rem;">
+                                <p-column type="text" field="name">ID</p-column>
+                            </div>
+                        </th>
+                        <th>
+                            <div style="min-width: 12rem;">
+
+                                <p-column type="text" field="name">Nome</p-column>
+                            </div>
+                        </th>
+                        <th>
+                            <div style="min-width: 10rem;">
+
+                                <p-column type="text" field="name">NAgente</p-column>
+                            </div>
+                        </th>
+                        <th>
+                            <div style="min-width: 2rem;">
+
+                                <p-column type="text" field="name">Equipa</p-column>
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-agente>
+                    <tr>
+                        <td style="min-width: 3rem;">
+                            <button (click)="atribuirAgenteFormButtonClick(agente.id)" pButton pRipple icon="pi pi-angle-up"
+                                class="p-button mr-2 mb-2">
+                            </button>
+                        </td>
+
+                        <td style="min-width: 2rem;">
+                            {{agente.id}}
+                        </td>
+                        <td style="min-width: 12rem;">
+                            {{agente.pessoa.nome}}
+                        </td>
+                        <td style="min-width: 10rem;">
+                            {{agente.nagente}}
+                        </td>
+                        <td style="min-width: 2rem;">
+                            {{agente.equipaId}}
+                        </td>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">No agentes found.</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="loadingbody">
+                    <tr>
+                        <td colspan="7">Loading agentes data. Please wait.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <div class="col-12 lg:col-6">
+        <div class="card p-fluid">
+            <h5>Apólices</h5>
+            <p-table #dt1 [value]="apolices" dataKey="id" [rows]="8" [rowHover]="true" [paginator]="true"
+                     responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                ID
+                                <p-column type="text" field="name"></p-column>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                Seguro
+                                <p-column type="text" field="name"></p-column>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                Estado
+                                <p-column type="text" field="name"></p-column>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                Mais Info
+                                <p-column type="text" field="name"></p-column>
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-apolice>
+                    <tr>
+                        <td style="min-width: 2rem;">
+                            {{apolice.id}}
+                        </td>
+                        <td style="min-width: 12rem;">
+                            {{apolice.seguro.nome}}
+                        </td>
+                        <td style="min-width: 10rem;">
+                            {{apolice.simulacao}}
+                        </td>
+                        <td style="min-width: 2rem;">
+                            <button (click)="getThisApolice(apolice)" pButton pRipple type="button"
+                                    class="p-button-secondary p-button-text mr-2 mb-2"><i class="pi pi-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">No apolices found.</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="loadingbody">
+                    <tr>
+                        <td colspan="7">Loading apolices data. Please wait.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+    </div>
+</div>

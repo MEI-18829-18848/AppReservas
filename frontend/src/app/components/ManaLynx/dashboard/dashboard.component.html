@@ -1,0 +1,284 @@
+<div class="grid">
+    <div class="col-6 xl:col-3">
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <!--Define the data to present on card depending on user role -->
+                <div *ngIf="this.dashboardAdmin" >
+                    <span class="block text-500 font-medium mb-3">Ganho Total</span>
+                    <div class="text-900 font-medium text-xl">{{this.dashboardAdmin.ganhoTotal}} €</div>
+                </div>
+                <div *ngIf="this.dashboardGestor">
+                    <span class="block text-500 font-medium mb-3">Ganho Equipa</span>
+                    <div class="text-900 font-medium text-xl">{{this.dashboardGestor.ganhoEquipa}} €</div>
+                </div>
+                <div *ngIf="this.dashboardAgente">
+                    <span class="block text-500 font-medium mb-3">Ganho Pessoal</span>
+                    <div class="text-900 font-medium text-xl">{{this.dashboardAgente.ganhoPessoal}} €</div>
+                </div>
+                <div *ngIf="this.dashboardCliente">
+                    <span class="block text-500 font-medium mb-3">Gasto Pessoal</span>
+                    <div class="text-900 font-medium text-xl">{{this.dashboardCliente.gastoPessoal}} €</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-info-circle text-blue-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 xl:col-3">
+        <div class="card mb-0 bg-blue-500">
+            <div class="flex justify-content-between mb-3">
+                <!--Define the data to present on card depending on user role -->
+                <div *ngIf="this.dashboardAdmin" >
+                    <span class="block text-300 font-medium mb-3">Total Apólices</span>
+                    <div class="text-100 font-medium text-xl" >{{this.dashboardAdmin.apoliceTotal}}</div>
+                </div>
+                <div *ngIf="this.dashboardGestor">
+                    <span class="block text-300 font-medium mb-3">Apólices Equipa</span>
+                    <div class="text-100 font-medium text-xl" >{{this.dashboardGestor.apolicesEquipa}}</div>
+                </div>
+                <div *ngIf="this.dashboardAgente">
+                    <span class="block text-300 font-medium mb-3">Apólices Encargo</span>
+                    <div class="text-100 font-medium text-xl">{{this.dashboardAgente.apolicesEncargo}}</div>
+                </div>
+                <div *ngIf="this.dashboardCliente">
+                    <span class="block text-300 font-medium mb-3">Minhas Apólices</span>
+                    <div class="text-100 font-medium text-xl">{{this.dashboardCliente.qtdApolices}}</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-info-circle text-blue-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 xl:col-3">
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <!--Define the data to present on card depending on user role -->
+                <div *ngIf="this.dashboardAdmin" >
+                    <span class="block text-500 font-medium mb-3">Leads Totais</span>
+                    <div class="text-900 font-medium text-xl" >{{this.dashboardAdmin.leads}}</div>
+                </div>
+                <div *ngIf="this.dashboardGestor">
+                    <span class="block text-500 font-medium mb-3">As Minhas Leads</span>
+                    <div class="text-900 font-medium text-xl" >{{this.dashboardGestor.leads}}</div>
+                </div>
+                <div *ngIf="this.dashboardAgente">
+                    <span class="block text-500 font-medium mb-3">As Minhas Leads</span>
+                    <div class="text-900 font-medium text-xl">{{this.dashboardAgente.leads}}</div>
+                </div>
+                <div *ngIf="this.dashboardCliente">
+                    <span class="block text-500 font-medium mb-3">Pagamentos em Falta</span>
+                    <div class="text-900 font-medium text-xl">{{this.dashboardCliente.qtdPagamentosPagar}}</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-info-circle text-blue-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 xl:col-3">
+        <div class="card mb-0 bg-blue-500">
+            <div class="flex justify-content-between mb-3">
+                <!--Define the data to present on card depending on user role -->
+                <div *ngIf="this.dashboardAdmin" >
+                    <span class="block text-300 font-medium mb-3">Clientes</span>
+                    <div class="text-100 font-medium text-xl" >{{this.dashboardAdmin.clientes}}</div>
+                </div>
+                <div *ngIf="this.dashboardGestor">
+                    <span class="block text-300 font-medium mb-3">Clientes Equipa</span>
+                    <div class="text-100 font-medium text-xl" >{{this.dashboardGestor.clientesEquipa}}</div>
+                </div>
+                <div *ngIf="this.dashboardAgente">
+                    <span class="block text-300 font-medium mb-3">Clientes Encargo</span>
+                    <div class="text-100 font-medium text-xl">{{this.dashboardAgente.clientesEncargo}}</div>
+                </div>
+                <div *ngIf="this.dashboardCliente">
+                    <span class="block text-300 font-medium mb-3">Quantidade Veiculos</span>
+                    <div class="text-100 font-medium text-xl">{{this.dashboardCliente.qtdVeiculos}}</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-info-circle text-blue-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 xl:col-8">
+        <div class="card" style="height: 100%;">
+            <h5 class="text-left w-full" *ngIf="this.dashboardCliente==null">Gráfico de Ganhos</h5>
+            <h5 class="text-left w-full" *ngIf="this.dashboardCliente">Gráfico de Gastos</h5>
+            <p-chart  type="line" [data]="lineData" [options]="lineOptions" [style]="{'width': '50%'}"></p-chart>
+        </div>
+    </div>
+    <div class="col-12 xl:col-4">
+        <div class="card" style="height: 100%;">
+            <h5 *ngIf="this.dashboardCliente">Distribuição de Apólices Ativas</h5>
+            <h5 *ngIf="!this.dashboardCliente">A minha Equipa</h5>
+            <p-chart type="bar" [data]="barData" [options]="barOptions" [style]="{'width':'50%'}"></p-chart>
+            <div class="mt-5" *ngIf="!this.dashboardCliente">
+                <h5>Informações da Equipa</h5>
+                <span>Nome: </span> 
+                <span *ngIf="this.dashboardAdmin">N/A</span>
+                <span *ngIf="this.dashboardGestor">{{this.dashboardGestor.nomeEquipa}}</span>
+                <span *ngIf="this.dashboardAgente">{{this.dashboardAgente.nomeEquipa}}</span>
+                <br><br>
+                <span>Região: </span>
+                <span *ngIf="this.dashboardAdmin">N/A</span>
+                <span *ngIf="this.dashboardGestor">{{this.dashboardGestor.regiaoEquipa}}</span>
+                <span *ngIf="this.dashboardAgente">{{this.dashboardAgente.regiaoEquipa}}</span>
+                <br><br>
+                <span>Elementos: </span>
+                <span *ngIf="this.dashboardAdmin">{{this.dashboardAdmin.elementosEquipa}}</span>
+                <span *ngIf="this.dashboardGestor">{{this.dashboardGestor.elementosEquipa}}</span>
+                <span *ngIf="this.dashboardAgente">{{this.dashboardAgente.elementosEquipa}}</span>
+            </div>
+            <div class="mt-5" *ngIf="this.dashboardCliente">
+                <h5>Informações Pessoais</h5>
+                <span>Nif: </span> 
+                <span *ngIf="this.dashboardCliente.nif">{{this.dashboardCliente.nif}}</span>
+                <span *ngIf="!this.dashboardCliente.nif">N/A</span>
+                <br><br>
+                <span>NSS: </span>
+                <span *ngIf="this.dashboardCliente.nss">{{this.dashboardCliente.nss}}</span>
+                <span *ngIf="!this.dashboardCliente.nss">N/A</span>
+                <br><br>
+                <span>NUS: </span>
+                <span *ngIf="this.dashboardCliente.nus">{{this.dashboardCliente.nus}}</span>
+                <span *ngIf="!this.dashboardCliente.nus">N/A</span>
+            </div>
+        </div>
+    </div>
+
+    <!--Bottom lists for when Gestor or Admin are accessing dashboard-->
+    <div class="col-12 xl:col-6" *ngIf="this.dashboardAdmin || this.dashboardGestor">
+        <div class="card">
+            <h5>Clientes</h5>
+            <p-table *ngIf="this.clientesList" [value]="this.clientesList" sortMode="single" responsiveLayout="scroll" [scrollable]="true" scrollHeight="400px">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="bg-blue-50" style="min-width: 200px;">Nome</th>
+                        <th class="bg-blue-50" style="min-width: 100px;">Id</th>
+                        <th class="bg-blue-50" style="min-width: 200px;">Profissão</th>
+                        <th class="bg-blue-50" style="min-width: 100px;">Nº Apólices</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-cliente let-rowIndex="rowIndex">
+                    <tr>
+                        <td style="min-width: 200px;">
+                            {{cliente.nome}}
+                        </td>
+                        <td style="min-width: 100px;">
+                            {{cliente.id}}
+                        </td>
+                        <td style="min-width: 200px;">
+                            {{cliente.profissao}}
+                        </td>
+                        <td style="min-width: 100px;">
+                            {{cliente.nApolices}}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <div class="col-12 xl:col-6" *ngIf="this.dashboardAdmin || this.dashboardGestor">
+        <div class="card">
+            <h5>Agentes</h5>
+            <p-table *ngIf="this.agenteList" [value]="this.agenteList" responsiveLayout="scroll" [scrollable]="true" scrollHeight="400px">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="bg-blue-50" style="min-width: 200px;">Nome</th>
+                        <th class="bg-blue-50" style="min-width: 100px;">Id</th>
+                        <th class="bg-blue-50" style="min-width: 100px;">Nº Agente</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-agente let-rowIndex="rowIndex">
+                    <tr>
+                        <td style="min-width: 200px;">
+                            {{agente.nome}}
+                        </td>
+                        <td style="min-width: 100px;">
+                            {{agente.id}}
+                        </td>
+                        <td style="min-width: 100px;">
+                            {{agente.nAgente}}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <!--Bottom table for when a Agente is accessing Dashboard-->
+    <div class="col-12" >
+        <div class="card" *ngIf="this.dashboardAgente">
+            <h5>Clientes</h5>
+            <p-table *ngIf="this.dashboardAgente" [value]="this.dashboardAgente.clientesList" responsiveLayout="scroll" [scrollable]="true" scrollHeight="400px">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="bg-blue-50" style="min-width: 200px;">Nome</th>
+                        <th class="bg-blue-50" style="min-width: 100px;">Id</th>
+                        <th class="bg-blue-50" style="min-width: 200px;">Profissão</th>
+                        <th class="bg-blue-50" style="min-width: 100px;">Nº Apólices</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-cliente let-rowIndex="rowIndex">
+                    <tr>
+                        <td style="min-width: 200px;">
+                            {{cliente.nome}}
+                        </td>
+                        <td style="min-width: 100px;">
+                            {{cliente.id}}
+                        </td>
+                        <td style="min-width: 200px;">
+                            {{cliente.profissao}}
+                        </td>
+                        <td style="min-width: 100px;">
+                            {{cliente.nApolices}}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+    <!--Bottom table for when a Cliente is accessing Dashboard-->
+    <div class="col-12">
+        <div class="card" *ngIf="this.dashboardCliente">
+            <h5>Apólices</h5>
+            <p-table *ngIf="this.dashboardCliente" [value]="this.dashboardCliente.apoliceList" responsiveLayout="scroll" [scrollable]="true" scrollHeight="400px">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="bg-blue-50" style="min-width: 200px;">Nome</th>
+                        <th class="bg-blue-50" style="min-width: 100px;">Tipo</th>
+                        <th class="bg-blue-50" style="min-width: 100px;">Estado</th>
+                        <th class="bg-blue-50" style="min-width: 200px;">Prémio</th>
+                        <th class="bg-blue-50" style="min-width: 120px;">Fracionamento</th>
+                        <th class="bg-blue-50" style="min-width: 100px;">Validade</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-apolice let-rowIndex="rowIndex">
+                    <tr>
+                        <td style="min-width: 200px;">
+                            {{apolice.nome}}
+                        </td>
+                        <td style="min-width: 100px;">
+                            {{apolice.tipo}}
+                        </td>
+                        <td style="min-width: 100px;">
+                            {{apolice.estado}}
+                        </td>
+                        <td style="min-width: 200px;">
+                            {{apolice.premio}}
+                        </td>
+                        <td style="min-width: 100px;">
+                            {{apolice.fracionamento}}
+                        </td>
+                        <td style="min-width: 100px;">
+                            {{apolice.validade | date}}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
