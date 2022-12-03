@@ -35,14 +35,14 @@ CREATE TABLE IF NOT EXISTS Organizador (
   OrganizadorId SERIAL PRIMARY KEY NOT NULL,
   Nome VARCHAR(45) NOT NULL,
   Contacto VARCHAR(45) NULL,
-  UserId INTEGER NOT NULL references Utilizador(UtilizadorId) 
+  appuserid INTEGER NOT NULL references auth.users(appuserid) 
 );
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS Cliente;
 
 CREATE TABLE IF NOT EXISTS Cliente(
   ClienteId SERIAL PRIMARY KEY NOT NULL,
-  UserId INTEGER NOT NULL references Utilizador(UtilizadorId),
+  appuserid INTEGER NOT NULL references auth.users(appuserid), 
   Nome VARCHAR(45) NOT NULL,
   Telemovel INTEGER NULL,
   Email VARCHAR(45) NULL,
