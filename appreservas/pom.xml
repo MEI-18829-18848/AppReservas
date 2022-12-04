@@ -21,7 +21,6 @@
         <server.port>8095</server.port>
         <db.password>postgres</db.password>
         <db.username>postgres</db.username>
-        <db.url>jdbc:postgresql://localhost:5432/appreservas</db.url>
 	</properties>
 
 	<dependencies>
