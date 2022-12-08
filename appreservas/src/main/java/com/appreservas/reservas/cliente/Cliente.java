@@ -7,6 +7,6 @@ import com.appreservas.reservas.cliente.generated.GeneratedCliente;
  * <p>
  * This file is safe to edit. It will not be overwritten by the code generator.
  * 
- * @author company
+ * @author reservas
  */
 public interface Cliente extends GeneratedCliente {}

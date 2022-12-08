@@ -16,8 +16,6 @@ import com.appreservas.reservas.sala.Sala;
 import com.appreservas.reservas.sala.generated.GeneratedSalaCacheHolder;
 import com.appreservas.reservas.sessao.Sessao;
 import com.appreservas.reservas.sessao.generated.GeneratedSessaoCacheHolder;
-import com.appreservas.reservas.utilizador.Utilizador;
-import com.appreservas.reservas.utilizador.generated.GeneratedUtilizadorCacheHolder;
 import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.enterprise.datastore.runtime.DataStoreHolder;
 import com.speedment.enterprise.datastore.runtime.entitystore.EntityStore;
@@ -52,7 +50,6 @@ public final class GeneratedReservasDataStoreHolder implements DataStoreHolder {
     private final GeneratedReservalugarCacheHolder reservalugarHolder;
     private final GeneratedSalaCacheHolder salaHolder;
     private final GeneratedSessaoCacheHolder sessaoHolder;
-    private final GeneratedUtilizadorCacheHolder utilizadorHolder;
     
     public GeneratedReservasDataStoreHolder(
             GeneratedClienteCacheHolder clienteHolder,
@@ -62,8 +59,7 @@ public final class GeneratedReservasDataStoreHolder implements DataStoreHolder {
             GeneratedReservaCacheHolder reservaHolder,
             GeneratedReservalugarCacheHolder reservalugarHolder,
             GeneratedSalaCacheHolder salaHolder,
-            GeneratedSessaoCacheHolder sessaoHolder,
-            GeneratedUtilizadorCacheHolder utilizadorHolder) {
+            GeneratedSessaoCacheHolder sessaoHolder) {
         this.clienteHolder      = requireNonNull(clienteHolder);
         this.eventoHolder       = requireNonNull(eventoHolder);
         this.lugarHolder        = requireNonNull(lugarHolder);
@@ -72,7 +68,6 @@ public final class GeneratedReservasDataStoreHolder implements DataStoreHolder {
         this.reservalugarHolder = requireNonNull(reservalugarHolder);
         this.salaHolder         = requireNonNull(salaHolder);
         this.sessaoHolder       = requireNonNull(sessaoHolder);
-        this.utilizadorHolder   = requireNonNull(utilizadorHolder);
     }
     
     @Override
@@ -90,7 +85,6 @@ public final class GeneratedReservasDataStoreHolder implements DataStoreHolder {
             case "reservalugar" : return (EntityStore<ENTITY>) reservalugarHolder.getEntityStore();
             case "sala"         : return (EntityStore<ENTITY>) salaHolder.getEntityStore();
             case "sessao"       : return (EntityStore<ENTITY>) sessaoHolder.getEntityStore();
-            case "utilizador"   : return (EntityStore<ENTITY>) utilizadorHolder.getEntityStore();
             default : throw new UnsupportedOperationException(
                 String.format("Could not find '%s' in database model.", tableName)
             );
@@ -109,7 +103,6 @@ public final class GeneratedReservasDataStoreHolder implements DataStoreHolder {
             case "reservalugar" : return (CACHE) reservalugarHolder.getFieldCache((ColumnIdentifier<Reservalugar>) columnId);
             case "sala"         : return (CACHE) salaHolder.getFieldCache((ColumnIdentifier<Sala>) columnId);
             case "sessao"       : return (CACHE) sessaoHolder.getFieldCache((ColumnIdentifier<Sessao>) columnId);
-            case "utilizador"   : return (CACHE) utilizadorHolder.getFieldCache((ColumnIdentifier<Utilizador>) columnId);
             default : throw new UnsupportedOperationException(
                 String.format("Could not find '%s' in database model.", columnId.getTableId())
             );
@@ -151,8 +144,7 @@ public final class GeneratedReservasDataStoreHolder implements DataStoreHolder {
             reservaHolder,
             reservalugarHolder,
             salaHolder,
-            sessaoHolder,
-            utilizadorHolder
+            sessaoHolder
         );
     }
 }

@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -57,7 +56,6 @@ import static java.util.stream.Collectors.toList;
  */
 @GeneratedCode("Speedment")
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/reservas")
 public abstract class GeneratedEventoController {
     
     protected @Autowired JsonComponent jsonComponent;
@@ -155,13 +153,16 @@ public abstract class GeneratedEventoController {
     public void update(
             @PathVariable(name = "eventoid") int eventoid,
             @RequestBody @Validated EventoUpdateBody updateBody) {
-        final Updater<Evento> updater = manager.updater();
+        final FieldSet<Evento> excluded = FieldSet.allExcept(
+            Evento.EVENTOID
+        );
+        
+        final Updater<Evento> updater = manager.updater(excluded);
         final Evento evento = manager.stream()
             .filter(Evento.EVENTOID.equal(eventoid))
             .findFirst()
             .orElseThrow(() -> new EventoNotFoundException(eventoid));
         
-        evento.setEventoid(updateBody.getEventoid());
         evento.setSalaid(updateBody.getSalaid());
         evento.setOrganizadorid(updateBody.getOrganizadorid());
         evento.setNome(updateBody.getNome());
@@ -439,7 +440,6 @@ public abstract class GeneratedEventoController {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class EventoUpdateBody {
         
-        private final int eventoid;
         private final int salaid;
         private final int organizadorid;
         private final String nome;
@@ -449,24 +449,18 @@ public abstract class GeneratedEventoController {
         
         @JsonCreator
         public EventoUpdateBody(
-                @JsonProperty("eventoid") Integer eventoid,
                 @JsonProperty("salaid") Integer salaid,
                 @JsonProperty("organizadorid") Integer organizadorid,
                 @JsonProperty("nome") String nome,
                 @JsonProperty("descricao") String descricao,
                 @JsonProperty("categoria") String categoria,
                 @JsonProperty("imdbid") String imdbid) {
-            this.eventoid = Objects.requireNonNull(eventoid, "`eventoid` is required");
             this.salaid = Objects.requireNonNull(salaid, "`salaid` is required");
             this.organizadorid = Objects.requireNonNull(organizadorid, "`organizadorid` is required");
             this.nome = Objects.requireNonNull(nome, "`nome` is required");
             this.descricao = Objects.requireNonNull(descricao, "`descricao` is required");
             this.categoria = Objects.requireNonNull(categoria, "`categoria` is required");
             this.imdbid = Objects.requireNonNull(imdbid, "`imdbid` is required");
-        }
-        
-        public int getEventoid() {
-            return this.eventoid;
         }
         
         public int getSalaid() {

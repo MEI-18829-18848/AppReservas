@@ -1,21 +1,7 @@
 package com.appreservas.reservas.cliente.generated;
 
-import static java.util.Collections.singletonList;
-import static java.util.Objects.requireNonNull;
-
-import java.nio.ByteBuffer;
-import java.util.List;
-import java.util.function.BiConsumer;
-import java.util.function.LongConsumer;
-import java.util.function.LongFunction;
-import java.util.function.LongPredicate;
-import java.util.function.LongToDoubleFunction;
-import java.util.function.LongToIntFunction;
-import java.util.function.LongUnaryOperator;
-
 import com.appreservas.reservas.cliente.Cliente;
 import com.appreservas.reservas.cliente.ClienteImpl;
-import com.appreservas.reservas.utilizador.Utilizador;
 import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.common.function.BiLongToIntFunction;
 import com.speedment.common.function.LongToBooleanFunction;
@@ -29,12 +15,24 @@ import com.speedment.enterprise.datastore.runtime.entitystore.EntityStoreSeriali
 import com.speedment.enterprise.datastore.runtime.entitystore.function.EntityStoreComparator;
 import com.speedment.enterprise.datastore.runtime.entitystore.function.EntityStoreCompareTo;
 import com.speedment.enterprise.datastore.runtime.entitystore.function.EntityStorePredicate;
-import com.speedment.enterprise.datastore.runtime.fieldcache.FieldCache;
 import com.speedment.enterprise.datastore.runtime.throwable.DeserializationException;
 import com.speedment.enterprise.datastore.runtime.throwable.Utf8Exception;
 import com.speedment.enterprise.datastore.runtime.util.SerializerUtil;
 import com.speedment.enterprise.datastore.runtime.util.Utf8Util;
 import com.speedment.runtime.config.identifier.ColumnIdentifier;
+
+import java.nio.ByteBuffer;
+import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.LongConsumer;
+import java.util.function.LongFunction;
+import java.util.function.LongPredicate;
+import java.util.function.LongToDoubleFunction;
+import java.util.function.LongToIntFunction;
+import java.util.function.LongUnaryOperator;
+
+import static java.util.Collections.singletonList;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Serializes and deserializes instances of Cliente.
@@ -50,13 +48,12 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
     private final LongFunction<ByteBuffer> bufferFinder;
     private final LongToIntFunction offsetFinder;
     private static final int FIELD_CLIENTEID = 0;
-    private static final int FIELD_USERID = 4;
-    private static final int FKREF_CLIENTE_USERID_FKEY = 8;
-    private static final int ENDPOS_TELEMOVEL = 16;
-    private static final int ENDPOS_NIF = 17;
-    private static final int ENDPOS_NOME = 18;
-    private static final int ENDPOS_EMAIL = 22;
-    private static final int VARSIZE_BEGINS = 26;
+    private static final int FIELD_APPUSERID = 4;
+    private static final int ENDPOS_TELEMOVEL = 8;
+    private static final int ENDPOS_NIF = 9;
+    private static final int ENDPOS_NOME = 10;
+    private static final int ENDPOS_EMAIL = 14;
+    private static final int VARSIZE_BEGINS = 18;
     
     protected GeneratedClienteEntityStoreSerializerImpl(final LongFunction<ByteBuffer> bufferFinder, final LongToIntFunction offsetFinder) {
         this.bufferFinder = requireNonNull(bufferFinder);
@@ -68,8 +65,7 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
         return (buffer, entity) -> {
             int varSizePos = 0;
             buffer.putInt(FIELD_CLIENTEID, entity.getClienteid());
-            buffer.putInt(FIELD_USERID, entity.getUserid());
-            buffer.putLong(FKREF_CLIENTE_USERID_FKEY, -1L); // Will be set later on in the decorator()-method.
+            buffer.putInt(FIELD_APPUSERID, entity.getAppuserid());
             if (entity.getTelemovel().isPresent()) {
                 buffer.putInt(VARSIZE_BEGINS + varSizePos, entity.getTelemovel().getAsInt());
                 varSizePos += Integer.BYTES;
@@ -99,17 +95,7 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
     
     @Override
     public LongConsumer decorator(DataStoreHolder holder) {
-        final FieldCache.OfInt utilizador_utilizadoridFieldCache = holder.getFieldCache(Utilizador.UTILIZADORID.identifier());
-        final LongToIntFunction useridDeserializer = intDeserializer(Cliente.USERID.identifier());
-        final LongUnaryOperator clienteUseridFkeyResolver = ref -> {
-            final int value = useridDeserializer.applyAsInt(ref);
-            return utilizador_utilizadoridFieldCache.any(value);
-        };
-        return ref -> {
-            final ByteBuffer buffer = bufferFinder.apply(ref);
-            final int rowOffset = offsetFinder.applyAsInt(ref);
-            buffer.putLong(rowOffset + FKREF_CLIENTE_USERID_FKEY, clienteUseridFkeyResolver.applyAsLong(ref));
-        };
+        return DO_NOTHING;
     }
     
     @Override
@@ -119,7 +105,7 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
             final int offset = offsetFinder.applyAsInt(ref);
             final Cliente entity = new ClienteImpl();
             entity.setClienteid(buffer.getInt(offset + FIELD_CLIENTEID));
-            entity.setUserid(buffer.getInt(offset + FIELD_USERID));
+            entity.setAppuserid(buffer.getInt(offset + FIELD_APPUSERID));
             try {
                 entity.setNome(Utf8Util.deserialize(buffer,
                     offset + VARSIZE_BEGINS + (0x7f & buffer.get(offset + ENDPOS_NOME - Byte.BYTES)),
@@ -156,7 +142,7 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
             final Cliente.Identifier _id = (Cliente.Identifier) colId;
             switch (_id) {
                 case CLIENTEID : 
-                case USERID    : 
+                case APPUSERID : 
                 case TELEMOVEL : 
                 case NIF       : return int.class;
                 case NOME      : 
@@ -171,7 +157,7 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
             final String _colName = colId.getColumnId();
             switch (_colName) {
                 case "clienteid" : 
-                case "userid"    : 
+                case "appuserid" : 
                 case "telemovel" : 
                 case "nif"       : return int.class;
                 case "nome"      : 
@@ -192,25 +178,12 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
     
     @Override
     public <FK_ENTITY> LongUnaryOperator finder(final List<ColumnIdentifier<Cliente>> cols, final List<ColumnIdentifier<FK_ENTITY>> fkCols) {
-        final String fkName = SerializerUtil.uniqueFkName(cols, fkCols);
-        switch (fkName) {
-            case "{userid}->utilizador{utilizadorid}": return finder("cliente_userid_fkey");
-        }
-        
-        throw new IllegalArgumentException(
-            fkName + " is not a valid foreign reference name."
-        );
+        throw new UnsupportedOperationException("Cliente has no foreign references.");
     }
     
     @Override
     public LongUnaryOperator finder(final String fkName) {
-        switch (fkName) {
-            case "cliente_userid_fkey": return ref -> bufferFinder.apply(ref).getLong(offsetFinder.applyAsInt(ref) + FKREF_CLIENTE_USERID_FKEY);
-        }
-        
-        throw new IllegalArgumentException(
-            "Could not find a foreign key " + fkName + " in table 'cliente'."
-        );
+        throw new UnsupportedOperationException("Cliente has no foreign references.");
     }
     
     @Override
@@ -219,7 +192,7 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
             final Cliente.Identifier _id = (Cliente.Identifier) colId;
             switch (_id) {
                 case CLIENTEID : 
-                case USERID    : return ALWAYS_FALSE;
+                case APPUSERID : return ALWAYS_FALSE;
                 case TELEMOVEL : return ref -> bufferFinder.apply(ref).get(offsetFinder.applyAsInt(ref) + ENDPOS_TELEMOVEL) < 0;
                 case NIF       : return ref -> bufferFinder.apply(ref).get(offsetFinder.applyAsInt(ref) + ENDPOS_NIF) < 0;
                 case NOME      : return ALWAYS_FALSE;
@@ -234,7 +207,7 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
             final String _colName = colId.getColumnId();
             switch (_colName) {
                 case "clienteid" : 
-                case "userid"    : return ALWAYS_FALSE;
+                case "appuserid" : return ALWAYS_FALSE;
                 case "telemovel" : return ref -> bufferFinder.apply(ref).get(offsetFinder.applyAsInt(ref) + ENDPOS_TELEMOVEL) < 0;
                 case "nif"       : return ref -> bufferFinder.apply(ref).get(offsetFinder.applyAsInt(ref) + ENDPOS_NIF) < 0;
                 case "nome"      : return ALWAYS_FALSE;
@@ -254,7 +227,7 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
             final Cliente.Identifier _id = (Cliente.Identifier) colId;
             switch (_id) {
                 case CLIENTEID : 
-                case USERID    : return ALWAYS_TRUE;
+                case APPUSERID : return ALWAYS_TRUE;
                 case TELEMOVEL : return ref -> bufferFinder.apply(ref).get(offsetFinder.applyAsInt(ref) + ENDPOS_TELEMOVEL) >= 0;
                 case NIF       : return ref -> bufferFinder.apply(ref).get(offsetFinder.applyAsInt(ref) + ENDPOS_NIF) >= 0;
                 case NOME      : return ALWAYS_TRUE;
@@ -269,7 +242,7 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
             final String _colName = colId.getColumnId();
             switch (_colName) {
                 case "clienteid" : 
-                case "userid"    : return ALWAYS_TRUE;
+                case "appuserid" : return ALWAYS_TRUE;
                 case "telemovel" : return ref -> bufferFinder.apply(ref).get(offsetFinder.applyAsInt(ref) + ENDPOS_TELEMOVEL) >= 0;
                 case "nif"       : return ref -> bufferFinder.apply(ref).get(offsetFinder.applyAsInt(ref) + ENDPOS_NIF) >= 0;
                 case "nome"      : return ALWAYS_TRUE;
@@ -303,7 +276,7 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
             final Cliente.Identifier _id = (Cliente.Identifier) colId;
             switch (_id) {
                 case CLIENTEID : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_CLIENTEID);
-                case USERID    : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_USERID);
+                case APPUSERID : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_APPUSERID);
                 case TELEMOVEL : return ref -> {
                     final ByteBuffer buffer = bufferFinder.apply(ref);
                     final int offset = offsetFinder.applyAsInt(ref);
@@ -324,7 +297,7 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
             final String _colName = colId.getColumnId();
             switch (_colName) {
                 case "clienteid" : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_CLIENTEID);
-                case "userid"    : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_USERID);
+                case "appuserid" : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_APPUSERID);
                 case "telemovel" : return ref -> {
                     final ByteBuffer buffer = bufferFinder.apply(ref);
                     final int offset = offsetFinder.applyAsInt(ref);
@@ -463,9 +436,9 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
                     bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_CLIENTEID),
                     bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_CLIENTEID)
                 );
-                case USERID    : return (aRef, bRef) -> Integer.compare(
-                    bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_USERID),
-                    bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_USERID)
+                case APPUSERID : return (aRef, bRef) -> Integer.compare(
+                    bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_APPUSERID),
+                    bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_APPUSERID)
                 );
                 case TELEMOVEL : return (aRef, bRef) -> {
                     final ByteBuffer aBuf = bufferFinder.apply(aRef);
@@ -528,9 +501,9 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
                     bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_CLIENTEID),
                     bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_CLIENTEID)
                 );
-                case "userid"    : return (aRef, bRef) -> Integer.compare(
-                    bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_USERID),
-                    bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_USERID)
+                case "appuserid" : return (aRef, bRef) -> Integer.compare(
+                    bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_APPUSERID),
+                    bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_APPUSERID)
                 );
                 case "telemovel" : return (aRef, bRef) -> {
                     final ByteBuffer aBuf = bufferFinder.apply(aRef);
@@ -598,9 +571,9 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
                     bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_CLIENTEID),
                     bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_CLIENTEID)
                 );
-                case USERID    : return (aRef, bRef) -> Integer.compare(
-                    bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_USERID),
-                    bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_USERID)
+                case APPUSERID : return (aRef, bRef) -> Integer.compare(
+                    bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_APPUSERID),
+                    bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_APPUSERID)
                 );
                 case TELEMOVEL : return (aRef, bRef) -> {
                     final ByteBuffer aBuf = bufferFinder.apply(aRef);
@@ -676,9 +649,9 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
                     bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_CLIENTEID),
                     bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_CLIENTEID)
                 );
-                case "userid"    : return (aRef, bRef) -> Integer.compare(
-                    bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_USERID),
-                    bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_USERID)
+                case "appuserid" : return (aRef, bRef) -> Integer.compare(
+                    bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_APPUSERID),
+                    bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_APPUSERID)
                 );
                 case "telemovel" : return (aRef, bRef) -> {
                     final ByteBuffer aBuf = bufferFinder.apply(aRef);
@@ -776,10 +749,10 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
                         operand
                     );
                 }
-                case USERID    : {
+                case APPUSERID : {
                     final int operand = value;
                     return ref -> Integer.compare(
-                        bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_USERID),
+                        bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_APPUSERID),
                         operand
                     );
                 }
@@ -825,10 +798,10 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
                         operand
                     );
                 }
-                case "userid"    : {
+                case "appuserid" : {
                     final int operand = value;
                     return ref -> Integer.compare(
-                        bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_USERID),
+                        bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_APPUSERID),
                         operand
                     );
                 }
@@ -983,7 +956,7 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
             final Cliente.Identifier _id = (Cliente.Identifier) colId;
             switch (_id) {
                 case CLIENTEID : 
-                case USERID    : return ALWAYS_LESS;
+                case APPUSERID : return ALWAYS_LESS;
                 case TELEMOVEL : return ref -> {
                     final ByteBuffer buffer = bufferFinder.apply(ref);
                     final int offset = offsetFinder.applyAsInt(ref);
@@ -1006,7 +979,7 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
             final String _colName = colId.getColumnId();
             switch (_colName) {
                 case "clienteid" : 
-                case "userid"    : return ALWAYS_LESS;
+                case "appuserid" : return ALWAYS_LESS;
                 case "telemovel" : return ref -> {
                     final ByteBuffer buffer = bufferFinder.apply(ref);
                     final int offset = offsetFinder.applyAsInt(ref);
@@ -1039,10 +1012,10 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
                     final int begins = rowOffset + FIELD_CLIENTEID;
                     return predicate.test(buffer, begins, begins + Integer.BYTES);
                 };
-                case USERID    : return ref -> {
+                case APPUSERID : return ref -> {
                     final ByteBuffer buffer = bufferFinder.apply(ref);
                     final int rowOffset = offsetFinder.applyAsInt(ref);
-                    final int begins = rowOffset + FIELD_USERID;
+                    final int begins = rowOffset + FIELD_APPUSERID;
                     return predicate.test(buffer, begins, begins + Integer.BYTES);
                 };
                 case TELEMOVEL : return ref -> {
@@ -1092,10 +1065,10 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
                     final int begins = rowOffset + FIELD_CLIENTEID;
                     return predicate.test(buffer, begins, begins + Integer.BYTES);
                 };
-                case "userid"    : return ref -> {
+                case "appuserid" : return ref -> {
                     final ByteBuffer buffer = bufferFinder.apply(ref);
                     final int rowOffset = offsetFinder.applyAsInt(ref);
-                    final int begins = rowOffset + FIELD_USERID;
+                    final int begins = rowOffset + FIELD_APPUSERID;
                     return predicate.test(buffer, begins, begins + Integer.BYTES);
                 };
                 case "telemovel" : return ref -> {
@@ -1150,10 +1123,10 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
                     final int begins = rowOffset + FIELD_CLIENTEID;
                     return compareTo.compare(buffer, begins, begins + Integer.BYTES);
                 };
-                case USERID    : return ref -> {
+                case APPUSERID : return ref -> {
                     final ByteBuffer buffer = bufferFinder.apply(ref);
                     final int rowOffset = offsetFinder.applyAsInt(ref);
-                    final int begins = rowOffset + FIELD_USERID;
+                    final int begins = rowOffset + FIELD_APPUSERID;
                     return compareTo.compare(buffer, begins, begins + Integer.BYTES);
                 };
                 case TELEMOVEL : return ref -> {
@@ -1203,10 +1176,10 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
                     final int begins = rowOffset + FIELD_CLIENTEID;
                     return compareTo.compare(buffer, begins, begins + Integer.BYTES);
                 };
-                case "userid"    : return ref -> {
+                case "appuserid" : return ref -> {
                     final ByteBuffer buffer = bufferFinder.apply(ref);
                     final int rowOffset = offsetFinder.applyAsInt(ref);
-                    final int begins = rowOffset + FIELD_USERID;
+                    final int begins = rowOffset + FIELD_APPUSERID;
                     return compareTo.compare(buffer, begins, begins + Integer.BYTES);
                 };
                 case "telemovel" : return ref -> {
@@ -1267,13 +1240,13 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
                         bBuffer, bBegins, bBegins + Integer.BYTES
                     );
                 };
-                case USERID    : return (aRef, bRef) -> {
+                case APPUSERID : return (aRef, bRef) -> {
                     final ByteBuffer aBuffer = bufferFinder.apply(aRef);
                     final ByteBuffer bBuffer = bufferFinder.apply(bRef);
                     final int aRowOffset = offsetFinder.applyAsInt(aRef);
                     final int bRowOffset = offsetFinder.applyAsInt(bRef);
-                    final int aBegins = aRowOffset + FIELD_USERID;
-                    final int bBegins = bRowOffset + FIELD_USERID;
+                    final int aBegins = aRowOffset + FIELD_APPUSERID;
+                    final int bBegins = bRowOffset + FIELD_APPUSERID;
                     return comparator.compare(
                         aBuffer, aBegins, aBegins + Integer.BYTES,
                         bBuffer, bBegins, bBegins + Integer.BYTES
@@ -1340,13 +1313,13 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
                         bBuffer, bBegins, bBegins + Integer.BYTES
                     );
                 };
-                case "userid"    : return (aRef, bRef) -> {
+                case "appuserid" : return (aRef, bRef) -> {
                     final ByteBuffer aBuffer = bufferFinder.apply(aRef);
                     final ByteBuffer bBuffer = bufferFinder.apply(bRef);
                     final int aRowOffset = offsetFinder.applyAsInt(aRef);
                     final int bRowOffset = offsetFinder.applyAsInt(bRef);
-                    final int aBegins = aRowOffset + FIELD_USERID;
-                    final int bBegins = bRowOffset + FIELD_USERID;
+                    final int aBegins = aRowOffset + FIELD_APPUSERID;
+                    final int bBegins = bRowOffset + FIELD_APPUSERID;
                     return comparator.compare(
                         aBuffer, aBegins, aBegins + Integer.BYTES,
                         bBuffer, bBegins, bBegins + Integer.BYTES

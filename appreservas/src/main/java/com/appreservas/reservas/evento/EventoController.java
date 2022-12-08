@@ -40,4 +40,5 @@ public class EventoController extends GeneratedEventoController {
         @PathVariable(name = "eventoid") int eventoid) {
 
         return query.select(p -> user.attachRows(p), user.buildQuery(eventoid));
-    }}
+    }
+}

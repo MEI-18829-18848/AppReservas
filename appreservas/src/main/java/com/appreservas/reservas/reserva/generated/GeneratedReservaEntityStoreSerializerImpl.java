@@ -1,7 +1,26 @@
 package com.appreservas.reservas.reserva.generated;
 
-import static java.util.Collections.singletonList;
-import static java.util.Objects.requireNonNull;
+import com.appreservas.reservas.cliente.Cliente;
+import com.appreservas.reservas.reserva.Reserva;
+import com.appreservas.reservas.reserva.ReservaImpl;
+import com.appreservas.reservas.sessao.Sessao;
+import com.speedment.common.annotation.GeneratedCode;
+import com.speedment.common.function.BiLongToIntFunction;
+import com.speedment.common.function.LongToBooleanFunction;
+import com.speedment.common.function.LongToByteFunction;
+import com.speedment.common.function.LongToCharFunction;
+import com.speedment.common.function.LongToFloatFunction;
+import com.speedment.common.function.LongToShortFunction;
+import com.speedment.enterprise.common.bytebuffercommon.ByteBufferUtil;
+import com.speedment.enterprise.datastore.runtime.DataStoreHolder;
+import com.speedment.enterprise.datastore.runtime.entitystore.EntityStoreSerializer;
+import com.speedment.enterprise.datastore.runtime.entitystore.function.EntityStoreComparator;
+import com.speedment.enterprise.datastore.runtime.entitystore.function.EntityStoreCompareTo;
+import com.speedment.enterprise.datastore.runtime.entitystore.function.EntityStorePredicate;
+import com.speedment.enterprise.datastore.runtime.fieldcache.FieldCache;
+import com.speedment.enterprise.datastore.runtime.util.BigDecimalUtil;
+import com.speedment.enterprise.datastore.runtime.util.SerializerUtil;
+import com.speedment.runtime.config.identifier.ColumnIdentifier;
 
 import java.math.BigDecimal;
 import java.nio.ByteBuffer;
@@ -14,26 +33,9 @@ import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
 
-import com.appreservas.reservas.cliente.Cliente;
-import com.appreservas.reservas.reserva.Reserva;
-import com.appreservas.reservas.reserva.ReservaImpl;
-import com.appreservas.reservas.sessao.Sessao;
-import com.speedment.common.annotation.GeneratedCode;
-import com.speedment.common.function.BiLongToIntFunction;
-import com.speedment.common.function.LongToBooleanFunction;
-import com.speedment.common.function.LongToByteFunction;
-import com.speedment.common.function.LongToCharFunction;
-import com.speedment.common.function.LongToFloatFunction;
-import com.speedment.common.function.LongToShortFunction;
-import com.speedment.enterprise.datastore.runtime.DataStoreHolder;
-import com.speedment.enterprise.datastore.runtime.entitystore.EntityStoreSerializer;
-import com.speedment.enterprise.datastore.runtime.entitystore.function.EntityStoreComparator;
-import com.speedment.enterprise.datastore.runtime.entitystore.function.EntityStoreCompareTo;
-import com.speedment.enterprise.datastore.runtime.entitystore.function.EntityStorePredicate;
-import com.speedment.enterprise.datastore.runtime.fieldcache.FieldCache;
-import com.speedment.enterprise.datastore.runtime.util.BigDecimalUtil;
-import com.speedment.enterprise.datastore.runtime.util.SerializerUtil;
-import com.speedment.runtime.config.identifier.ColumnIdentifier;
+import static java.util.Collections.singletonList;
+import static java.util.Objects.requireNonNull;
+import static java.util.stream.Collectors.joining;
 
 /**
  * Serializes and deserializes instances of Reserva.

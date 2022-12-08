@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -58,7 +57,6 @@ import static java.util.stream.Collectors.toList;
  */
 @GeneratedCode("Speedment")
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/reservas")
 public abstract class GeneratedLugarController {
     
     protected @Autowired JsonComponent jsonComponent;
@@ -152,13 +150,16 @@ public abstract class GeneratedLugarController {
     public void update(
             @PathVariable(name = "lugarid") int lugarid,
             @RequestBody @Validated LugarUpdateBody updateBody) {
-        final Updater<Lugar> updater = manager.updater();
+        final FieldSet<Lugar> excluded = FieldSet.allExcept(
+            Lugar.LUGARID
+        );
+        
+        final Updater<Lugar> updater = manager.updater(excluded);
         final Lugar lugar = manager.stream()
             .filter(Lugar.LUGARID.equal(lugarid))
             .findFirst()
             .orElseThrow(() -> new LugarNotFoundException(lugarid));
         
-        lugar.setLugarid(updateBody.getLugarid());
         lugar.setSalaid(updateBody.getSalaid());
         lugar.setNome(updateBody.getNome());
         lugar.setQuantidade(updateBody.getQuantidade());
@@ -386,7 +387,6 @@ public abstract class GeneratedLugarController {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class LugarUpdateBody {
         
-        private final int lugarid;
         private final int salaid;
         private final String nome;
         private final Integer quantidade;
@@ -394,20 +394,14 @@ public abstract class GeneratedLugarController {
         
         @JsonCreator
         public LugarUpdateBody(
-                @JsonProperty("lugarid") Integer lugarid,
                 @JsonProperty("salaid") Integer salaid,
                 @JsonProperty("nome") String nome,
                 @JsonProperty("quantidade") Integer quantidade,
                 @JsonProperty("valor") BigDecimal valor) {
-            this.lugarid = Objects.requireNonNull(lugarid, "`lugarid` is required");
             this.salaid = Objects.requireNonNull(salaid, "`salaid` is required");
             this.nome = Objects.requireNonNull(nome, "`nome` is required");
             this.quantidade = Objects.requireNonNull(quantidade, "`quantidade` is required");
             this.valor = Objects.requireNonNull(valor, "`valor` is required");
-        }
-        
-        public int getLugarid() {
-            return this.lugarid;
         }
         
         public int getSalaid() {

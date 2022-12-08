@@ -1,21 +1,7 @@
 package com.appreservas.reservas.organizador.generated;
 
-import static java.util.Collections.singletonList;
-import static java.util.Objects.requireNonNull;
-
-import java.nio.ByteBuffer;
-import java.util.List;
-import java.util.function.BiConsumer;
-import java.util.function.LongConsumer;
-import java.util.function.LongFunction;
-import java.util.function.LongPredicate;
-import java.util.function.LongToDoubleFunction;
-import java.util.function.LongToIntFunction;
-import java.util.function.LongUnaryOperator;
-
 import com.appreservas.reservas.organizador.Organizador;
 import com.appreservas.reservas.organizador.OrganizadorImpl;
-import com.appreservas.reservas.utilizador.Utilizador;
 import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.common.function.BiLongToIntFunction;
 import com.speedment.common.function.LongToBooleanFunction;
@@ -29,12 +15,24 @@ import com.speedment.enterprise.datastore.runtime.entitystore.EntityStoreSeriali
 import com.speedment.enterprise.datastore.runtime.entitystore.function.EntityStoreComparator;
 import com.speedment.enterprise.datastore.runtime.entitystore.function.EntityStoreCompareTo;
 import com.speedment.enterprise.datastore.runtime.entitystore.function.EntityStorePredicate;
-import com.speedment.enterprise.datastore.runtime.fieldcache.FieldCache;
 import com.speedment.enterprise.datastore.runtime.throwable.DeserializationException;
 import com.speedment.enterprise.datastore.runtime.throwable.Utf8Exception;
 import com.speedment.enterprise.datastore.runtime.util.SerializerUtil;
 import com.speedment.enterprise.datastore.runtime.util.Utf8Util;
 import com.speedment.runtime.config.identifier.ColumnIdentifier;
+
+import java.nio.ByteBuffer;
+import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.LongConsumer;
+import java.util.function.LongFunction;
+import java.util.function.LongPredicate;
+import java.util.function.LongToDoubleFunction;
+import java.util.function.LongToIntFunction;
+import java.util.function.LongUnaryOperator;
+
+import static java.util.Collections.singletonList;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Serializes and deserializes instances of Organizador.
@@ -50,11 +48,10 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
     private final LongFunction<ByteBuffer> bufferFinder;
     private final LongToIntFunction offsetFinder;
     private static final int FIELD_ORGANIZADORID = 0;
-    private static final int FIELD_USERID = 4;
-    private static final int FKREF_ORGANIZADOR_USERID_FKEY = 8;
-    private static final int ENDPOS_NOME = 16;
-    private static final int ENDPOS_CONTACTO = 20;
-    private static final int VARSIZE_BEGINS = 24;
+    private static final int FIELD_APPUSERID = 4;
+    private static final int ENDPOS_NOME = 8;
+    private static final int ENDPOS_CONTACTO = 12;
+    private static final int VARSIZE_BEGINS = 16;
     
     protected GeneratedOrganizadorEntityStoreSerializerImpl(final LongFunction<ByteBuffer> bufferFinder, final LongToIntFunction offsetFinder) {
         this.bufferFinder = requireNonNull(bufferFinder);
@@ -66,8 +63,7 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
         return (buffer, entity) -> {
             int varSizePos = 0;
             buffer.putInt(FIELD_ORGANIZADORID, entity.getOrganizadorid());
-            buffer.putInt(FIELD_USERID, entity.getUserid());
-            buffer.putLong(FKREF_ORGANIZADOR_USERID_FKEY, -1L); // Will be set later on in the decorator()-method.
+            buffer.putInt(FIELD_APPUSERID, entity.getAppuserid());
             varSizePos += ByteBufferUtil.putArrayAbsolute(buffer, VARSIZE_BEGINS + varSizePos, entity.getNome().getBytes());
             buffer.putInt(ENDPOS_NOME, varSizePos);
             if (entity.getContacto().isPresent()) {
@@ -83,17 +79,7 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
     
     @Override
     public LongConsumer decorator(DataStoreHolder holder) {
-        final FieldCache.OfInt utilizador_utilizadoridFieldCache = holder.getFieldCache(Utilizador.UTILIZADORID.identifier());
-        final LongToIntFunction useridDeserializer = intDeserializer(Organizador.USERID.identifier());
-        final LongUnaryOperator organizadorUseridFkeyResolver = ref -> {
-            final int value = useridDeserializer.applyAsInt(ref);
-            return utilizador_utilizadoridFieldCache.any(value);
-        };
-        return ref -> {
-            final ByteBuffer buffer = bufferFinder.apply(ref);
-            final int rowOffset = offsetFinder.applyAsInt(ref);
-            buffer.putLong(rowOffset + FKREF_ORGANIZADOR_USERID_FKEY, organizadorUseridFkeyResolver.applyAsLong(ref));
-        };
+        return DO_NOTHING;
     }
     
     @Override
@@ -123,7 +109,7 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
                     throw new DeserializationException(buffer, offset, sizeOf.applyAsInt(ref), ex);
                 }
             }
-            entity.setUserid(buffer.getInt(offset + FIELD_USERID));
+            entity.setAppuserid(buffer.getInt(offset + FIELD_APPUSERID));
             return entity;
         };
     }
@@ -134,7 +120,7 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
             final Organizador.Identifier _id = (Organizador.Identifier) colId;
             switch (_id) {
                 case ORGANIZADORID : 
-                case USERID        : return int.class;
+                case APPUSERID     : return int.class;
                 case NOME          : 
                 case CONTACTO      : return String.class;
                 default : {
@@ -147,7 +133,7 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
             final String _colName = colId.getColumnId();
             switch (_colName) {
                 case "organizadorid" : 
-                case "userid"        : return int.class;
+                case "appuserid"     : return int.class;
                 case "nome"          : 
                 case "contacto"      : return String.class;
                 default : {
@@ -166,25 +152,12 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
     
     @Override
     public <FK_ENTITY> LongUnaryOperator finder(final List<ColumnIdentifier<Organizador>> cols, final List<ColumnIdentifier<FK_ENTITY>> fkCols) {
-        final String fkName = SerializerUtil.uniqueFkName(cols, fkCols);
-        switch (fkName) {
-            case "{userid}->utilizador{utilizadorid}": return finder("organizador_userid_fkey");
-        }
-        
-        throw new IllegalArgumentException(
-            fkName + " is not a valid foreign reference name."
-        );
+        throw new UnsupportedOperationException("Organizador has no foreign references.");
     }
     
     @Override
     public LongUnaryOperator finder(final String fkName) {
-        switch (fkName) {
-            case "organizador_userid_fkey": return ref -> bufferFinder.apply(ref).getLong(offsetFinder.applyAsInt(ref) + FKREF_ORGANIZADOR_USERID_FKEY);
-        }
-        
-        throw new IllegalArgumentException(
-            "Could not find a foreign key " + fkName + " in table 'organizador'."
-        );
+        throw new UnsupportedOperationException("Organizador has no foreign references.");
     }
     
     @Override
@@ -193,7 +166,7 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
             final Organizador.Identifier _id = (Organizador.Identifier) colId;
             switch (_id) {
                 case ORGANIZADORID : 
-                case USERID        : 
+                case APPUSERID     : 
                 case NOME          : return ALWAYS_FALSE;
                 case CONTACTO      : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + ENDPOS_CONTACTO) < 0;
                 default : {
@@ -206,7 +179,7 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
             final String _colName = colId.getColumnId();
             switch (_colName) {
                 case "organizadorid" : 
-                case "userid"        : 
+                case "appuserid"     : 
                 case "nome"          : return ALWAYS_FALSE;
                 case "contacto"      : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + ENDPOS_CONTACTO) < 0;
                 default : {
@@ -224,7 +197,7 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
             final Organizador.Identifier _id = (Organizador.Identifier) colId;
             switch (_id) {
                 case ORGANIZADORID : 
-                case USERID        : 
+                case APPUSERID     : 
                 case NOME          : return ALWAYS_TRUE;
                 case CONTACTO      : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + ENDPOS_CONTACTO) >= 0;
                 default : {
@@ -237,7 +210,7 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
             final String _colName = colId.getColumnId();
             switch (_colName) {
                 case "organizadorid" : 
-                case "userid"        : 
+                case "appuserid"     : 
                 case "nome"          : return ALWAYS_TRUE;
                 case "contacto"      : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + ENDPOS_CONTACTO) >= 0;
                 default : {
@@ -269,7 +242,7 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
             final Organizador.Identifier _id = (Organizador.Identifier) colId;
             switch (_id) {
                 case ORGANIZADORID : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_ORGANIZADORID);
-                case USERID        : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_USERID);
+                case APPUSERID     : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_APPUSERID);
                 default : {
                     throw new UnsupportedOperationException(
                         String.format("The column '%s' is either unknown or not of type int.", _id)
@@ -280,7 +253,7 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
             final String _colName = colId.getColumnId();
             switch (_colName) {
                 case "organizadorid" : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_ORGANIZADORID);
-                case "userid"        : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_USERID);
+                case "appuserid"     : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_APPUSERID);
                 default : {
                     throw new UnsupportedOperationException(
                         String.format("The column '%s' is either unknown or not of type int.", _colName)
@@ -409,9 +382,9 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
                     bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_ORGANIZADORID),
                     bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_ORGANIZADORID)
                 );
-                case USERID        : return (aRef, bRef) -> Integer.compare(
-                    bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_USERID),
-                    bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_USERID)
+                case APPUSERID     : return (aRef, bRef) -> Integer.compare(
+                    bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_APPUSERID),
+                    bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_APPUSERID)
                 );
                 case NOME          : return (aRef, bRef) -> {
                     final ByteBuffer aBuf = bufferFinder.apply(aRef);
@@ -454,9 +427,9 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
                     bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_ORGANIZADORID),
                     bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_ORGANIZADORID)
                 );
-                case "userid"        : return (aRef, bRef) -> Integer.compare(
-                    bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_USERID),
-                    bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_USERID)
+                case "appuserid"     : return (aRef, bRef) -> Integer.compare(
+                    bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_APPUSERID),
+                    bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_APPUSERID)
                 );
                 case "nome"          : return (aRef, bRef) -> {
                     final ByteBuffer aBuf = bufferFinder.apply(aRef);
@@ -504,9 +477,9 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
                     bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_ORGANIZADORID),
                     bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_ORGANIZADORID)
                 );
-                case USERID        : return (aRef, bRef) -> Integer.compare(
-                    bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_USERID),
-                    bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_USERID)
+                case APPUSERID     : return (aRef, bRef) -> Integer.compare(
+                    bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_APPUSERID),
+                    bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_APPUSERID)
                 );
                 case NOME          : return (aRef, bRef) -> {
                     final ByteBuffer aBuf = bufferFinder.apply(aRef);
@@ -552,9 +525,9 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
                     bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_ORGANIZADORID),
                     bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_ORGANIZADORID)
                 );
-                case "userid"        : return (aRef, bRef) -> Integer.compare(
-                    bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_USERID),
-                    bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_USERID)
+                case "appuserid"     : return (aRef, bRef) -> Integer.compare(
+                    bufferFinder.apply(aRef).getInt(offsetFinder.applyAsInt(aRef) + FIELD_APPUSERID),
+                    bufferFinder.apply(bRef).getInt(offsetFinder.applyAsInt(bRef) + FIELD_APPUSERID)
                 );
                 case "nome"          : return (aRef, bRef) -> {
                     final ByteBuffer aBuf = bufferFinder.apply(aRef);
@@ -622,10 +595,10 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
                         operand
                     );
                 }
-                case USERID        : {
+                case APPUSERID     : {
                     final int operand = value;
                     return ref -> Integer.compare(
-                        bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_USERID),
+                        bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_APPUSERID),
                         operand
                     );
                 }
@@ -645,10 +618,10 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
                         operand
                     );
                 }
-                case "userid"        : {
+                case "appuserid"     : {
                     final int operand = value;
                     return ref -> Integer.compare(
-                        bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_USERID),
+                        bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + FIELD_APPUSERID),
                         operand
                     );
                 }
@@ -777,7 +750,7 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
             final Organizador.Identifier _id = (Organizador.Identifier) colId;
             switch (_id) {
                 case ORGANIZADORID : 
-                case USERID        : return ALWAYS_LESS;
+                case APPUSERID     : return ALWAYS_LESS;
                 case NOME          : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + ENDPOS_NOME) < 0 ? 0 : -1;
                 case CONTACTO      : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + ENDPOS_CONTACTO) < 0 ? 0 : -1;
                 default : {
@@ -790,7 +763,7 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
             final String _colName = colId.getColumnId();
             switch (_colName) {
                 case "organizadorid" : 
-                case "userid"        : return ALWAYS_LESS;
+                case "appuserid"     : return ALWAYS_LESS;
                 case "nome"          : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + ENDPOS_NOME) < 0 ? 0 : -1;
                 case "contacto"      : return ref -> bufferFinder.apply(ref).getInt(offsetFinder.applyAsInt(ref) + ENDPOS_CONTACTO) < 0 ? 0 : -1;
                 default : {
@@ -813,10 +786,10 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
                     final int begins = rowOffset + FIELD_ORGANIZADORID;
                     return predicate.test(buffer, begins, begins + Integer.BYTES);
                 };
-                case USERID        : return ref -> {
+                case APPUSERID     : return ref -> {
                     final ByteBuffer buffer = bufferFinder.apply(ref);
                     final int rowOffset = offsetFinder.applyAsInt(ref);
-                    final int begins = rowOffset + FIELD_USERID;
+                    final int begins = rowOffset + FIELD_APPUSERID;
                     return predicate.test(buffer, begins, begins + Integer.BYTES);
                 };
                 case NOME          : return ref -> {
@@ -850,10 +823,10 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
                     final int begins = rowOffset + FIELD_ORGANIZADORID;
                     return predicate.test(buffer, begins, begins + Integer.BYTES);
                 };
-                case "userid"        : return ref -> {
+                case "appuserid"     : return ref -> {
                     final ByteBuffer buffer = bufferFinder.apply(ref);
                     final int rowOffset = offsetFinder.applyAsInt(ref);
-                    final int begins = rowOffset + FIELD_USERID;
+                    final int begins = rowOffset + FIELD_APPUSERID;
                     return predicate.test(buffer, begins, begins + Integer.BYTES);
                 };
                 case "nome"          : return ref -> {
@@ -892,10 +865,10 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
                     final int begins = rowOffset + FIELD_ORGANIZADORID;
                     return compareTo.compare(buffer, begins, begins + Integer.BYTES);
                 };
-                case USERID        : return ref -> {
+                case APPUSERID     : return ref -> {
                     final ByteBuffer buffer = bufferFinder.apply(ref);
                     final int rowOffset = offsetFinder.applyAsInt(ref);
-                    final int begins = rowOffset + FIELD_USERID;
+                    final int begins = rowOffset + FIELD_APPUSERID;
                     return compareTo.compare(buffer, begins, begins + Integer.BYTES);
                 };
                 case NOME          : return ref -> {
@@ -929,10 +902,10 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
                     final int begins = rowOffset + FIELD_ORGANIZADORID;
                     return compareTo.compare(buffer, begins, begins + Integer.BYTES);
                 };
-                case "userid"        : return ref -> {
+                case "appuserid"     : return ref -> {
                     final ByteBuffer buffer = bufferFinder.apply(ref);
                     final int rowOffset = offsetFinder.applyAsInt(ref);
-                    final int begins = rowOffset + FIELD_USERID;
+                    final int begins = rowOffset + FIELD_APPUSERID;
                     return compareTo.compare(buffer, begins, begins + Integer.BYTES);
                 };
                 case "nome"          : return ref -> {
@@ -977,13 +950,13 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
                         bBuffer, bBegins, bBegins + Integer.BYTES
                     );
                 };
-                case USERID        : return (aRef, bRef) -> {
+                case APPUSERID     : return (aRef, bRef) -> {
                     final ByteBuffer aBuffer = bufferFinder.apply(aRef);
                     final ByteBuffer bBuffer = bufferFinder.apply(bRef);
                     final int aRowOffset = offsetFinder.applyAsInt(aRef);
                     final int bRowOffset = offsetFinder.applyAsInt(bRef);
-                    final int aBegins = aRowOffset + FIELD_USERID;
-                    final int bBegins = bRowOffset + FIELD_USERID;
+                    final int aBegins = aRowOffset + FIELD_APPUSERID;
+                    final int bBegins = bRowOffset + FIELD_APPUSERID;
                     return comparator.compare(
                         aBuffer, aBegins, aBegins + Integer.BYTES,
                         bBuffer, bBegins, bBegins + Integer.BYTES
@@ -1030,13 +1003,13 @@ public abstract class GeneratedOrganizadorEntityStoreSerializerImpl implements E
                         bBuffer, bBegins, bBegins + Integer.BYTES
                     );
                 };
-                case "userid"        : return (aRef, bRef) -> {
+                case "appuserid"     : return (aRef, bRef) -> {
                     final ByteBuffer aBuffer = bufferFinder.apply(aRef);
                     final ByteBuffer bBuffer = bufferFinder.apply(bRef);
                     final int aRowOffset = offsetFinder.applyAsInt(aRef);
                     final int bRowOffset = offsetFinder.applyAsInt(bRef);
-                    final int aBegins = aRowOffset + FIELD_USERID;
-                    final int bBegins = bRowOffset + FIELD_USERID;
+                    final int aBegins = aRowOffset + FIELD_APPUSERID;
+                    final int bBegins = bRowOffset + FIELD_APPUSERID;
                     return comparator.compare(
                         aBuffer, aBegins, aBegins + Integer.BYTES,
                         bBuffer, bBegins, bBegins + Integer.BYTES

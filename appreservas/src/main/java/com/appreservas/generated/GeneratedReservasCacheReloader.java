@@ -8,7 +8,6 @@ import com.appreservas.reservas.reserva.generated.GeneratedReservaCacheHolder;
 import com.appreservas.reservas.reservalugar.generated.GeneratedReservalugarCacheHolder;
 import com.appreservas.reservas.sala.generated.GeneratedSalaCacheHolder;
 import com.appreservas.reservas.sessao.generated.GeneratedSessaoCacheHolder;
-import com.appreservas.reservas.utilizador.generated.GeneratedUtilizadorCacheHolder;
 import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.enterprise.datastore.runtime.DataStoreHolder;
 import com.speedment.enterprise.datastore.runtime.DataStoreReloader;
@@ -41,7 +40,6 @@ public abstract class GeneratedReservasCacheReloader implements DataStoreReloade
         final CompletableFuture<GeneratedReservalugarCacheHolder> reservalugarHolder  = GeneratedReservalugarCacheHolder.reload(streamSupplier, executor);
         final CompletableFuture<GeneratedSalaCacheHolder> salaHolder                  = GeneratedSalaCacheHolder.reload(streamSupplier, executor);
         final CompletableFuture<GeneratedSessaoCacheHolder> sessaoHolder              = GeneratedSessaoCacheHolder.reload(streamSupplier, executor);
-        final CompletableFuture<GeneratedUtilizadorCacheHolder> utilizadorHolder      = GeneratedUtilizadorCacheHolder.reload(streamSupplier, executor);
         
         final DataStoreHolder holder;
         try {
@@ -53,8 +51,7 @@ public abstract class GeneratedReservasCacheReloader implements DataStoreReloade
                 reservaHolder.get(),
                 reservalugarHolder.get(),
                 salaHolder.get(),
-                sessaoHolder.get(),
-                utilizadorHolder.get()
+                sessaoHolder.get()
             );
         } catch (final ExecutionException | InterruptedException ex) {
             throw new RuntimeException("Error reloading caches.", ex);

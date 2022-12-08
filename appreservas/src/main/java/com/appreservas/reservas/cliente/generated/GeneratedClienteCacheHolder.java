@@ -1,18 +1,5 @@
 package com.appreservas.reservas.cliente.generated;
 
-import static java.util.Objects.requireNonNull;
-import static java.util.stream.Collectors.toMap;
-import static java.util.stream.Collectors.toSet;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.stream.Stream;
-
 import com.appreservas.reservas.cliente.Cliente;
 import com.appreservas.reservas.cliente.ClienteEntityStoreSerializerImpl;
 import com.appreservas.reservas.cliente.ClienteManager;
@@ -21,9 +8,9 @@ import com.speedment.common.tuple.Tuple2;
 import com.speedment.common.tuple.Tuples;
 import com.speedment.enterprise.datastore.runtime.entitystore.EntityStore;
 import com.speedment.enterprise.datastore.runtime.entitystore.EntityStoreHolder;
-import com.speedment.enterprise.datastore.runtime.fieldcache.FieldCache;
 import com.speedment.enterprise.datastore.runtime.fieldcache.FieldCache.OfInt;
 import com.speedment.enterprise.datastore.runtime.fieldcache.FieldCache.OfString;
+import com.speedment.enterprise.datastore.runtime.fieldcache.FieldCache;
 import com.speedment.enterprise.datastore.runtime.fieldcache.MultiFieldCache;
 import com.speedment.enterprise.datastore.runtime.statistic.Statistics;
 import com.speedment.enterprise.datastore.runtime.util.DataStoreHolderUtil;
@@ -35,7 +22,21 @@ import com.speedment.runtime.config.identifier.ColumnIdentifier;
 import com.speedment.runtime.config.identifier.ColumnLabel;
 import com.speedment.runtime.config.identifier.TableIdentifier;
 import com.speedment.runtime.core.component.StreamSupplierComponent;
+import com.speedment.runtime.field.Field;
 import com.speedment.runtime.field.trait.HasIdentifier;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.stream.Stream;
+
+import static java.util.Objects.requireNonNull;
+import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.toSet;
 
 /**
  * A holder class for the various caches that are used to speed up the {@link
@@ -54,7 +55,7 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
     
     private final EntityStore<Cliente> entityStore;
     private final OfInt fieldClienteidCache;
-    private final OfInt fieldUseridCache;
+    private final OfInt fieldAppuseridCache;
     private final OfString fieldNomeCache;
     private final OfInt fieldTelemovelCache;
     private final OfString fieldEmailCache;
@@ -63,7 +64,7 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
     public GeneratedClienteCacheHolder(
             EntityStore<Cliente> entityStore,
             OfInt fieldClienteidCache,
-            OfInt fieldUseridCache,
+            OfInt fieldAppuseridCache,
             OfString fieldNomeCache,
             OfInt fieldTelemovelCache,
             OfString fieldEmailCache,
@@ -71,7 +72,7 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
         
         this.entityStore         = requireNonNull(entityStore);
         this.fieldClienteidCache = requireNonNull(fieldClienteidCache);
-        this.fieldUseridCache    = requireNonNull(fieldUseridCache);
+        this.fieldAppuseridCache = requireNonNull(fieldAppuseridCache);
         this.fieldNomeCache      = requireNonNull(fieldNomeCache);
         this.fieldTelemovelCache = requireNonNull(fieldTelemovelCache);
         this.fieldEmailCache     = requireNonNull(fieldEmailCache);
@@ -90,7 +91,7 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
             final Cliente.Identifier _id = (Cliente.Identifier) columnId;
             switch (_id) {
                 case CLIENTEID : return (CACHE) fieldClienteidCache;
-                case USERID    : return (CACHE) fieldUseridCache;
+                case APPUSERID : return (CACHE) fieldAppuseridCache;
                 case NOME      : return (CACHE) fieldNomeCache;
                 case TELEMOVEL : return (CACHE) fieldTelemovelCache;
                 case EMAIL     : return (CACHE) fieldEmailCache;
@@ -105,7 +106,7 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
             final String _colName = columnId.getColumnId();
             switch (_colName) {
                 case "clienteid" : return (CACHE) fieldClienteidCache;
-                case "userid"    : return (CACHE) fieldUseridCache;
+                case "appuserid" : return (CACHE) fieldAppuseridCache;
                 case "nome"      : return (CACHE) fieldNomeCache;
                 case "telemovel" : return (CACHE) fieldTelemovelCache;
                 case "email"     : return (CACHE) fieldEmailCache;
@@ -152,7 +153,7 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
         // Use explicit type for Stream to improve compilation time.
         final Map<ColumnLabel, FieldCache<?>> fieldCaches = Stream.<Tuple2<HasIdentifier<Cliente>, FieldCache<?>>>of(
             Tuples.of(Cliente.CLIENTEID,fieldClienteidCache),
-            Tuples.of(Cliente.USERID,   fieldUseridCache),
+            Tuples.of(Cliente.APPUSERID,fieldAppuseridCache),
             Tuples.of(Cliente.NOME,     fieldNomeCache),
             Tuples.of(Cliente.TELEMOVEL,fieldTelemovelCache),
             Tuples.of(Cliente.EMAIL,    fieldEmailCache),
@@ -162,7 +163,7 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
         final Map<ColumnLabel,  Map<ColumnLabel, MultiFieldCache<?, ?, ?>>>  multiFieldCaches = createMultiCacheMap();
         final Set<ColumnIdentifier<Cliente>> columnIdentifiers = Stream.<HasIdentifier<Cliente>>of(
             Cliente.CLIENTEID,
-            Cliente.USERID,
+            Cliente.APPUSERID,
             Cliente.NOME,
             Cliente.TELEMOVEL,
             Cliente.EMAIL,
@@ -182,8 +183,8 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
         final CompletableFuture<FieldCache.OfInt> fieldClienteidCacheFuture =
             DataStoreHolderUtil.buildIntCache(entityStoreFuture, executor, Cliente.CLIENTEID, FieldCache.DISTINCT);
         
-        final CompletableFuture<FieldCache.OfInt> fieldUseridCacheFuture =
-            DataStoreHolderUtil.buildIntCache(entityStoreFuture, executor, Cliente.USERID, 0);
+        final CompletableFuture<FieldCache.OfInt> fieldAppuseridCacheFuture =
+            DataStoreHolderUtil.buildIntCache(entityStoreFuture, executor, Cliente.APPUSERID, 0);
         
         final CompletableFuture<FieldCache.OfString> fieldNomeCacheFuture =
             DataStoreHolderUtil.buildStringCache(entityStoreFuture, executor, Cliente.NOME, 0);
@@ -202,7 +203,7 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
                 return new GeneratedClienteCacheHolder(
                     entityStore,
                     fieldClienteidCacheFuture.get(),
-                    fieldUseridCacheFuture.get(),
+                    fieldAppuseridCacheFuture.get(),
                     fieldNomeCacheFuture.get(),
                     fieldTelemovelCacheFuture.get(),
                     fieldEmailCacheFuture.get(),
@@ -218,7 +219,7 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
     public void close() {
         entityStore.close();
         fieldClienteidCache.close();
-        fieldUseridCache.close();
+        fieldAppuseridCache.close();
         fieldNomeCache.close();
         fieldTelemovelCache.close();
         fieldEmailCache.close();
@@ -232,7 +233,7 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
             entityStore.identifier(),
             Arrays.asList(
                 Cliente.Identifier.CLIENTEID,
-                Cliente.Identifier.USERID,
+                Cliente.Identifier.APPUSERID,
                 Cliente.Identifier.NOME,
                 Cliente.Identifier.TELEMOVEL,
                 Cliente.Identifier.EMAIL,

@@ -1,19 +1,5 @@
 package com.appreservas.reservas.sessao.generated;
 
-import static java.util.Objects.requireNonNull;
-import static java.util.stream.Collectors.toMap;
-import static java.util.stream.Collectors.toSet;
-
-import java.sql.Timestamp;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.stream.Stream;
-
 import com.appreservas.reservas.sessao.Sessao;
 import com.appreservas.reservas.sessao.SessaoEntityStoreSerializerImpl;
 import com.appreservas.reservas.sessao.SessaoManager;
@@ -22,9 +8,9 @@ import com.speedment.common.tuple.Tuple2;
 import com.speedment.common.tuple.Tuples;
 import com.speedment.enterprise.datastore.runtime.entitystore.EntityStore;
 import com.speedment.enterprise.datastore.runtime.entitystore.EntityStoreHolder;
-import com.speedment.enterprise.datastore.runtime.fieldcache.FieldCache;
 import com.speedment.enterprise.datastore.runtime.fieldcache.FieldCache.OfComparable;
 import com.speedment.enterprise.datastore.runtime.fieldcache.FieldCache.OfInt;
+import com.speedment.enterprise.datastore.runtime.fieldcache.FieldCache;
 import com.speedment.enterprise.datastore.runtime.fieldcache.MultiFieldCache;
 import com.speedment.enterprise.datastore.runtime.statistic.Statistics;
 import com.speedment.enterprise.datastore.runtime.util.DataStoreHolderUtil;
@@ -36,7 +22,22 @@ import com.speedment.runtime.config.identifier.ColumnIdentifier;
 import com.speedment.runtime.config.identifier.ColumnLabel;
 import com.speedment.runtime.config.identifier.TableIdentifier;
 import com.speedment.runtime.core.component.StreamSupplierComponent;
+import com.speedment.runtime.field.Field;
 import com.speedment.runtime.field.trait.HasIdentifier;
+
+import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.stream.Stream;
+
+import static java.util.Objects.requireNonNull;
+import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.toSet;
 
 /**
  * A holder class for the various caches that are used to speed up the {@link
