@@ -22,6 +22,7 @@ import com.speedment.runtime.config.identifier.ColumnIdentifier;
 import com.speedment.runtime.config.identifier.ColumnLabel;
 import com.speedment.runtime.config.identifier.TableIdentifier;
 import com.speedment.runtime.core.component.StreamSupplierComponent;
+import com.speedment.runtime.field.Field;
 import com.speedment.runtime.field.trait.HasIdentifier;
 
 import java.util.Arrays;
@@ -56,20 +57,20 @@ public final class GeneratedOrganizadorCacheHolder implements EntityStoreHolder<
     private final OfInt fieldOrganizadoridCache;
     private final OfString fieldNomeCache;
     private final OfString fieldContactoCache;
-    private final OfInt fieldUseridCache;
+    private final OfInt fieldAppuseridCache;
     
     public GeneratedOrganizadorCacheHolder(
             EntityStore<Organizador> entityStore,
             OfInt fieldOrganizadoridCache,
             OfString fieldNomeCache,
             OfString fieldContactoCache,
-            OfInt fieldUseridCache) {
+            OfInt fieldAppuseridCache) {
         
         this.entityStore             = requireNonNull(entityStore);
         this.fieldOrganizadoridCache = requireNonNull(fieldOrganizadoridCache);
         this.fieldNomeCache          = requireNonNull(fieldNomeCache);
         this.fieldContactoCache      = requireNonNull(fieldContactoCache);
-        this.fieldUseridCache        = requireNonNull(fieldUseridCache);
+        this.fieldAppuseridCache     = requireNonNull(fieldAppuseridCache);
     }
     
     @Override
@@ -86,7 +87,7 @@ public final class GeneratedOrganizadorCacheHolder implements EntityStoreHolder<
                 case ORGANIZADORID : return (CACHE) fieldOrganizadoridCache;
                 case NOME          : return (CACHE) fieldNomeCache;
                 case CONTACTO      : return (CACHE) fieldContactoCache;
-                case USERID        : return (CACHE) fieldUseridCache;
+                case APPUSERID     : return (CACHE) fieldAppuseridCache;
                 default : {
                     throw new UnsupportedOperationException(
                         String.format("Unknown enum constant '%s'.", _id)
@@ -99,7 +100,7 @@ public final class GeneratedOrganizadorCacheHolder implements EntityStoreHolder<
                 case "organizadorid" : return (CACHE) fieldOrganizadoridCache;
                 case "nome"          : return (CACHE) fieldNomeCache;
                 case "contacto"      : return (CACHE) fieldContactoCache;
-                case "userid"        : return (CACHE) fieldUseridCache;
+                case "appuserid"     : return (CACHE) fieldAppuseridCache;
                 default : {
                     throw new UnsupportedOperationException(
                         String.format("Unknown column name '%s'.", _colName)
@@ -144,7 +145,7 @@ public final class GeneratedOrganizadorCacheHolder implements EntityStoreHolder<
             Tuples.of(Organizador.ORGANIZADORID,fieldOrganizadoridCache),
             Tuples.of(Organizador.NOME,         fieldNomeCache),
             Tuples.of(Organizador.CONTACTO,     fieldContactoCache),
-            Tuples.of(Organizador.USERID,       fieldUseridCache)
+            Tuples.of(Organizador.APPUSERID,    fieldAppuseridCache)
         )
             .collect(toMap(t2 -> t2.get0().identifier().label(), Tuple2::get1));
         final Map<ColumnLabel,  Map<ColumnLabel, MultiFieldCache<?, ?, ?>>>  multiFieldCaches = createMultiCacheMap();
@@ -152,7 +153,7 @@ public final class GeneratedOrganizadorCacheHolder implements EntityStoreHolder<
             Organizador.ORGANIZADORID,
             Organizador.NOME,
             Organizador.CONTACTO,
-            Organizador.USERID
+            Organizador.APPUSERID
         )
             .map(HasIdentifier::identifier)
             .collect(toSet());
@@ -174,8 +175,8 @@ public final class GeneratedOrganizadorCacheHolder implements EntityStoreHolder<
         final CompletableFuture<FieldCache.OfString> fieldContactoCacheFuture =
             DataStoreHolderUtil.buildStringCache(entityStoreFuture, executor, Organizador.CONTACTO, 0);
         
-        final CompletableFuture<FieldCache.OfInt> fieldUseridCacheFuture =
-            DataStoreHolderUtil.buildIntCache(entityStoreFuture, executor, Organizador.USERID, 0);
+        final CompletableFuture<FieldCache.OfInt> fieldAppuseridCacheFuture =
+            DataStoreHolderUtil.buildIntCache(entityStoreFuture, executor, Organizador.APPUSERID, 0);
         
         return entityStoreFuture.thenApplyAsync(entityStore -> {
             try {
@@ -184,7 +185,7 @@ public final class GeneratedOrganizadorCacheHolder implements EntityStoreHolder<
                     fieldOrganizadoridCacheFuture.get(),
                     fieldNomeCacheFuture.get(),
                     fieldContactoCacheFuture.get(),
-                    fieldUseridCacheFuture.get()
+                    fieldAppuseridCacheFuture.get()
                 );
             } catch (final ExecutionException | InterruptedException ex) {
                 throw new RuntimeException(ex);
@@ -198,7 +199,7 @@ public final class GeneratedOrganizadorCacheHolder implements EntityStoreHolder<
         fieldOrganizadoridCache.close();
         fieldNomeCache.close();
         fieldContactoCache.close();
-        fieldUseridCache.close();
+        fieldAppuseridCache.close();
     }
     
     @Override
@@ -210,7 +211,7 @@ public final class GeneratedOrganizadorCacheHolder implements EntityStoreHolder<
                 Organizador.Identifier.ORGANIZADORID,
                 Organizador.Identifier.NOME,
                 Organizador.Identifier.CONTACTO,
-                Organizador.Identifier.USERID
+                Organizador.Identifier.APPUSERID
             )
         
         );

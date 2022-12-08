@@ -28,7 +28,7 @@ public interface GeneratedOrganizadorManager extends Manager<Organizador> {
         Organizador.ORGANIZADORID,
         Organizador.NOME,
         Organizador.CONTACTO,
-        Organizador.USERID
+        Organizador.APPUSERID
     ));
     
     @Override

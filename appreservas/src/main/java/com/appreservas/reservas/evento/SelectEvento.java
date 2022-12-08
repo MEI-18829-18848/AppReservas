@@ -3,10 +3,13 @@ package com.appreservas.reservas.evento;
 import java.sql.ResultSet;
 
 import com.appreservas.Select.ISelect;
+import com.appreservas.services.MovieService;
 
 public class SelectEvento implements ISelect{
     private String className = this.getClass().getSimpleName().replace("Select", "").toLowerCase();
     private String idName = this.getClass().getSimpleName().replace("Select", "").toLowerCase() + "id";
+
+    private MovieService movies = new MovieService();
     
     private static SelectEvento _instance = null;
     public static SelectEvento getInstance(){
@@ -29,9 +32,21 @@ public class SelectEvento implements ISelect{
             result += String.format("\"organizadorid\":\"%s\",", organizadorid);
             result += String.format("\"nome\":\"%s\",", nome);
             result += String.format("\"descricao\":\"%s\",", descricao);
-            result += String.format("\"categoria\":\"%s\"", categoria);
+            result += String.format("\"categoria\":\"%s\",", categoria);
             result += String.format("\"imdbid\":\"%s\"", imdbid);
-            result += String.format("}");
+            if(imdbid.equals("0") || imdbid == null || imdbid.equals("")){
+                result += String.format("}");
+            }else{
+                var movieInfo = movies.getMoviePlainJSON(imdbid);
+                  if(movieInfo == null){
+                    result += String.format("}");
+                }
+                else{
+                    result += String.format(",");
+                    result += String.format("\"imdbInfo\":%s", movieInfo);
+                    result += String.format("}");
+                }
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return result;

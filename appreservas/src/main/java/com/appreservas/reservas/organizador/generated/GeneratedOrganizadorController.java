@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -57,7 +56,6 @@ import static java.util.stream.Collectors.toList;
  */
 @GeneratedCode("Speedment")
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/reservas")
 public abstract class GeneratedOrganizadorController {
     
     protected @Autowired JsonComponent jsonComponent;
@@ -70,7 +68,7 @@ public abstract class GeneratedOrganizadorController {
             .put("organizadorid", Organizador.ORGANIZADORID)
             .put("nome", Organizador.NOME)
             .put("contacto", Organizador.CONTACTO)
-            .put("userid", Organizador.USERID)
+            .put("appuserid", Organizador.APPUSERID)
             .build();
     }
     
@@ -138,7 +136,7 @@ public abstract class GeneratedOrganizadorController {
         final Organizador organizador = manager.create()
             .setNome(createBody.getNome())
             .setContacto(createBody.getContacto())
-            .setUserid(createBody.getUserid())
+            .setAppuserid(createBody.getAppuserid())
         ;
         
         persister.accept(organizador);
@@ -149,16 +147,19 @@ public abstract class GeneratedOrganizadorController {
     public void update(
             @PathVariable(name = "organizadorid") int organizadorid,
             @RequestBody @Validated OrganizadorUpdateBody updateBody) {
-        final Updater<Organizador> updater = manager.updater();
+        final FieldSet<Organizador> excluded = FieldSet.allExcept(
+            Organizador.ORGANIZADORID
+        );
+        
+        final Updater<Organizador> updater = manager.updater(excluded);
         final Organizador organizador = manager.stream()
             .filter(Organizador.ORGANIZADORID.equal(organizadorid))
             .findFirst()
             .orElseThrow(() -> new OrganizadorNotFoundException(organizadorid));
         
-        organizador.setOrganizadorid(updateBody.getOrganizadorid());
         organizador.setNome(updateBody.getNome());
         organizador.setContacto(updateBody.getContacto());
-        organizador.setUserid(updateBody.getUserid());
+        organizador.setAppuserid(updateBody.getAppuserid());
         
         updater.accept(organizador);
     }
@@ -258,19 +259,19 @@ public abstract class GeneratedOrganizadorController {
                         );
                     }
                 }
-                case "userid" : {
+                case "appuserid" : {
                     final int v = Integer.parseInt(value());
                     switch (operator()) {
-                        case "eq"   : return Organizador.USERID.equal(v);
-                        case "ne"   : return Organizador.USERID.notEqual(v);
-                        case "lt"   : return Organizador.USERID.lessThan(v);
-                        case "le"   : return Organizador.USERID.lessOrEqual(v);
-                        case "gt"   : return Organizador.USERID.greaterThan(v);
-                        case "ge"   : return Organizador.USERID.greaterOrEqual(v);
+                        case "eq"   : return Organizador.APPUSERID.equal(v);
+                        case "ne"   : return Organizador.APPUSERID.notEqual(v);
+                        case "lt"   : return Organizador.APPUSERID.lessThan(v);
+                        case "le"   : return Organizador.APPUSERID.lessOrEqual(v);
+                        case "gt"   : return Organizador.APPUSERID.greaterThan(v);
+                        case "ge"   : return Organizador.APPUSERID.greaterOrEqual(v);
                         case "like" : // Fallthrough
                         default : throw new IllegalArgumentException(
                             "'" + operator() + "' is not a valid operator for " +
-                            "Organizador.userid."
+                            "Organizador.appuserid."
                         );
                     }
                 }
@@ -298,7 +299,7 @@ public abstract class GeneratedOrganizadorController {
                 case "organizadorid" : comparator = Organizador.ORGANIZADORID.comparator(); break;
                 case "nome"          : comparator = Organizador.NOME.comparator();          break;
                 case "contacto"      : comparator = Organizador.CONTACTO.comparator();      break;
-                case "userid"        : comparator = Organizador.USERID.comparator();        break;
+                case "appuserid"     : comparator = Organizador.APPUSERID.comparator();     break;
                 default : throw new IllegalArgumentException(
                     "'" + property() + "' is not a valid Organizador property."
                 );
@@ -329,16 +330,16 @@ public abstract class GeneratedOrganizadorController {
         
         private final String nome;
         private final String contacto;
-        private final int userid;
+        private final int appuserid;
         
         @JsonCreator
         public OrganizadorCreateBody(
                 @JsonProperty("nome") String nome,
                 @JsonProperty("contacto") String contacto,
-                @JsonProperty("userid") Integer userid) {
+                @JsonProperty("appuserid") Integer appuserid) {
             this.nome = Objects.requireNonNull(nome, "`nome` is required");
             this.contacto = Objects.requireNonNull(contacto, "`contacto` is required");
-            this.userid = Objects.requireNonNull(userid, "`userid` is required");
+            this.appuserid = Objects.requireNonNull(appuserid, "`appuserid` is required");
         }
         
         public String getNome() {
@@ -349,8 +350,8 @@ public abstract class GeneratedOrganizadorController {
             return this.contacto;
         }
         
-        public int getUserid() {
-            return this.userid;
+        public int getAppuserid() {
+            return this.appuserid;
         }
     }
     
@@ -358,25 +359,18 @@ public abstract class GeneratedOrganizadorController {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class OrganizadorUpdateBody {
         
-        private final int organizadorid;
         private final String nome;
         private final String contacto;
-        private final int userid;
+        private final int appuserid;
         
         @JsonCreator
         public OrganizadorUpdateBody(
-                @JsonProperty("organizadorid") Integer organizadorid,
                 @JsonProperty("nome") String nome,
                 @JsonProperty("contacto") String contacto,
-                @JsonProperty("userid") Integer userid) {
-            this.organizadorid = Objects.requireNonNull(organizadorid, "`organizadorid` is required");
+                @JsonProperty("appuserid") Integer appuserid) {
             this.nome = Objects.requireNonNull(nome, "`nome` is required");
             this.contacto = Objects.requireNonNull(contacto, "`contacto` is required");
-            this.userid = Objects.requireNonNull(userid, "`userid` is required");
-        }
-        
-        public int getOrganizadorid() {
-            return this.organizadorid;
+            this.appuserid = Objects.requireNonNull(appuserid, "`appuserid` is required");
         }
         
         public String getNome() {
@@ -387,8 +381,8 @@ public abstract class GeneratedOrganizadorController {
             return this.contacto;
         }
         
-        public int getUserid() {
-            return this.userid;
+        public int getAppuserid() {
+            return this.appuserid;
         }
     }
 }

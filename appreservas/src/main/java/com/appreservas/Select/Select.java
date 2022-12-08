@@ -4,10 +4,20 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.function.*;;
+import java.util.function.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;;
 
 public class Select
 {
+    @Value("@spring.datasource.url@")
+    private String db_url;
+
+    @Autowired
+    Environment env;
+    
     private static Select _instance = null;
     public static Select getInstance()
     {
@@ -22,7 +32,7 @@ public class Select
     private Select(){
         try {
             Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/appreservas", "postgres", "postgres");
+            connection = DriverManager.getConnection(System.getenv("SPRING_DATASOURCE_URL"), "postgres", "postgres");
             //     c.setAutoCommit(false);
             System.out.println("Successfully Connected.");
         } catch (Exception e) {
@@ -31,22 +41,6 @@ public class Select
         }
     }
     
-    public void setConnection( String args[] ) 
-    {
-        
-        try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/appreservas", "postgres", "postgres");
-            //     c.setAutoCommit(false);
-            System.out.println("Successfully Connected.");
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
-            System.exit(0);
-        }
-
-        System.out.println(" Data Retrieved Successfully ..");
-    }
-
     public String select(
         Function<ResultSet, String> resultsCollector, 
         String query)

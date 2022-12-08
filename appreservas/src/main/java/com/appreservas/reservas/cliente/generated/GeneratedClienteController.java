@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -57,7 +56,6 @@ import static java.util.stream.Collectors.toList;
  */
 @GeneratedCode("Speedment")
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/reservas")
 public abstract class GeneratedClienteController {
     
     protected @Autowired JsonComponent jsonComponent;
@@ -68,7 +66,7 @@ public abstract class GeneratedClienteController {
     void createClienteEncoder() {
         encoder = jsonComponent.<Cliente>emptyEncoder()
             .put("clienteid", Cliente.CLIENTEID)
-            .put("userid", Cliente.USERID)
+            .put("appuserid", Cliente.APPUSERID)
             .put("nome", Cliente.NOME)
             .put("telemovel", Cliente.TELEMOVEL)
             .put("email", Cliente.EMAIL)
@@ -138,7 +136,7 @@ public abstract class GeneratedClienteController {
         
         final Persister<Cliente> persister = manager.persister(excluded);
         final Cliente cliente = manager.create()
-            .setUserid(createBody.getUserid())
+            .setAppuserid(createBody.getAppuserid())
             .setNome(createBody.getNome())
             .setTelemovel(createBody.getTelemovel())
             .setEmail(createBody.getEmail())
@@ -160,7 +158,7 @@ public abstract class GeneratedClienteController {
             .orElseThrow(() -> new ClienteNotFoundException(clienteid));
         
         cliente.setClienteid(updateBody.getClienteid());
-        cliente.setUserid(updateBody.getUserid());
+        cliente.setAppuserid(updateBody.getAppuserid());
         cliente.setNome(updateBody.getNome());
         cliente.setTelemovel(updateBody.getTelemovel());
         cliente.setEmail(updateBody.getEmail());
@@ -232,19 +230,19 @@ public abstract class GeneratedClienteController {
                         );
                     }
                 }
-                case "userid" : {
+                case "appuserid" : {
                     final int v = Integer.parseInt(value());
                     switch (operator()) {
-                        case "eq"   : return Cliente.USERID.equal(v);
-                        case "ne"   : return Cliente.USERID.notEqual(v);
-                        case "lt"   : return Cliente.USERID.lessThan(v);
-                        case "le"   : return Cliente.USERID.lessOrEqual(v);
-                        case "gt"   : return Cliente.USERID.greaterThan(v);
-                        case "ge"   : return Cliente.USERID.greaterOrEqual(v);
+                        case "eq"   : return Cliente.APPUSERID.equal(v);
+                        case "ne"   : return Cliente.APPUSERID.notEqual(v);
+                        case "lt"   : return Cliente.APPUSERID.lessThan(v);
+                        case "le"   : return Cliente.APPUSERID.lessOrEqual(v);
+                        case "gt"   : return Cliente.APPUSERID.greaterThan(v);
+                        case "ge"   : return Cliente.APPUSERID.greaterOrEqual(v);
                         case "like" : // Fallthrough
                         default : throw new IllegalArgumentException(
                             "'" + operator() + "' is not a valid operator for " +
-                            "Cliente.userid."
+                            "Cliente.appuserid."
                         );
                     }
                 }
@@ -334,7 +332,7 @@ public abstract class GeneratedClienteController {
             final Comparator<Cliente> comparator;
             switch (property()) {
                 case "clienteid" : comparator = Cliente.CLIENTEID.comparator(); break;
-                case "userid"    : comparator = Cliente.USERID.comparator();    break;
+                case "appuserid" : comparator = Cliente.APPUSERID.comparator(); break;
                 case "nome"      : comparator = Cliente.NOME.comparator();      break;
                 case "telemovel" : comparator = Cliente.TELEMOVEL.comparator(); break;
                 case "email"     : comparator = Cliente.EMAIL.comparator();     break;
@@ -367,7 +365,7 @@ public abstract class GeneratedClienteController {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class ClienteCreateBody {
         
-        private final int userid;
+        private final int appuserid;
         private final String nome;
         private final Integer telemovel;
         private final String email;
@@ -375,20 +373,20 @@ public abstract class GeneratedClienteController {
         
         @JsonCreator
         public ClienteCreateBody(
-                @JsonProperty("userid") Integer userid,
+                @JsonProperty("appuserid") Integer appuserid,
                 @JsonProperty("nome") String nome,
                 @JsonProperty("telemovel") Integer telemovel,
                 @JsonProperty("email") String email,
                 @JsonProperty("nif") Integer nif) {
-            this.userid = Objects.requireNonNull(userid, "`userid` is required");
+            this.appuserid = Objects.requireNonNull(appuserid, "`appuserid` is required");
             this.nome = Objects.requireNonNull(nome, "`nome` is required");
             this.telemovel = Objects.requireNonNull(telemovel, "`telemovel` is required");
             this.email = Objects.requireNonNull(email, "`email` is required");
             this.nif = Objects.requireNonNull(nif, "`nif` is required");
         }
         
-        public int getUserid() {
-            return this.userid;
+        public int getAppuserid() {
+            return this.appuserid;
         }
         
         public String getNome() {
@@ -413,7 +411,7 @@ public abstract class GeneratedClienteController {
     public static final class ClienteUpdateBody {
         
         private final int clienteid;
-        private final int userid;
+        private final int appuserid;
         private final String nome;
         private final Integer telemovel;
         private final String email;
@@ -422,13 +420,13 @@ public abstract class GeneratedClienteController {
         @JsonCreator
         public ClienteUpdateBody(
                 @JsonProperty("clienteid") Integer clienteid,
-                @JsonProperty("userid") Integer userid,
+                @JsonProperty("appuserid") Integer appuserid,
                 @JsonProperty("nome") String nome,
                 @JsonProperty("telemovel") Integer telemovel,
                 @JsonProperty("email") String email,
                 @JsonProperty("nif") Integer nif) {
             this.clienteid = Objects.requireNonNull(clienteid, "`clienteid` is required");
-            this.userid = Objects.requireNonNull(userid, "`userid` is required");
+            this.appuserid = Objects.requireNonNull(appuserid, "`appuserid` is required");
             this.nome = Objects.requireNonNull(nome, "`nome` is required");
             this.telemovel = Objects.requireNonNull(telemovel, "`telemovel` is required");
             this.email = Objects.requireNonNull(email, "`email` is required");
@@ -439,8 +437,8 @@ public abstract class GeneratedClienteController {
             return this.clienteid;
         }
         
-        public int getUserid() {
-            return this.userid;
+        public int getAppuserid() {
+            return this.appuserid;
         }
         
         public String getNome() {

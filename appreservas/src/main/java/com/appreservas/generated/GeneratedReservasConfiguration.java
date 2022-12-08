@@ -10,7 +10,6 @@ import com.appreservas.reservas.reserva.ReservaManager;
 import com.appreservas.reservas.reservalugar.ReservalugarManager;
 import com.appreservas.reservas.sala.SalaManager;
 import com.appreservas.reservas.sessao.SessaoManager;
-import com.appreservas.reservas.utilizador.UtilizadorManager;
 import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.enterprise.datastore.runtime.DataStoreBundle;
 import com.speedment.enterprise.datastore.runtime.DataStoreComponent;
@@ -150,10 +149,5 @@ public class GeneratedReservasConfiguration {
     @Bean
     public SessaoManager getSessaoManager(ReservasApplication app) {
         return app.getOrThrow(SessaoManager.class);
-    }
-    
-    @Bean
-    public UtilizadorManager getUtilizadorManager(ReservasApplication app) {
-        return app.getOrThrow(UtilizadorManager.class);
     }
 }

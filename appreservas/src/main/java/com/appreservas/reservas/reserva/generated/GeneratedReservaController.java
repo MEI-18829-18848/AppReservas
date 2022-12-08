@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -58,7 +57,6 @@ import static java.util.stream.Collectors.toList;
  */
 @GeneratedCode("Speedment")
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/reservas")
 public abstract class GeneratedReservaController {
     
     protected @Autowired JsonComponent jsonComponent;
@@ -150,13 +148,16 @@ public abstract class GeneratedReservaController {
     public void update(
             @PathVariable(name = "reservaid") int reservaid,
             @RequestBody @Validated ReservaUpdateBody updateBody) {
-        final Updater<Reserva> updater = manager.updater();
+        final FieldSet<Reserva> excluded = FieldSet.allExcept(
+            Reserva.RESERVAID
+        );
+        
+        final Updater<Reserva> updater = manager.updater(excluded);
         final Reserva reserva = manager.stream()
             .filter(Reserva.RESERVAID.equal(reservaid))
             .findFirst()
             .orElseThrow(() -> new ReservaNotFoundException(reservaid));
         
-        reserva.setReservaid(updateBody.getReservaid());
         reserva.setSessaoid(updateBody.getSessaoid());
         reserva.setClienteid(updateBody.getClienteid());
         reserva.setCusto(updateBody.getCusto());
@@ -359,25 +360,18 @@ public abstract class GeneratedReservaController {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class ReservaUpdateBody {
         
-        private final int reservaid;
         private final int sessaoid;
         private final int clienteid;
         private final BigDecimal custo;
         
         @JsonCreator
         public ReservaUpdateBody(
-                @JsonProperty("reservaid") Integer reservaid,
                 @JsonProperty("sessaoid") Integer sessaoid,
                 @JsonProperty("clienteid") Integer clienteid,
                 @JsonProperty("custo") BigDecimal custo) {
-            this.reservaid = Objects.requireNonNull(reservaid, "`reservaid` is required");
             this.sessaoid = Objects.requireNonNull(sessaoid, "`sessaoid` is required");
             this.clienteid = Objects.requireNonNull(clienteid, "`clienteid` is required");
             this.custo = Objects.requireNonNull(custo, "`custo` is required");
-        }
-        
-        public int getReservaid() {
-            return this.reservaid;
         }
         
         public int getSessaoid() {

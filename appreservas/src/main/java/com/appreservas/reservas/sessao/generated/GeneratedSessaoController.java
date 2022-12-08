@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -58,7 +57,6 @@ import static java.util.stream.Collectors.toList;
  */
 @GeneratedCode("Speedment")
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/reservas")
 public abstract class GeneratedSessaoController {
     
     protected @Autowired JsonComponent jsonComponent;
@@ -152,13 +150,16 @@ public abstract class GeneratedSessaoController {
     public void update(
             @PathVariable(name = "sessaoid") int sessaoid,
             @RequestBody @Validated SessaoUpdateBody updateBody) {
-        final Updater<Sessao> updater = manager.updater();
+        final FieldSet<Sessao> excluded = FieldSet.allExcept(
+            Sessao.SESSAOID
+        );
+        
+        final Updater<Sessao> updater = manager.updater(excluded);
         final Sessao sessao = manager.stream()
             .filter(Sessao.SESSAOID.equal(sessaoid))
             .findFirst()
             .orElseThrow(() -> new SessaoNotFoundException(sessaoid));
         
-        sessao.setSessaoid(updateBody.getSessaoid());
         sessao.setEventoid(updateBody.getEventoid());
         sessao.setSalaid(updateBody.getSalaid());
         sessao.setDuracao(updateBody.getDuracao());
@@ -386,7 +387,6 @@ public abstract class GeneratedSessaoController {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class SessaoUpdateBody {
         
-        private final int sessaoid;
         private final int eventoid;
         private final int salaid;
         private final Integer duracao;
@@ -394,20 +394,14 @@ public abstract class GeneratedSessaoController {
         
         @JsonCreator
         public SessaoUpdateBody(
-                @JsonProperty("sessaoid") Integer sessaoid,
                 @JsonProperty("eventoid") Integer eventoid,
                 @JsonProperty("salaid") Integer salaid,
                 @JsonProperty("duracao") Integer duracao,
                 @JsonProperty("data") Timestamp data) {
-            this.sessaoid = Objects.requireNonNull(sessaoid, "`sessaoid` is required");
             this.eventoid = Objects.requireNonNull(eventoid, "`eventoid` is required");
             this.salaid = Objects.requireNonNull(salaid, "`salaid` is required");
             this.duracao = Objects.requireNonNull(duracao, "`duracao` is required");
             this.data = Objects.requireNonNull(data, "`data` is required");
-        }
-        
-        public int getSessaoid() {
-            return this.sessaoid;
         }
         
         public int getEventoid() {

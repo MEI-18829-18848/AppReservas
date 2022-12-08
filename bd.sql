@@ -1,5 +1,4 @@
-SELECT 'CREATE DATABASE appreservas'
-WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'appreservas')\gexec;
+CREATE DATABASE appreservas;
 
 \c appreservas;
 

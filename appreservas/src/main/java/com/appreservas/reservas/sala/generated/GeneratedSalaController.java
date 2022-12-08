@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -57,7 +56,6 @@ import static java.util.stream.Collectors.toList;
  */
 @GeneratedCode("Speedment")
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/reservas")
 public abstract class GeneratedSalaController {
     
     protected @Autowired JsonComponent jsonComponent;
@@ -151,13 +149,16 @@ public abstract class GeneratedSalaController {
     public void update(
             @PathVariable(name = "salaid") int salaid,
             @RequestBody @Validated SalaUpdateBody updateBody) {
-        final Updater<Sala> updater = manager.updater();
+        final FieldSet<Sala> excluded = FieldSet.allExcept(
+            Sala.SALAID
+        );
+        
+        final Updater<Sala> updater = manager.updater(excluded);
         final Sala sala = manager.stream()
             .filter(Sala.SALAID.equal(salaid))
             .findFirst()
             .orElseThrow(() -> new SalaNotFoundException(salaid));
         
-        sala.setSalaid(updateBody.getSalaid());
         sala.setNome(updateBody.getNome());
         sala.setLocalizacao(updateBody.getLocalizacao());
         sala.setLugaresmarcados(updateBody.getLugaresmarcados());
@@ -368,7 +369,6 @@ public abstract class GeneratedSalaController {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class SalaUpdateBody {
         
-        private final int salaid;
         private final String nome;
         private final String localizacao;
         private final boolean lugaresmarcados;
@@ -376,20 +376,14 @@ public abstract class GeneratedSalaController {
         
         @JsonCreator
         public SalaUpdateBody(
-                @JsonProperty("salaid") Integer salaid,
                 @JsonProperty("nome") String nome,
                 @JsonProperty("localizacao") String localizacao,
                 @JsonProperty("lugaresmarcados") Boolean lugaresmarcados,
                 @JsonProperty("lotacao") Integer lotacao) {
-            this.salaid = Objects.requireNonNull(salaid, "`salaid` is required");
             this.nome = Objects.requireNonNull(nome, "`nome` is required");
             this.localizacao = Objects.requireNonNull(localizacao, "`localizacao` is required");
             this.lugaresmarcados = Objects.requireNonNull(lugaresmarcados, "`lugaresmarcados` is required");
             this.lotacao = Objects.requireNonNull(lotacao, "`lotacao` is required");
-        }
-        
-        public int getSalaid() {
-            return this.salaid;
         }
         
         public String getNome() {

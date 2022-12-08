@@ -1,10 +1,10 @@
 package com.appreservas.reservas.cliente;
 
+import com.appreservas.reservas.cliente.generated.GeneratedClienteEntityStoreSerializerImpl;
+
 import java.nio.ByteBuffer;
 import java.util.function.LongFunction;
 import java.util.function.LongToIntFunction;
-
-import com.appreservas.reservas.cliente.generated.GeneratedClienteEntityStoreSerializerImpl;
 
 /**
  * An {@link
@@ -13,7 +13,7 @@ import com.appreservas.reservas.cliente.generated.GeneratedClienteEntityStoreSer
  * <p>
  * This file is safe to edit. It will not be overwritten by the code generator.
  * 
- * @author company
+ * @author reservas
  */
 public final class ClienteEntityStoreSerializerImpl extends GeneratedClienteEntityStoreSerializerImpl {
     

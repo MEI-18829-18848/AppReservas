@@ -36,7 +36,7 @@ public class SalaController extends GeneratedSalaController {
     }
 
     @ResponseStatus(code = HttpStatus.OK)
-    @GetMapping(path = "/sessao/{salaid}", produces = "application/json")
+    @GetMapping(path = "/sala/{salaid}", produces = "application/json")
     public String get(
         @PathVariable(name = "salaid") int salaid) {
 

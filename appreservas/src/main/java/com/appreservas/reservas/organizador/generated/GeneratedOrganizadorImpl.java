@@ -1,9 +1,7 @@
 package com.appreservas.reservas.organizador.generated;
 
 import com.appreservas.reservas.organizador.Organizador;
-import com.appreservas.reservas.utilizador.Utilizador;
 import com.speedment.common.annotation.GeneratedCode;
-import com.speedment.runtime.core.manager.Manager;
 import com.speedment.runtime.core.util.OptionalUtil;
 
 import java.util.Objects;
@@ -25,7 +23,7 @@ public abstract class GeneratedOrganizadorImpl implements Organizador {
     private int organizadorid;
     private String nome;
     private String contacto;
-    private int userid;
+    private int appuserid;
     
     protected GeneratedOrganizadorImpl() {}
     
@@ -45,8 +43,8 @@ public abstract class GeneratedOrganizadorImpl implements Organizador {
     }
     
     @Override
-    public int getUserid() {
-        return userid;
+    public int getAppuserid() {
+        return appuserid;
     }
     
     @Override
@@ -68,14 +66,9 @@ public abstract class GeneratedOrganizadorImpl implements Organizador {
     }
     
     @Override
-    public Organizador setUserid(int userid) {
-        this.userid = userid;
+    public Organizador setAppuserid(int appuserid) {
+        this.appuserid = appuserid;
         return this;
-    }
-    
-    @Override
-    public Utilizador findUserid(Manager<Utilizador> foreignManager) {
-        return foreignManager.stream().filter(Utilizador.UTILIZADORID.equal(getUserid())).findAny().orElse(null);
     }
     
     @Override
@@ -84,7 +77,7 @@ public abstract class GeneratedOrganizadorImpl implements Organizador {
         sj.add("organizadorid = " + Objects.toString(getOrganizadorid()));
         sj.add("nome = "          + Objects.toString(getNome()));
         sj.add("contacto = "      + Objects.toString(OptionalUtil.unwrap(getContacto())));
-        sj.add("userid = "        + Objects.toString(getUserid()));
+        sj.add("appuserid = "     + Objects.toString(getAppuserid()));
         return "OrganizadorImpl " + sj.toString();
     }
     
@@ -96,7 +89,7 @@ public abstract class GeneratedOrganizadorImpl implements Organizador {
         if (this.getOrganizadorid() != thatOrganizador.getOrganizadorid()) { return false; }
         if (!Objects.equals(this.getNome(), thatOrganizador.getNome())) { return false; }
         if (!Objects.equals(this.getContacto(), thatOrganizador.getContacto())) { return false; }
-        if (this.getUserid() != thatOrganizador.getUserid()) { return false; }
+        if (this.getAppuserid() != thatOrganizador.getAppuserid()) { return false; }
         return true;
     }
     
@@ -106,7 +99,7 @@ public abstract class GeneratedOrganizadorImpl implements Organizador {
         hash = 31 * hash + Integer.hashCode(getOrganizadorid());
         hash = 31 * hash + Objects.hashCode(getNome());
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getContacto()));
-        hash = 31 * hash + Integer.hashCode(getUserid());
+        hash = 31 * hash + Integer.hashCode(getAppuserid());
         return hash;
     }
 }

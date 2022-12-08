@@ -10,6 +10,7 @@ import com.speedment.runtime.core.db.SqlFunction;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static com.speedment.common.injector.State.RESOLVED;
 import static com.speedment.runtime.core.util.ResultSetUtil.*;
 
 /**
@@ -33,7 +34,7 @@ public abstract class GeneratedClienteSqlAdapter implements SqlAdapter<Cliente> 
     protected Cliente apply(ResultSet resultSet, int offset) throws SQLException {
         return createEntity()
             .setClienteid( getInt(resultSet, 1 + offset))
-            .setUserid(    getInt(resultSet, 2 + offset))
+            .setAppuserid( getInt(resultSet, 2 + offset))
             .setNome(      resultSet.getString(3 + offset))
             .setTelemovel( getInt(resultSet, 4 + offset))
             .setEmail(     resultSet.getString(5 + offset))
