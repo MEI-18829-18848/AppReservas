@@ -14,6 +14,17 @@ services:
       - ./bd.sql:/docker-entrypoint-initdb.d/create_tables.sql
     networks:
         - appreservas
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+        - appreservas
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.5.2
     container_name: elasticsearch_springboot
@@ -53,10 +64,12 @@ services:
       - "9600:9600"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      RABBIT_MQ_IP: "rabbitmq"
     networks:
       - appreservas
     depends_on:
       - elasticsearch
+      - rabbitmq
   auth-backend: 
     build: 
       context: ./auth
@@ -65,22 +78,11 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/appreservas?currentSchema=auth
       - LOGSTASH_URL=logstash:5000
+      - RABBIT_MQ_IP=rabbitmq
     depends_on:
       - db
       - logstash
-    networks:
-      - appreservas
-  appreservas-backend: 
-    build: 
-      context: ./appreservas
-    ports: 
-      - '8095:8095'
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/appreservas?currentSchema=reservas
-      - LOGSTASH_URL=logstash:5000
-    depends_on:
-      - db
-      - logstash
+      - rabbitmq
     networks:
       - appreservas
 volumes:  
