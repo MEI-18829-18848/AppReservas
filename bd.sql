@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS users(
   email VARCHAR(45) NOT NULL,
   firstname VARCHAR(45) ,
   lastname VARCHAR(45) ,
-  roles VARCHAR(45) NOT NULL,
+  roles VARCHAR(45) NOT NULL check (roles in ('user', 'org', 'admin')),
   password VARCHAR(255) NOT NULL
 );
 
