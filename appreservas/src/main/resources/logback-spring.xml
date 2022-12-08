@@ -13,7 +13,7 @@
                 <pattern>
                     <pattern>
                         {
-                        "app": "auth-log"
+                        "app": "app-log"
                         }
                     </pattern>
                 </pattern>

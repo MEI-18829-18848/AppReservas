@@ -13,7 +13,18 @@ services:
           # copy the sql script to create tables
       - ./bd.sql:/docker-entrypoint-initdb.d/create_tables.sql
     networks:
-        - auth
+        - appreservas
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+        - appreservas
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.5.2
     container_name: elasticsearch_springboot
@@ -27,7 +38,7 @@ services:
     volumes:
         - elasticsearch_data:/usr/share/elasticsearch/data
     networks:
-        - auth
+        - appreservas
   kibana:
     image: docker.elastic.co/kibana/kibana:8.5.2
     container_name: kibana_springboot
@@ -39,7 +50,7 @@ services:
     depends_on:
         - elasticsearch
     networks:
-        - auth
+        - appreservas
   logstash:
     image: docker.elastic.co/logstash/logstash:8.5.2
     container_name: logstash_springboot
@@ -53,23 +64,27 @@ services:
       - "9600:9600"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      RABBIT_MQ_IP: "rabbitmq"
     networks:
-      - auth
+      - appreservas
     depends_on:
       - elasticsearch
+      - rabbitmq
   auth-backend: 
-      build: 
-        context: ./auth
-      ports: 
-       - '8085:8085'
-      environment:
-        - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/appreservas?currentSchema=auth
-        - LOGSTASH_URL=logstash:5000
-      depends_on:
-        - db
-        - logstash
-      networks:
-        - auth
+    build: 
+      context: ./auth
+    ports: 
+      - '8085:8085'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/appreservas?currentSchema=auth
+      - LOGSTASH_URL=logstash:5000
+      - RABBIT_MQ_IP=rabbitmq
+    depends_on:
+      - db
+      - logstash
+      - rabbitmq
+    networks:
+      - appreservas
 volumes:  
   db:
     driver: local
@@ -77,5 +92,5 @@ volumes:
     driver: local
   elastic_data: {}
 networks:
-  auth:
+  appreservas:
 
