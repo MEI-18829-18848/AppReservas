@@ -85,6 +85,21 @@ services:
       - rabbitmq
     networks:
       - appreservas
+  reservas-backend: 
+    build: 
+      context: ./appreservas
+    ports: 
+      - '8095:8095'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/appreservas?currentSchema=reservas
+      - LOGSTASH_URL=logstash:5000
+      - RABBIT_MQ_IP=rabbitmq
+    depends_on:
+      - db
+      - logstash
+      - rabbitmq
+    networks:
+      - appreservas
 volumes:  
   db:
     driver: local
