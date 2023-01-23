@@ -52,7 +52,7 @@ services:
     networks:
         - appreservas
   logstash:
-    image: docker.elastic.co/logstash/logstash:8.5.2
+    image: opensearchproject/logstash-oss-with-opensearch-output-plugin:7.16.2
     container_name: logstash_springboot
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
@@ -77,6 +77,21 @@ services:
       - '8085:8085'
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/appreservas?currentSchema=auth
+      - LOGSTASH_URL=logstash:5000
+      - RABBIT_MQ_IP=rabbitmq
+    depends_on:
+      - db
+      - logstash
+      - rabbitmq
+    networks:
+      - appreservas
+  reservas-backend: 
+    build: 
+      context: ./appreservas
+    ports: 
+      - '8095:8095'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/appreservas?currentSchema=reservas
       - LOGSTASH_URL=logstash:5000
       - RABBIT_MQ_IP=rabbitmq
     depends_on:

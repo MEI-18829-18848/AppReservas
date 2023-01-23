@@ -17,7 +17,7 @@ public class SelectCliente implements ISelect{
         String result = "";
         try {
             var id = rs.getInt("clienteid");
-            var userid = rs.getInt("userid");
+            var userid = rs.getInt("appuserid");
             var nome = rs.getString("nome");
             var telemovel = rs.getInt("telemovel");
             var email = rs.getString("email");
