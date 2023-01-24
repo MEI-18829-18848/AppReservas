@@ -1,7 +1,11 @@
-SELECT 'CREATE DATABASE appreservas'
-WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'appreservas')\gexec;
+-- SELECT 'CREATE DATABASE appreservas'
+-- WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'appreservas')\gexec;
 
-\c appreservas;
+-- \c appreservas;
+
+CREATE DATABASE appreservas;
+
+\c appreservas
 
 CREATE SCHEMA IF NOT EXISTS auth;
 
@@ -25,7 +29,7 @@ SET search_path TO reservas;
 
 DROP TABLE IF EXISTS Utilizador;
 CREATE TABLE IF NOT EXISTS Utilizador (
-  UtilizadorId SERIAL PRIMARY KEY,
+  appuserid SERIAL PRIMARY KEY,
   Role VARCHAR(45) NOT NULL
 );
 -- -----------------------------------------------------
@@ -35,6 +39,7 @@ CREATE TABLE IF NOT EXISTS Organizador (
   OrganizadorId SERIAL PRIMARY KEY NOT NULL,
   Nome VARCHAR(45) NOT NULL,
   Contacto VARCHAR(45) NULL,
+  appuserid INTEGER NOT NULL references auth.users(appuserid)
 );
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS Cliente;
@@ -44,7 +49,8 @@ CREATE TABLE IF NOT EXISTS Cliente(
   Nome VARCHAR(45) NOT NULL,
   Telemovel INTEGER NULL,
   Email VARCHAR(45) NULL,
-  NIF INT NULL
+  NIF INT NULL,
+  appuserid INTEGER NOT NULL references auth.users(appuserid)
 );
 
 -- -----------------------------------------------------
