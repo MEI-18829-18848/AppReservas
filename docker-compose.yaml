@@ -1,19 +1,5 @@
 version: "3"
 services:
-  db:
-    image: postgres:15.1-alpine
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - '5432:5432'
-    volumes: 
-      - ./db-data:/var/lib/postgresql/data
-          # copy the sql script to create tables
-      - ./bd.sql:/docker-entrypoint-initdb.d/create_tables.sql
-    networks:
-        - appreservas
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
@@ -23,32 +9,6 @@ services:
     volumes:
         - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
         - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
-    networks:
-        - appreservas
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.5.2
-    container_name: elasticsearch_springboot
-    environment:
-        - bootstrap.memory_lock=true
-        - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-        - "discovery.type=single-node"
-        - xpack.security.enabled=false
-    ports:
-        - "9200:9200"
-    volumes:
-        - elasticsearch_data:/usr/share/elasticsearch/data
-    networks:
-        - appreservas
-  kibana:
-    image: docker.elastic.co/kibana/kibana:8.5.2
-    container_name: kibana_springboot
-    ports:
-        - "5601:5601"
-    environment:
-        ELASTICSEARCH_URL: http://elasticsearch:9200
-        ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
-    depends_on:
-        - elasticsearch
     networks:
         - appreservas
   logstash:
@@ -68,7 +28,6 @@ services:
     networks:
       - appreservas
     depends_on:
-      - elasticsearch
       - rabbitmq
   auth-backend: 
     build: 
@@ -76,11 +35,10 @@ services:
     ports: 
       - '8085:8085'
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/appreservas?currentSchema=auth
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://appreservas.ccyenfzsjoqi.eu-west-3.rds.amazonaws.com/appreservas?currentSchema=auth
       - LOGSTASH_URL=logstash:5000
       - RABBIT_MQ_IP=rabbitmq
     depends_on:
-      - db
       - logstash
       - rabbitmq
     networks:
@@ -91,11 +49,10 @@ services:
     ports: 
       - '8095:8095'
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/appreservas?currentSchema=reservas
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://appreservas.ccyenfzsjoqi.eu-west-3.rds.amazonaws.com/appreservas?currentSchema=reservas
       - LOGSTASH_URL=logstash:5000
       - RABBIT_MQ_IP=rabbitmq
     depends_on:
-      - db
       - logstash
       - rabbitmq
     networks:
