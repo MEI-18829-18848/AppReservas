@@ -19,7 +19,7 @@
 		<java.version>17</java.version>
         <speedment.version>3.2.10</speedment.version>
         <server.port>8095</server.port>
-        <db.password>#appReservas2023</db.password>
+        <db.password>?appReservas2023</db.password>
         <db.username>postgres</db.username>
 	</properties>
 

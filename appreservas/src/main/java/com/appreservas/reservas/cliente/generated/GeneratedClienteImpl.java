@@ -22,22 +22,17 @@ import java.util.StringJoiner;
 public abstract class GeneratedClienteImpl implements Cliente {
     
     private int clienteid;
-    private int appuserid;
     private String nome;
     private Integer telemovel;
     private String email;
     private Integer nif;
+    private int appuserid;
     
     protected GeneratedClienteImpl() {}
     
     @Override
     public int getClienteid() {
         return clienteid;
-    }
-    
-    @Override
-    public int getAppuserid() {
-        return appuserid;
     }
     
     @Override
@@ -61,14 +56,13 @@ public abstract class GeneratedClienteImpl implements Cliente {
     }
     
     @Override
-    public Cliente setClienteid(int clienteid) {
-        this.clienteid = clienteid;
-        return this;
+    public int getAppuserid() {
+        return appuserid;
     }
     
     @Override
-    public Cliente setAppuserid(int appuserid) {
-        this.appuserid = appuserid;
+    public Cliente setClienteid(int clienteid) {
+        this.clienteid = clienteid;
         return this;
     }
     
@@ -97,14 +91,20 @@ public abstract class GeneratedClienteImpl implements Cliente {
     }
     
     @Override
+    public Cliente setAppuserid(int appuserid) {
+        this.appuserid = appuserid;
+        return this;
+    }
+    
+    @Override
     public String toString() {
         final StringJoiner sj = new StringJoiner(", ", "{ ", " }");
         sj.add("clienteid = " + Objects.toString(getClienteid()));
-        sj.add("appuserid = " + Objects.toString(getAppuserid()));
         sj.add("nome = "      + Objects.toString(getNome()));
         sj.add("telemovel = " + Objects.toString(OptionalUtil.unwrap(getTelemovel())));
         sj.add("email = "     + Objects.toString(OptionalUtil.unwrap(getEmail())));
         sj.add("nif = "       + Objects.toString(OptionalUtil.unwrap(getNif())));
+        sj.add("appuserid = " + Objects.toString(getAppuserid()));
         return "ClienteImpl " + sj.toString();
     }
     
@@ -114,11 +114,11 @@ public abstract class GeneratedClienteImpl implements Cliente {
         if (!(that instanceof Cliente)) { return false; }
         final Cliente thatCliente = (Cliente)that;
         if (this.getClienteid() != thatCliente.getClienteid()) { return false; }
-        if (this.getAppuserid() != thatCliente.getAppuserid()) { return false; }
         if (!Objects.equals(this.getNome(), thatCliente.getNome())) { return false; }
         if (!Objects.equals(this.getTelemovel(), thatCliente.getTelemovel())) { return false; }
         if (!Objects.equals(this.getEmail(), thatCliente.getEmail())) { return false; }
         if (!Objects.equals(this.getNif(), thatCliente.getNif())) { return false; }
+        if (this.getAppuserid() != thatCliente.getAppuserid()) { return false; }
         return true;
     }
     
@@ -126,11 +126,11 @@ public abstract class GeneratedClienteImpl implements Cliente {
     public int hashCode() {
         int hash = 7;
         hash = 31 * hash + Integer.hashCode(getClienteid());
-        hash = 31 * hash + Integer.hashCode(getAppuserid());
         hash = 31 * hash + Objects.hashCode(getNome());
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getTelemovel()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getEmail()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getNif()));
+        hash = 31 * hash + Integer.hashCode(getAppuserid());
         return hash;
     }
 }

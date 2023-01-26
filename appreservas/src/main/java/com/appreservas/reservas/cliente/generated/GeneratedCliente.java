@@ -40,17 +40,6 @@ public interface GeneratedCliente {
     );
     /**
      * This Field corresponds to the {@link Cliente} field that can be obtained
-     * using the {@link Cliente#getAppuserid()} method.
-     */
-    IntField<Cliente, Integer> APPUSERID = DatastoreFields.createIntField(
-        Identifier.APPUSERID,
-        Cliente::getAppuserid,
-        Cliente::setAppuserid,
-        TypeMapper.primitive(),
-        false
-    );
-    /**
-     * This Field corresponds to the {@link Cliente} field that can be obtained
      * using the {@link Cliente#getNome()} method.
      */
     StringField<Cliente, String> NOME = DatastoreFields.createStringField(
@@ -93,6 +82,17 @@ public interface GeneratedCliente {
         TypeMapper.identity(),
         false
     );
+    /**
+     * This Field corresponds to the {@link Cliente} field that can be obtained
+     * using the {@link Cliente#getAppuserid()} method.
+     */
+    IntField<Cliente, Integer> APPUSERID = DatastoreFields.createIntField(
+        Identifier.APPUSERID,
+        Cliente::getAppuserid,
+        Cliente::setAppuserid,
+        TypeMapper.primitive(),
+        false
+    );
     
     /**
      * Returns the clienteid of this Cliente. The clienteid field corresponds to
@@ -101,14 +101,6 @@ public interface GeneratedCliente {
      * @return the clienteid of this Cliente
      */
     int getClienteid();
-    
-    /**
-     * Returns the appuserid of this Cliente. The appuserid field corresponds to
-     * the database column appreservas.reservas.cliente.appuserid.
-     * 
-     * @return the appuserid of this Cliente
-     */
-    int getAppuserid();
     
     /**
      * Returns the nome of this Cliente. The nome field corresponds to the
@@ -143,6 +135,14 @@ public interface GeneratedCliente {
     OptionalInt getNif();
     
     /**
+     * Returns the appuserid of this Cliente. The appuserid field corresponds to
+     * the database column appreservas.reservas.cliente.appuserid.
+     * 
+     * @return the appuserid of this Cliente
+     */
+    int getAppuserid();
+    
+    /**
      * Sets the clienteid of this Cliente. The clienteid field corresponds to
      * the database column appreservas.reservas.cliente.clienteid.
      * 
@@ -150,15 +150,6 @@ public interface GeneratedCliente {
      * @return          this Cliente instance
      */
     Cliente setClienteid(int clienteid);
-    
-    /**
-     * Sets the appuserid of this Cliente. The appuserid field corresponds to
-     * the database column appreservas.reservas.cliente.appuserid.
-     * 
-     * @param appuserid to set of this Cliente
-     * @return          this Cliente instance
-     */
-    Cliente setAppuserid(int appuserid);
     
     /**
      * Sets the nome of this Cliente. The nome field corresponds to the database
@@ -196,14 +187,23 @@ public interface GeneratedCliente {
      */
     Cliente setNif(Integer nif);
     
+    /**
+     * Sets the appuserid of this Cliente. The appuserid field corresponds to
+     * the database column appreservas.reservas.cliente.appuserid.
+     * 
+     * @param appuserid to set of this Cliente
+     * @return          this Cliente instance
+     */
+    Cliente setAppuserid(int appuserid);
+    
     enum Identifier implements ColumnIdentifier<Cliente> {
         
         CLIENTEID ("clienteid"),
-        APPUSERID ("appuserid"),
         NOME      ("nome"),
         TELEMOVEL ("telemovel"),
         EMAIL     ("email"),
-        NIF       ("nif");
+        NIF       ("nif"),
+        APPUSERID ("appuserid");
         
         private final String columnId;
         private final TableIdentifier<Cliente> tableIdentifier;

@@ -57,7 +57,7 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "        \"enabled\" : true,",
             "        \"expanded\" : true,",
             "        \"id\" : \"appreservas\",",
-            "        \"ipAddress\" : \"127.0.0.1\",",
+            "        \"ipAddress\" : \"appreservas.ccyenfzsjoqi.eu-west-3.rds.amazonaws.com\",",
             "        \"name\" : \"appreservas\",",
             "        \"nameProtected\" : true,",
             "        \"port\" : 5432,",
@@ -71,223 +71,6 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "            \"restEnabled\" : true,",
             "            \"restPath\" : \"\",",
             "            \"tables\" : [",
-            "              {",
-            "                \"columns\" : [",
-            "                  {",
-            "                    \"autoIncrement\" : true,",
-            "                    \"biDirectional\" : false,",
-            "                    \"databaseType\" : \"java.lang.Integer\",",
-            "                    \"enabled\" : true,",
-            "                    \"expanded\" : true,",
-            "                    \"hashIndex\" : false,",
-            "                    \"id\" : \"appuserid\",",
-            "                    \"lowCardinality\" : false,",
-            "                    \"name\" : \"appuserid\",",
-            "                    \"nameProtected\" : true,",
-            "                    \"nullable\" : false,",
-            "                    \"nullableImplementation\" : \"OPTIONAL\",",
-            "                    \"ordinalPosition\" : 1,",
-            "                    \"restCreateBodyInclude\" : true,",
-            "                    \"restCreateBodyRequired\" : true,",
-            "                    \"restGetResponseInclude\" : true,",
-            "                    \"restUpdateBodyInclude\" : false,",
-            "                    \"restUpdateBodyRequired\" : true,",
-            "                    \"restVisible\" : true,",
-            "                    \"typeMapper\" : \"com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper\",",
-            "                    \"unindexed\" : false",
-            "                  },",
-            "                  {",
-            "                    \"autoIncrement\" : false,",
-            "                    \"biDirectional\" : false,",
-            "                    \"databaseType\" : \"java.lang.String\",",
-            "                    \"enabled\" : true,",
-            "                    \"expanded\" : true,",
-            "                    \"hashIndex\" : false,",
-            "                    \"id\" : \"username\",",
-            "                    \"lowCardinality\" : false,",
-            "                    \"name\" : \"username\",",
-            "                    \"nameProtected\" : true,",
-            "                    \"nullable\" : false,",
-            "                    \"nullableImplementation\" : \"OPTIONAL\",",
-            "                    \"ordinalPosition\" : 2,",
-            "                    \"restCreateBodyInclude\" : true,",
-            "                    \"restCreateBodyRequired\" : true,",
-            "                    \"restGetResponseInclude\" : true,",
-            "                    \"restUpdateBodyInclude\" : true,",
-            "                    \"restUpdateBodyRequired\" : true,",
-            "                    \"restVisible\" : true,",
-            "                    \"unindexed\" : false",
-            "                  },",
-            "                  {",
-            "                    \"autoIncrement\" : false,",
-            "                    \"biDirectional\" : false,",
-            "                    \"databaseType\" : \"java.lang.String\",",
-            "                    \"enabled\" : true,",
-            "                    \"expanded\" : true,",
-            "                    \"hashIndex\" : false,",
-            "                    \"id\" : \"email\",",
-            "                    \"lowCardinality\" : false,",
-            "                    \"name\" : \"email\",",
-            "                    \"nameProtected\" : true,",
-            "                    \"nullable\" : false,",
-            "                    \"nullableImplementation\" : \"OPTIONAL\",",
-            "                    \"ordinalPosition\" : 3,",
-            "                    \"restCreateBodyInclude\" : true,",
-            "                    \"restCreateBodyRequired\" : true,",
-            "                    \"restGetResponseInclude\" : true,",
-            "                    \"restUpdateBodyInclude\" : true,",
-            "                    \"restUpdateBodyRequired\" : true,",
-            "                    \"restVisible\" : true,",
-            "                    \"unindexed\" : false",
-            "                  },",
-            "                  {",
-            "                    \"autoIncrement\" : false,",
-            "                    \"biDirectional\" : false,",
-            "                    \"databaseType\" : \"java.lang.String\",",
-            "                    \"enabled\" : true,",
-            "                    \"expanded\" : true,",
-            "                    \"hashIndex\" : false,",
-            "                    \"id\" : \"firstname\",",
-            "                    \"lowCardinality\" : false,"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart1(StringBuilder sb) {
-        Stream.of(
-            "                    \"name\" : \"firstname\",",
-            "                    \"nameProtected\" : true,",
-            "                    \"nullable\" : true,",
-            "                    \"nullableImplementation\" : \"OPTIONAL\",",
-            "                    \"ordinalPosition\" : 4,",
-            "                    \"restCreateBodyInclude\" : true,",
-            "                    \"restCreateBodyRequired\" : true,",
-            "                    \"restGetResponseInclude\" : true,",
-            "                    \"restUpdateBodyInclude\" : true,",
-            "                    \"restUpdateBodyRequired\" : true,",
-            "                    \"restVisible\" : true,",
-            "                    \"unindexed\" : false",
-            "                  },",
-            "                  {",
-            "                    \"autoIncrement\" : false,",
-            "                    \"biDirectional\" : false,",
-            "                    \"databaseType\" : \"java.lang.String\",",
-            "                    \"enabled\" : true,",
-            "                    \"expanded\" : true,",
-            "                    \"hashIndex\" : false,",
-            "                    \"id\" : \"lastname\",",
-            "                    \"lowCardinality\" : false,",
-            "                    \"name\" : \"lastname\",",
-            "                    \"nameProtected\" : true,",
-            "                    \"nullable\" : true,",
-            "                    \"nullableImplementation\" : \"OPTIONAL\",",
-            "                    \"ordinalPosition\" : 5,",
-            "                    \"restCreateBodyInclude\" : true,",
-            "                    \"restCreateBodyRequired\" : true,",
-            "                    \"restGetResponseInclude\" : true,",
-            "                    \"restUpdateBodyInclude\" : true,",
-            "                    \"restUpdateBodyRequired\" : true,",
-            "                    \"restVisible\" : true,",
-            "                    \"unindexed\" : false",
-            "                  },",
-            "                  {",
-            "                    \"autoIncrement\" : false,",
-            "                    \"biDirectional\" : false,",
-            "                    \"databaseType\" : \"java.lang.String\",",
-            "                    \"enabled\" : true,",
-            "                    \"expanded\" : true,",
-            "                    \"hashIndex\" : false,",
-            "                    \"id\" : \"roles\",",
-            "                    \"lowCardinality\" : false,",
-            "                    \"name\" : \"roles\",",
-            "                    \"nameProtected\" : true,",
-            "                    \"nullable\" : false,",
-            "                    \"nullableImplementation\" : \"OPTIONAL\",",
-            "                    \"ordinalPosition\" : 6,",
-            "                    \"restCreateBodyInclude\" : true,",
-            "                    \"restCreateBodyRequired\" : true,",
-            "                    \"restGetResponseInclude\" : true,",
-            "                    \"restUpdateBodyInclude\" : true,",
-            "                    \"restUpdateBodyRequired\" : true,",
-            "                    \"restVisible\" : true,",
-            "                    \"unindexed\" : false",
-            "                  },",
-            "                  {",
-            "                    \"autoIncrement\" : false,",
-            "                    \"biDirectional\" : false,",
-            "                    \"databaseType\" : \"java.lang.String\",",
-            "                    \"enabled\" : true,",
-            "                    \"expanded\" : true,",
-            "                    \"hashIndex\" : false,",
-            "                    \"id\" : \"password\",",
-            "                    \"lowCardinality\" : false,",
-            "                    \"name\" : \"password\",",
-            "                    \"nameProtected\" : true,",
-            "                    \"nullable\" : false,",
-            "                    \"nullableImplementation\" : \"OPTIONAL\",",
-            "                    \"ordinalPosition\" : 7,",
-            "                    \"restCreateBodyInclude\" : true,",
-            "                    \"restCreateBodyRequired\" : true,",
-            "                    \"restGetResponseInclude\" : true,",
-            "                    \"restUpdateBodyInclude\" : true,",
-            "                    \"restUpdateBodyRequired\" : true,",
-            "                    \"restVisible\" : true,",
-            "                    \"unindexed\" : false",
-            "                  }",
-            "                ],",
-            "                \"enabled\" : false,",
-            "                \"expanded\" : false,",
-            "                \"id\" : \"users\",",
-            "                \"implements\" : \"\",",
-            "                \"indexes\" : [",
-            "                  {",
-            "                    \"enabled\" : true,",
-            "                    \"expanded\" : false,",
-            "                    \"id\" : \"users_pkey\",",
-            "                    \"indexColumns\" : [",
-            "                      {",
-            "                        \"expanded\" : true,",
-            "                        \"id\" : \"appuserid\",",
-            "                        \"name\" : \"appuserid\",",
-            "                        \"orderType\" : \"ASC\",",
-            "                        \"ordinalPosition\" : 1",
-            "                      }",
-            "                    ],",
-            "                    \"name\" : \"users_pkey\",",
-            "                    \"nameProtected\" : true,",
-            "                    \"unique\" : true"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart2(StringBuilder sb) {
-        Stream.of(
-            "                  }",
-            "                ],",
-            "                \"isView\" : false,",
-            "                \"name\" : \"users\",",
-            "                \"nameProtected\" : true,",
-            "                \"packageName\" : \"com.appreservas.auth.users\",",
-            "                \"primaryKeyColumns\" : [",
-            "                  {",
-            "                    \"enabled\" : true,",
-            "                    \"expanded\" : true,",
-            "                    \"id\" : \"appuserid\",",
-            "                    \"name\" : \"appuserid\",",
-            "                    \"nameProtected\" : false,",
-            "                    \"ordinalPosition\" : 1",
-            "                  }",
-            "                ],",
-            "                \"restCors\" : \"*\",",
-            "                \"restEnableCreate\" : true,",
-            "                \"restEnableDelete\" : true,",
-            "                \"restEnableFilters\" : true,",
-            "                \"restEnableGet\" : true,",
-            "                \"restEnableList\" : true,",
-            "                \"restEnableSkipLimit\" : true,",
-            "                \"restEnableSorters\" : true,",
-            "                \"restEnableTotal\" : false,",
-            "                \"restEnableUpdate\" : true,",
-            "                \"restEnabled\" : true",
-            "              },",
             "              {",
             "                \"columns\" : [",
             "                  {",
@@ -314,6 +97,42 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "                    \"unindexed\" : false",
             "                  },",
             "                  {",
+            "                    \"databaseType\" : \"java.lang.String\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"nome\",",
+            "                    \"name\" : \"nome\",",
+            "                    \"nullable\" : false,",
+            "                    \"ordinalPosition\" : 2",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.Integer\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"telemovel\",",
+            "                    \"name\" : \"telemovel\",",
+            "                    \"nullable\" : true,",
+            "                    \"ordinalPosition\" : 3",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.String\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"email\",",
+            "                    \"name\" : \"email\",",
+            "                    \"nullable\" : true,",
+            "                    \"ordinalPosition\" : 4",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.Integer\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"nif\",",
+            "                    \"name\" : \"nif\",",
+            "                    \"nullable\" : true,",
+            "                    \"ordinalPosition\" : 5",
+            "                  },",
+            "                  {",
             "                    \"autoIncrement\" : false,",
             "                    \"biDirectional\" : false,",
             "                    \"databaseType\" : \"java.lang.Integer\",",
@@ -326,56 +145,20 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "                    \"nameProtected\" : true,",
             "                    \"nullable\" : false,",
             "                    \"nullableImplementation\" : \"OPTIONAL\",",
-            "                    \"ordinalPosition\" : 2,",
+            "                    \"ordinalPosition\" : 6,",
             "                    \"restCreateBodyInclude\" : true,",
             "                    \"restCreateBodyRequired\" : true,",
-            "                    \"restGetResponseInclude\" : true,",
+            "                    \"restGetResponseInclude\" : true,"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart1(StringBuilder sb) {
+        Stream.of(
             "                    \"restUpdateBodyInclude\" : true,",
             "                    \"restUpdateBodyRequired\" : true,",
             "                    \"restVisible\" : true,",
             "                    \"typeMapper\" : \"com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper\",",
             "                    \"unindexed\" : false",
-            "                  },",
-            "                  {",
-            "                    \"databaseType\" : \"java.lang.String\",",
-            "                    \"enabled\" : true,",
-            "                    \"expanded\" : true,",
-            "                    \"id\" : \"nome\",",
-            "                    \"name\" : \"nome\",",
-            "                    \"nullable\" : false,",
-            "                    \"ordinalPosition\" : 3",
-            "                  },",
-            "                  {",
-            "                    \"databaseType\" : \"java.lang.Integer\",",
-            "                    \"enabled\" : true,",
-            "                    \"expanded\" : true,",
-            "                    \"id\" : \"telemovel\",",
-            "                    \"name\" : \"telemovel\",",
-            "                    \"nullable\" : true,",
-            "                    \"ordinalPosition\" : 4",
-            "                  },",
-            "                  {",
-            "                    \"databaseType\" : \"java.lang.String\",",
-            "                    \"enabled\" : true,",
-            "                    \"expanded\" : true,",
-            "                    \"id\" : \"email\",",
-            "                    \"name\" : \"email\",",
-            "                    \"nullable\" : true,"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart3(StringBuilder sb) {
-        Stream.of(
-            "                    \"ordinalPosition\" : 5",
-            "                  },",
-            "                  {",
-            "                    \"databaseType\" : \"java.lang.Integer\",",
-            "                    \"enabled\" : true,",
-            "                    \"expanded\" : true,",
-            "                    \"id\" : \"nif\",",
-            "                    \"name\" : \"nif\",",
-            "                    \"nullable\" : true,",
-            "                    \"ordinalPosition\" : 6",
             "                  }",
             "                ],",
             "                \"enabled\" : true,",
@@ -466,17 +249,17 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "                    \"restCreateBodyInclude\" : false,",
             "                    \"restCreateBodyRequired\" : true,",
             "                    \"restGetResponseInclude\" : true,",
-            "                    \"restUpdateBodyInclude\" : false,"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart4(StringBuilder sb) {
-        Stream.of(
+            "                    \"restUpdateBodyInclude\" : false,",
             "                    \"restUpdateBodyRequired\" : true,",
             "                    \"restVisible\" : true,",
             "                    \"typeMapper\" : \"com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper\",",
             "                    \"unindexed\" : false",
-            "                  },",
+            "                  },"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart2(StringBuilder sb) {
+        Stream.of(
             "                  {",
             "                    \"autoIncrement\" : false,",
             "                    \"biDirectional\" : false,",
@@ -572,17 +355,17 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "                    \"enabled\" : true,",
             "                    \"expanded\" : false,",
             "                    \"foreignKeyColumns\" : [",
-            "                      {"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart5(StringBuilder sb) {
-        Stream.of(
+            "                      {",
             "                        \"expanded\" : true,",
             "                        \"foreignColumnName\" : \"salaid\",",
             "                        \"foreignDatabaseName\" : \"appreservas\",",
             "                        \"foreignSchemaName\" : \"reservas\",",
-            "                        \"foreignTableName\" : \"sala\",",
+            "                        \"foreignTableName\" : \"sala\","
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart3(StringBuilder sb) {
+        Stream.of(
             "                        \"id\" : \"salaid\",",
             "                        \"name\" : \"salaid\",",
             "                        \"ordinalPosition\" : 1",
@@ -678,17 +461,17 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "                    \"ordinalPosition\" : 2,",
             "                    \"restCreateBodyInclude\" : true,",
             "                    \"restCreateBodyRequired\" : true,",
-            "                    \"restGetResponseInclude\" : true,"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart6(StringBuilder sb) {
-        Stream.of(
+            "                    \"restGetResponseInclude\" : true,",
             "                    \"restUpdateBodyInclude\" : true,",
             "                    \"restUpdateBodyRequired\" : true,",
             "                    \"restVisible\" : true,",
             "                    \"typeMapper\" : \"com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper\",",
-            "                    \"unindexed\" : false",
+            "                    \"unindexed\" : false"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart4(StringBuilder sb) {
+        Stream.of(
             "                  },",
             "                  {",
             "                    \"databaseType\" : \"java.lang.String\",",
@@ -784,17 +567,17 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "                \"restEnableTotal\" : false,",
             "                \"restEnableUpdate\" : true,",
             "                \"restEnabled\" : true",
-            "              },"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart7(StringBuilder sb) {
-        Stream.of(
+            "              },",
             "              {",
             "                \"columns\" : [",
             "                  {",
             "                    \"autoIncrement\" : true,",
-            "                    \"biDirectional\" : false,",
+            "                    \"biDirectional\" : false,"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart5(StringBuilder sb) {
+        Stream.of(
             "                    \"databaseType\" : \"java.lang.Integer\",",
             "                    \"enabled\" : true,",
             "                    \"expanded\" : true,",
@@ -890,17 +673,17 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "                    \"indexColumns\" : [",
             "                      {",
             "                        \"expanded\" : true,",
-            "                        \"id\" : \"organizadorid\","
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart8(StringBuilder sb) {
-        Stream.of(
+            "                        \"id\" : \"organizadorid\",",
             "                        \"name\" : \"organizadorid\",",
             "                        \"orderType\" : \"ASC\",",
             "                        \"ordinalPosition\" : 1",
             "                      }",
-            "                    ],",
+            "                    ],"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart6(StringBuilder sb) {
+        Stream.of(
             "                    \"name\" : \"organizador_pkey\",",
             "                    \"nameProtected\" : true,",
             "                    \"unique\" : true",
@@ -996,17 +779,17 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "                      {",
             "                        \"expanded\" : true,",
             "                        \"foreignColumnName\" : \"clienteid\",",
-            "                        \"foreignDatabaseName\" : \"appreservas\","
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart9(StringBuilder sb) {
-        Stream.of(
+            "                        \"foreignDatabaseName\" : \"appreservas\",",
             "                        \"foreignSchemaName\" : \"reservas\",",
             "                        \"foreignTableName\" : \"cliente\",",
             "                        \"id\" : \"clienteid\",",
             "                        \"name\" : \"clienteid\",",
-            "                        \"ordinalPosition\" : 1",
+            "                        \"ordinalPosition\" : 1"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart7(StringBuilder sb) {
+        Stream.of(
             "                      }",
             "                    ],",
             "                    \"id\" : \"reserva_clienteid_fkey\",",
@@ -1102,17 +885,17 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "                    \"unindexed\" : false",
             "                  },",
             "                  {",
-            "                    \"autoIncrement\" : false,"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart10(StringBuilder sb) {
-        Stream.of(
+            "                    \"autoIncrement\" : false,",
             "                    \"biDirectional\" : false,",
             "                    \"databaseType\" : \"java.lang.Integer\",",
             "                    \"enabled\" : true,",
             "                    \"expanded\" : true,",
-            "                    \"hashIndex\" : false,",
+            "                    \"hashIndex\" : false,"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart8(StringBuilder sb) {
+        Stream.of(
             "                    \"id\" : \"lugarid\",",
             "                    \"lowCardinality\" : false,",
             "                    \"name\" : \"lugarid\",",
@@ -1208,17 +991,17 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "                    \"id\" : \"reservaid\",",
             "                    \"name\" : \"reservaid\",",
             "                    \"ordinalPosition\" : 1",
-            "                  },"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart11(StringBuilder sb) {
-        Stream.of(
+            "                  },",
             "                  {",
             "                    \"enabled\" : true,",
             "                    \"expanded\" : true,",
             "                    \"id\" : \"lugarid\",",
-            "                    \"name\" : \"lugarid\",",
+            "                    \"name\" : \"lugarid\","
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart9(StringBuilder sb) {
+        Stream.of(
             "                    \"nameProtected\" : false,",
             "                    \"ordinalPosition\" : 2",
             "                  }",
@@ -1314,17 +1097,17 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "                        \"name\" : \"salaid\",",
             "                        \"orderType\" : \"ASC\",",
             "                        \"ordinalPosition\" : 1",
-            "                      }"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart12(StringBuilder sb) {
-        Stream.of(
+            "                      }",
             "                    ],",
             "                    \"name\" : \"sala_pkey\",",
             "                    \"unique\" : true",
             "                  }",
-            "                ],",
+            "                ],"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart10(StringBuilder sb) {
+        Stream.of(
             "                \"isView\" : false,",
             "                \"name\" : \"sala\",",
             "                \"nameProtected\" : true,",
@@ -1420,17 +1203,17 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "                  {",
             "                    \"enabled\" : true,",
             "                    \"expanded\" : false,",
-            "                    \"foreignKeyColumns\" : ["
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart13(StringBuilder sb) {
-        Stream.of(
+            "                    \"foreignKeyColumns\" : [",
             "                      {",
             "                        \"expanded\" : true,",
             "                        \"foreignColumnName\" : \"eventoid\",",
             "                        \"foreignDatabaseName\" : \"appreservas\",",
-            "                        \"foreignSchemaName\" : \"reservas\",",
+            "                        \"foreignSchemaName\" : \"reservas\","
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart11(StringBuilder sb) {
+        Stream.of(
             "                        \"foreignTableName\" : \"evento\",",
             "                        \"id\" : \"eventoid\",",
             "                        \"name\" : \"eventoid\",",
@@ -1507,6 +1290,223 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "              {",
             "                \"columns\" : [",
             "                  {",
+            "                    \"autoIncrement\" : false,",
+            "                    \"biDirectional\" : false,",
+            "                    \"databaseType\" : \"java.lang.String\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"hashIndex\" : false,",
+            "                    \"id\" : \"firstname\",",
+            "                    \"lowCardinality\" : false,",
+            "                    \"name\" : \"firstname\",",
+            "                    \"nameProtected\" : true,",
+            "                    \"nullable\" : true,",
+            "                    \"nullableImplementation\" : \"OPTIONAL\",",
+            "                    \"ordinalPosition\" : 4,",
+            "                    \"restCreateBodyInclude\" : true,",
+            "                    \"restCreateBodyRequired\" : true,",
+            "                    \"restGetResponseInclude\" : true,",
+            "                    \"restUpdateBodyInclude\" : true,",
+            "                    \"restUpdateBodyRequired\" : true,",
+            "                    \"restVisible\" : true,",
+            "                    \"unindexed\" : false",
+            "                  },",
+            "                  {",
+            "                    \"autoIncrement\" : false,",
+            "                    \"biDirectional\" : false,",
+            "                    \"databaseType\" : \"java.lang.String\","
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart12(StringBuilder sb) {
+        Stream.of(
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"hashIndex\" : false,",
+            "                    \"id\" : \"lastname\",",
+            "                    \"lowCardinality\" : false,",
+            "                    \"name\" : \"lastname\",",
+            "                    \"nameProtected\" : true,",
+            "                    \"nullable\" : true,",
+            "                    \"nullableImplementation\" : \"OPTIONAL\",",
+            "                    \"ordinalPosition\" : 5,",
+            "                    \"restCreateBodyInclude\" : true,",
+            "                    \"restCreateBodyRequired\" : true,",
+            "                    \"restGetResponseInclude\" : true,",
+            "                    \"restUpdateBodyInclude\" : true,",
+            "                    \"restUpdateBodyRequired\" : true,",
+            "                    \"restVisible\" : true,",
+            "                    \"unindexed\" : false",
+            "                  },",
+            "                  {",
+            "                    \"autoIncrement\" : true,",
+            "                    \"biDirectional\" : false,",
+            "                    \"databaseType\" : \"java.lang.Long\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"hashIndex\" : false,",
+            "                    \"id\" : \"appuserid\",",
+            "                    \"lowCardinality\" : false,",
+            "                    \"name\" : \"appuserid\",",
+            "                    \"nameProtected\" : true,",
+            "                    \"nullable\" : false,",
+            "                    \"nullableImplementation\" : \"OPTIONAL\",",
+            "                    \"ordinalPosition\" : 1,",
+            "                    \"restCreateBodyInclude\" : true,",
+            "                    \"restCreateBodyRequired\" : true,",
+            "                    \"restGetResponseInclude\" : true,",
+            "                    \"restUpdateBodyInclude\" : false,",
+            "                    \"restUpdateBodyRequired\" : true,",
+            "                    \"restVisible\" : true,",
+            "                    \"typeMapper\" : \"com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper\",",
+            "                    \"unindexed\" : false",
+            "                  },",
+            "                  {",
+            "                    \"autoIncrement\" : false,",
+            "                    \"biDirectional\" : false,",
+            "                    \"databaseType\" : \"java.lang.String\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"hashIndex\" : false,",
+            "                    \"id\" : \"email\",",
+            "                    \"lowCardinality\" : false,",
+            "                    \"name\" : \"email\",",
+            "                    \"nameProtected\" : true,",
+            "                    \"nullable\" : true,",
+            "                    \"nullableImplementation\" : \"OPTIONAL\",",
+            "                    \"ordinalPosition\" : 2,",
+            "                    \"restCreateBodyInclude\" : true,",
+            "                    \"restCreateBodyRequired\" : true,",
+            "                    \"restGetResponseInclude\" : true,",
+            "                    \"restUpdateBodyInclude\" : true,",
+            "                    \"restUpdateBodyRequired\" : true,",
+            "                    \"restVisible\" : true,",
+            "                    \"unindexed\" : false",
+            "                  },",
+            "                  {",
+            "                    \"autoIncrement\" : false,",
+            "                    \"biDirectional\" : false,",
+            "                    \"databaseType\" : \"java.lang.String\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"hashIndex\" : false,",
+            "                    \"id\" : \"password\",",
+            "                    \"lowCardinality\" : false,",
+            "                    \"name\" : \"password\",",
+            "                    \"nameProtected\" : true,",
+            "                    \"nullable\" : true,",
+            "                    \"nullableImplementation\" : \"OPTIONAL\",",
+            "                    \"ordinalPosition\" : 3,",
+            "                    \"restCreateBodyInclude\" : true,",
+            "                    \"restCreateBodyRequired\" : true,",
+            "                    \"restGetResponseInclude\" : true,",
+            "                    \"restUpdateBodyInclude\" : true,",
+            "                    \"restUpdateBodyRequired\" : true,",
+            "                    \"restVisible\" : true,",
+            "                    \"unindexed\" : false",
+            "                  },",
+            "                  {",
+            "                    \"autoIncrement\" : false,",
+            "                    \"biDirectional\" : false,",
+            "                    \"databaseType\" : \"java.lang.String\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"hashIndex\" : false,",
+            "                    \"id\" : \"roles\",",
+            "                    \"lowCardinality\" : false,",
+            "                    \"name\" : \"roles\",",
+            "                    \"nameProtected\" : true,",
+            "                    \"nullable\" : true,",
+            "                    \"nullableImplementation\" : \"OPTIONAL\",",
+            "                    \"ordinalPosition\" : 4,",
+            "                    \"restCreateBodyInclude\" : true,",
+            "                    \"restCreateBodyRequired\" : true,"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart13(StringBuilder sb) {
+        Stream.of(
+            "                    \"restGetResponseInclude\" : true,",
+            "                    \"restUpdateBodyInclude\" : true,",
+            "                    \"restUpdateBodyRequired\" : true,",
+            "                    \"restVisible\" : true,",
+            "                    \"unindexed\" : false",
+            "                  },",
+            "                  {",
+            "                    \"autoIncrement\" : false,",
+            "                    \"biDirectional\" : false,",
+            "                    \"databaseType\" : \"java.lang.String\",",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"hashIndex\" : false,",
+            "                    \"id\" : \"username\",",
+            "                    \"lowCardinality\" : false,",
+            "                    \"name\" : \"username\",",
+            "                    \"nameProtected\" : true,",
+            "                    \"nullable\" : true,",
+            "                    \"nullableImplementation\" : \"OPTIONAL\",",
+            "                    \"ordinalPosition\" : 5,",
+            "                    \"restCreateBodyInclude\" : true,",
+            "                    \"restCreateBodyRequired\" : true,",
+            "                    \"restGetResponseInclude\" : true,",
+            "                    \"restUpdateBodyInclude\" : true,",
+            "                    \"restUpdateBodyRequired\" : true,",
+            "                    \"restVisible\" : true,",
+            "                    \"unindexed\" : false",
+            "                  }",
+            "                ],",
+            "                \"enabled\" : false,",
+            "                \"expanded\" : false,",
+            "                \"id\" : \"users\",",
+            "                \"implements\" : \"\",",
+            "                \"indexes\" : [",
+            "                  {",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : false,",
+            "                    \"id\" : \"users_pkey\",",
+            "                    \"indexColumns\" : [",
+            "                      {",
+            "                        \"expanded\" : true,",
+            "                        \"id\" : \"appuserid\",",
+            "                        \"name\" : \"appuserid\",",
+            "                        \"orderType\" : \"ASC\",",
+            "                        \"ordinalPosition\" : 1",
+            "                      }",
+            "                    ],",
+            "                    \"name\" : \"users_pkey\",",
+            "                    \"nameProtected\" : true,",
+            "                    \"unique\" : true",
+            "                  }",
+            "                ],",
+            "                \"isView\" : false,",
+            "                \"name\" : \"users\",",
+            "                \"nameProtected\" : true,",
+            "                \"packageName\" : \"com.appreservas.auth.users\",",
+            "                \"primaryKeyColumns\" : [",
+            "                  {",
+            "                    \"enabled\" : true,",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"appuserid\",",
+            "                    \"name\" : \"appuserid\",",
+            "                    \"nameProtected\" : false,",
+            "                    \"ordinalPosition\" : 1",
+            "                  }",
+            "                ],",
+            "                \"restCors\" : \"*\",",
+            "                \"restEnableCreate\" : true,",
+            "                \"restEnableDelete\" : true,",
+            "                \"restEnableFilters\" : true,",
+            "                \"restEnableGet\" : true,",
+            "                \"restEnableList\" : true,",
+            "                \"restEnableSkipLimit\" : true,",
+            "                \"restEnableSorters\" : true,",
+            "                \"restEnableTotal\" : false,",
+            "                \"restEnableUpdate\" : true,",
+            "                \"restEnabled\" : true",
+            "              },",
+            "              {",
+            "                \"columns\" : [",
+            "                  {",
             "                    \"autoIncrement\" : true,",
             "                    \"databaseType\" : \"java.lang.Integer\",",
             "                    \"enabled\" : true,",
@@ -1518,6 +1518,21 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "                    \"typeMapper\" : \"com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper\"",
             "                  },",
             "                  {",
+            "                    \"autoIncrement\" : true,",
+            "                    \"databaseType\" : \"java.lang.Integer\",",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"appuserid\",",
+            "                    \"name\" : \"appuserid\",",
+            "                    \"nullable\" : false,",
+            "                    \"ordinalPosition\" : 1,",
+            "                    \"typeMapper\" : \"com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper\"",
+            "                  },"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart14(StringBuilder sb) {
+        Stream.of(
+            "                  {",
             "                    \"databaseType\" : \"java.lang.String\",",
             "                    \"enabled\" : true,",
             "                    \"expanded\" : true,",
@@ -1526,12 +1541,7 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "                    \"nullable\" : false,",
             "                    \"ordinalPosition\" : 2",
             "                  }",
-            "                ],"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart14(StringBuilder sb) {
-        Stream.of(
+            "                ],",
             "                \"enabled\" : false,",
             "                \"expanded\" : false,",
             "                \"id\" : \"utilizador\",",
@@ -1546,6 +1556,13 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "                        \"expanded\" : true,",
             "                        \"id\" : \"utilizadorid\",",
             "                        \"name\" : \"utilizadorid\",",
+            "                        \"orderType\" : \"ASC\",",
+            "                        \"ordinalPosition\" : 1",
+            "                      },",
+            "                      {",
+            "                        \"expanded\" : true,",
+            "                        \"id\" : \"appuserid\",",
+            "                        \"name\" : \"appuserid\",",
             "                        \"orderType\" : \"ASC\",",
             "                        \"ordinalPosition\" : 1",
             "                      }",
@@ -1563,6 +1580,12 @@ public class GeneratedReservasMetadata extends AbstractApplicationMetadata {
             "                    \"expanded\" : true,",
             "                    \"id\" : \"utilizadorid\",",
             "                    \"name\" : \"utilizadorid\",",
+            "                    \"ordinalPosition\" : 1",
+            "                  },",
+            "                  {",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"appuserid\",",
+            "                    \"name\" : \"appuserid\",",
             "                    \"ordinalPosition\" : 1",
             "                  }",
             "                ],",

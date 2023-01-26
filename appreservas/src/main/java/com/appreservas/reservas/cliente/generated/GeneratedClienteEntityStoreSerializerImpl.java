@@ -105,7 +105,6 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
             final int offset = offsetFinder.applyAsInt(ref);
             final Cliente entity = new ClienteImpl();
             entity.setClienteid(buffer.getInt(offset + FIELD_CLIENTEID));
-            entity.setAppuserid(buffer.getInt(offset + FIELD_APPUSERID));
             try {
                 entity.setNome(Utf8Util.deserialize(buffer,
                     offset + VARSIZE_BEGINS + (0x7f & buffer.get(offset + ENDPOS_NOME - Byte.BYTES)),
@@ -132,6 +131,7 @@ public abstract class GeneratedClienteEntityStoreSerializerImpl implements Entit
             if (buffer.get(offset + ENDPOS_NIF) >= 0) {
                 entity.setNif(buffer.getInt(offset + VARSIZE_BEGINS + buffer.get(offset + ENDPOS_NIF) - Integer.BYTES));
             }
+            entity.setAppuserid(buffer.getInt(offset + FIELD_APPUSERID));
             return entity;
         };
     }
