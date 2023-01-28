@@ -32,7 +32,7 @@ public class Select
     private Select(){
         try {
             Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(System.getenv("SPRING_DATASOURCE_URL"), "postgres", "postgres");
+            connection = DriverManager.getConnection("jdbc:postgresql://appreservas.ccyenfzsjoqi.eu-west-3.rds.amazonaws.com:5432/appreservas?currentSchema=reservas", "postgres", "?appReservas2023");
             //     c.setAutoCommit(false);
             System.out.println("Successfully Connected.");
         } catch (Exception e) {

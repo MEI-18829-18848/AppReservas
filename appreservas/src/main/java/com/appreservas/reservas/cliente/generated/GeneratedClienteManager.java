@@ -26,11 +26,11 @@ public interface GeneratedClienteManager extends Manager<Cliente> {
     TableIdentifier<Cliente> IDENTIFIER = TableIdentifier.of("appreservas", "reservas", "cliente");
     List<Field<Cliente>> FIELDS = unmodifiableList(asList(
         Cliente.CLIENTEID,
-        Cliente.APPUSERID,
         Cliente.NOME,
         Cliente.TELEMOVEL,
         Cliente.EMAIL,
-        Cliente.NIF
+        Cliente.NIF,
+        Cliente.APPUSERID
     ));
     
     @Override

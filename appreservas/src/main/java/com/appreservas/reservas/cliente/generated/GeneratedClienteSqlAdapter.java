@@ -34,11 +34,11 @@ public abstract class GeneratedClienteSqlAdapter implements SqlAdapter<Cliente> 
     protected Cliente apply(ResultSet resultSet, int offset) throws SQLException {
         return createEntity()
             .setClienteid( getInt(resultSet, 1 + offset))
-            .setAppuserid( getInt(resultSet, 2 + offset))
-            .setNome(      resultSet.getString(3 + offset))
-            .setTelemovel( getInt(resultSet, 4 + offset))
-            .setEmail(     resultSet.getString(5 + offset))
-            .setNif(       getInt(resultSet, 6 + offset))
+            .setNome(      resultSet.getString(2 + offset))
+            .setTelemovel( getInt(resultSet, 3 + offset))
+            .setEmail(     resultSet.getString(4 + offset))
+            .setNif(       getInt(resultSet, 5 + offset))
+            .setAppuserid( getInt(resultSet, 6 + offset))
             ;
     }
     

@@ -55,28 +55,28 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
     
     private final EntityStore<Cliente> entityStore;
     private final OfInt fieldClienteidCache;
-    private final OfInt fieldAppuseridCache;
     private final OfString fieldNomeCache;
     private final OfInt fieldTelemovelCache;
     private final OfString fieldEmailCache;
     private final OfInt fieldNifCache;
+    private final OfInt fieldAppuseridCache;
     
     public GeneratedClienteCacheHolder(
             EntityStore<Cliente> entityStore,
             OfInt fieldClienteidCache,
-            OfInt fieldAppuseridCache,
             OfString fieldNomeCache,
             OfInt fieldTelemovelCache,
             OfString fieldEmailCache,
-            OfInt fieldNifCache) {
+            OfInt fieldNifCache,
+            OfInt fieldAppuseridCache) {
         
         this.entityStore         = requireNonNull(entityStore);
         this.fieldClienteidCache = requireNonNull(fieldClienteidCache);
-        this.fieldAppuseridCache = requireNonNull(fieldAppuseridCache);
         this.fieldNomeCache      = requireNonNull(fieldNomeCache);
         this.fieldTelemovelCache = requireNonNull(fieldTelemovelCache);
         this.fieldEmailCache     = requireNonNull(fieldEmailCache);
         this.fieldNifCache       = requireNonNull(fieldNifCache);
+        this.fieldAppuseridCache = requireNonNull(fieldAppuseridCache);
     }
     
     @Override
@@ -91,11 +91,11 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
             final Cliente.Identifier _id = (Cliente.Identifier) columnId;
             switch (_id) {
                 case CLIENTEID : return (CACHE) fieldClienteidCache;
-                case APPUSERID : return (CACHE) fieldAppuseridCache;
                 case NOME      : return (CACHE) fieldNomeCache;
                 case TELEMOVEL : return (CACHE) fieldTelemovelCache;
                 case EMAIL     : return (CACHE) fieldEmailCache;
                 case NIF       : return (CACHE) fieldNifCache;
+                case APPUSERID : return (CACHE) fieldAppuseridCache;
                 default : {
                     throw new UnsupportedOperationException(
                         String.format("Unknown enum constant '%s'.", _id)
@@ -106,11 +106,11 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
             final String _colName = columnId.getColumnId();
             switch (_colName) {
                 case "clienteid" : return (CACHE) fieldClienteidCache;
-                case "appuserid" : return (CACHE) fieldAppuseridCache;
                 case "nome"      : return (CACHE) fieldNomeCache;
                 case "telemovel" : return (CACHE) fieldTelemovelCache;
                 case "email"     : return (CACHE) fieldEmailCache;
                 case "nif"       : return (CACHE) fieldNifCache;
+                case "appuserid" : return (CACHE) fieldAppuseridCache;
                 default : {
                     throw new UnsupportedOperationException(
                         String.format("Unknown column name '%s'.", _colName)
@@ -153,21 +153,21 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
         // Use explicit type for Stream to improve compilation time.
         final Map<ColumnLabel, FieldCache<?>> fieldCaches = Stream.<Tuple2<HasIdentifier<Cliente>, FieldCache<?>>>of(
             Tuples.of(Cliente.CLIENTEID,fieldClienteidCache),
-            Tuples.of(Cliente.APPUSERID,fieldAppuseridCache),
             Tuples.of(Cliente.NOME,     fieldNomeCache),
             Tuples.of(Cliente.TELEMOVEL,fieldTelemovelCache),
             Tuples.of(Cliente.EMAIL,    fieldEmailCache),
-            Tuples.of(Cliente.NIF,      fieldNifCache)
+            Tuples.of(Cliente.NIF,      fieldNifCache),
+            Tuples.of(Cliente.APPUSERID,fieldAppuseridCache)
         )
             .collect(toMap(t2 -> t2.get0().identifier().label(), Tuple2::get1));
         final Map<ColumnLabel,  Map<ColumnLabel, MultiFieldCache<?, ?, ?>>>  multiFieldCaches = createMultiCacheMap();
         final Set<ColumnIdentifier<Cliente>> columnIdentifiers = Stream.<HasIdentifier<Cliente>>of(
             Cliente.CLIENTEID,
-            Cliente.APPUSERID,
             Cliente.NOME,
             Cliente.TELEMOVEL,
             Cliente.EMAIL,
-            Cliente.NIF
+            Cliente.NIF,
+            Cliente.APPUSERID
         )
             .map(HasIdentifier::identifier)
             .collect(toSet());
@@ -183,9 +183,6 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
         final CompletableFuture<FieldCache.OfInt> fieldClienteidCacheFuture =
             DataStoreHolderUtil.buildIntCache(entityStoreFuture, executor, Cliente.CLIENTEID, FieldCache.DISTINCT);
         
-        final CompletableFuture<FieldCache.OfInt> fieldAppuseridCacheFuture =
-            DataStoreHolderUtil.buildIntCache(entityStoreFuture, executor, Cliente.APPUSERID, 0);
-        
         final CompletableFuture<FieldCache.OfString> fieldNomeCacheFuture =
             DataStoreHolderUtil.buildStringCache(entityStoreFuture, executor, Cliente.NOME, 0);
         
@@ -198,16 +195,19 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
         final CompletableFuture<FieldCache.OfInt> fieldNifCacheFuture =
             DataStoreHolderUtil.buildIntCache(entityStoreFuture, executor, Cliente.NIF, 0);
         
+        final CompletableFuture<FieldCache.OfInt> fieldAppuseridCacheFuture =
+            DataStoreHolderUtil.buildIntCache(entityStoreFuture, executor, Cliente.APPUSERID, 0);
+        
         return entityStoreFuture.thenApplyAsync(entityStore -> {
             try {
                 return new GeneratedClienteCacheHolder(
                     entityStore,
                     fieldClienteidCacheFuture.get(),
-                    fieldAppuseridCacheFuture.get(),
                     fieldNomeCacheFuture.get(),
                     fieldTelemovelCacheFuture.get(),
                     fieldEmailCacheFuture.get(),
-                    fieldNifCacheFuture.get()
+                    fieldNifCacheFuture.get(),
+                    fieldAppuseridCacheFuture.get()
                 );
             } catch (final ExecutionException | InterruptedException ex) {
                 throw new RuntimeException(ex);
@@ -219,11 +219,11 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
     public void close() {
         entityStore.close();
         fieldClienteidCache.close();
-        fieldAppuseridCache.close();
         fieldNomeCache.close();
         fieldTelemovelCache.close();
         fieldEmailCache.close();
         fieldNifCache.close();
+        fieldAppuseridCache.close();
     }
     
     @Override
@@ -233,11 +233,11 @@ public final class GeneratedClienteCacheHolder implements EntityStoreHolder<Clie
             entityStore.identifier(),
             Arrays.asList(
                 Cliente.Identifier.CLIENTEID,
-                Cliente.Identifier.APPUSERID,
                 Cliente.Identifier.NOME,
                 Cliente.Identifier.TELEMOVEL,
                 Cliente.Identifier.EMAIL,
-                Cliente.Identifier.NIF
+                Cliente.Identifier.NIF,
+                Cliente.Identifier.APPUSERID
             )
         
         );

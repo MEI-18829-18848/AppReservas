@@ -66,11 +66,11 @@ public abstract class GeneratedClienteController {
     void createClienteEncoder() {
         encoder = jsonComponent.<Cliente>emptyEncoder()
             .put("clienteid", Cliente.CLIENTEID)
-            .put("appuserid", Cliente.APPUSERID)
             .put("nome", Cliente.NOME)
             .put("telemovel", Cliente.TELEMOVEL)
             .put("email", Cliente.EMAIL)
             .put("nif", Cliente.NIF)
+            .put("appuserid", Cliente.APPUSERID)
             .build();
     }
     
@@ -136,11 +136,11 @@ public abstract class GeneratedClienteController {
         
         final Persister<Cliente> persister = manager.persister(excluded);
         final Cliente cliente = manager.create()
-            .setAppuserid(createBody.getAppuserid())
             .setNome(createBody.getNome())
             .setTelemovel(createBody.getTelemovel())
             .setEmail(createBody.getEmail())
             .setNif(createBody.getNif())
+            .setAppuserid(createBody.getAppuserid())
         ;
         
         persister.accept(cliente);
@@ -158,11 +158,11 @@ public abstract class GeneratedClienteController {
             .orElseThrow(() -> new ClienteNotFoundException(clienteid));
         
         cliente.setClienteid(updateBody.getClienteid());
-        cliente.setAppuserid(updateBody.getAppuserid());
         cliente.setNome(updateBody.getNome());
         cliente.setTelemovel(updateBody.getTelemovel());
         cliente.setEmail(updateBody.getEmail());
         cliente.setNif(updateBody.getNif());
+        cliente.setAppuserid(updateBody.getAppuserid());
         
         updater.accept(cliente);
     }
@@ -230,22 +230,6 @@ public abstract class GeneratedClienteController {
                         );
                     }
                 }
-                case "appuserid" : {
-                    final int v = Integer.parseInt(value());
-                    switch (operator()) {
-                        case "eq"   : return Cliente.APPUSERID.equal(v);
-                        case "ne"   : return Cliente.APPUSERID.notEqual(v);
-                        case "lt"   : return Cliente.APPUSERID.lessThan(v);
-                        case "le"   : return Cliente.APPUSERID.lessOrEqual(v);
-                        case "gt"   : return Cliente.APPUSERID.greaterThan(v);
-                        case "ge"   : return Cliente.APPUSERID.greaterOrEqual(v);
-                        case "like" : // Fallthrough
-                        default : throw new IllegalArgumentException(
-                            "'" + operator() + "' is not a valid operator for " +
-                            "Cliente.appuserid."
-                        );
-                    }
-                }
                 case "nome" : {
                     final String v = value();
                     switch (operator()) {
@@ -310,6 +294,22 @@ public abstract class GeneratedClienteController {
                         );
                     }
                 }
+                case "appuserid" : {
+                    final int v = Integer.parseInt(value());
+                    switch (operator()) {
+                        case "eq"   : return Cliente.APPUSERID.equal(v);
+                        case "ne"   : return Cliente.APPUSERID.notEqual(v);
+                        case "lt"   : return Cliente.APPUSERID.lessThan(v);
+                        case "le"   : return Cliente.APPUSERID.lessOrEqual(v);
+                        case "gt"   : return Cliente.APPUSERID.greaterThan(v);
+                        case "ge"   : return Cliente.APPUSERID.greaterOrEqual(v);
+                        case "like" : // Fallthrough
+                        default : throw new IllegalArgumentException(
+                            "'" + operator() + "' is not a valid operator for " +
+                            "Cliente.appuserid."
+                        );
+                    }
+                }
                 default : throw new IllegalArgumentException(
                     "'" + property() + "' is not a valid Cliente property."
                 );
@@ -332,11 +332,11 @@ public abstract class GeneratedClienteController {
             final Comparator<Cliente> comparator;
             switch (property()) {
                 case "clienteid" : comparator = Cliente.CLIENTEID.comparator(); break;
-                case "appuserid" : comparator = Cliente.APPUSERID.comparator(); break;
                 case "nome"      : comparator = Cliente.NOME.comparator();      break;
                 case "telemovel" : comparator = Cliente.TELEMOVEL.comparator(); break;
                 case "email"     : comparator = Cliente.EMAIL.comparator();     break;
                 case "nif"       : comparator = Cliente.NIF.comparator();       break;
+                case "appuserid" : comparator = Cliente.APPUSERID.comparator(); break;
                 default : throw new IllegalArgumentException(
                     "'" + property() + "' is not a valid Cliente property."
                 );
@@ -365,28 +365,24 @@ public abstract class GeneratedClienteController {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class ClienteCreateBody {
         
-        private final int appuserid;
         private final String nome;
         private final Integer telemovel;
         private final String email;
         private final Integer nif;
+        private final int appuserid;
         
         @JsonCreator
         public ClienteCreateBody(
-                @JsonProperty("appuserid") Integer appuserid,
                 @JsonProperty("nome") String nome,
                 @JsonProperty("telemovel") Integer telemovel,
                 @JsonProperty("email") String email,
-                @JsonProperty("nif") Integer nif) {
-            this.appuserid = Objects.requireNonNull(appuserid, "`appuserid` is required");
+                @JsonProperty("nif") Integer nif,
+                @JsonProperty("appuserid") Integer appuserid) {
             this.nome = Objects.requireNonNull(nome, "`nome` is required");
             this.telemovel = Objects.requireNonNull(telemovel, "`telemovel` is required");
             this.email = Objects.requireNonNull(email, "`email` is required");
             this.nif = Objects.requireNonNull(nif, "`nif` is required");
-        }
-        
-        public int getAppuserid() {
-            return this.appuserid;
+            this.appuserid = Objects.requireNonNull(appuserid, "`appuserid` is required");
         }
         
         public String getNome() {
@@ -403,6 +399,10 @@ public abstract class GeneratedClienteController {
         
         public Integer getNif() {
             return this.nif;
+        }
+        
+        public int getAppuserid() {
+            return this.appuserid;
         }
     }
     
@@ -411,34 +411,30 @@ public abstract class GeneratedClienteController {
     public static final class ClienteUpdateBody {
         
         private final int clienteid;
-        private final int appuserid;
         private final String nome;
         private final Integer telemovel;
         private final String email;
         private final Integer nif;
+        private final int appuserid;
         
         @JsonCreator
         public ClienteUpdateBody(
                 @JsonProperty("clienteid") Integer clienteid,
-                @JsonProperty("appuserid") Integer appuserid,
                 @JsonProperty("nome") String nome,
                 @JsonProperty("telemovel") Integer telemovel,
                 @JsonProperty("email") String email,
-                @JsonProperty("nif") Integer nif) {
+                @JsonProperty("nif") Integer nif,
+                @JsonProperty("appuserid") Integer appuserid) {
             this.clienteid = Objects.requireNonNull(clienteid, "`clienteid` is required");
-            this.appuserid = Objects.requireNonNull(appuserid, "`appuserid` is required");
             this.nome = Objects.requireNonNull(nome, "`nome` is required");
             this.telemovel = Objects.requireNonNull(telemovel, "`telemovel` is required");
             this.email = Objects.requireNonNull(email, "`email` is required");
             this.nif = Objects.requireNonNull(nif, "`nif` is required");
+            this.appuserid = Objects.requireNonNull(appuserid, "`appuserid` is required");
         }
         
         public int getClienteid() {
             return this.clienteid;
-        }
-        
-        public int getAppuserid() {
-            return this.appuserid;
         }
         
         public String getNome() {
@@ -455,6 +451,10 @@ public abstract class GeneratedClienteController {
         
         public Integer getNif() {
             return this.nif;
+        }
+        
+        public int getAppuserid() {
+            return this.appuserid;
         }
     }
 }
