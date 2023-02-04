@@ -1,0 +1,60 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pipeline-config
+data:
+  main.conf: |
+    input {
+    rabbitmq {
+        id => "rabbitmq_auth_logs"
+        # connect to rabbit
+        host => "172.23.0.3"
+        port => 5672
+        vhost => "/"
+        # Create a new queue
+        queue => "AuthLogs"
+        durable => "false"
+        # Take a copy of all messages with the "app_version_queue" routing key from the existing exchange
+        exchange => "AuthProvider"
+        key => "auth-log"
+        # No ack will boost your perf
+        ack => false
+        tags => "auth"
+      }
+    rabbitmq {
+        id => "rabbitmq_appreservas_logs"
+        # connect to rabbit
+        host => "172.23.0.3"
+        port => 5672
+        vhost => "/"
+        # Create a new queue
+        queue => "AppReservas"
+        durable => "false"
+        # Take a copy of all messages with the "app_version_queue" routing key from the existing exchange
+        exchange => "AppReservas"
+        key => "app-log"
+        # No ack will boost your perf
+        ack => false
+        tags => "app"
+      }
+    }  
+    
+    output {
+      if "auth" in [tags]{
+        elasticsearch {
+        hosts       => "https://search-appreservas-ln6bfecsbc5hb45wgbgtcdhpfi.eu-west-3.es.amazonaws.com:9200"
+        user        => "appreservas"
+        password    => "#appReservas2023"
+        index       => "auth-logs-%{+YYYY.MM.dd}"
+        }  
+      }
+      if "app" in [tags]{
+        elasticsearch {
+        hosts       => "https://search-appreservas-ln6bfecsbc5hb45wgbgtcdhpfi.eu-west-3.es.amazonaws.com:9200"
+        user        => "appreservas"
+        password    => "#appReservas2023"
+        index       => "app-logs-%{+YYYY.MM.dd}"
+        }  
+      }       
+    }

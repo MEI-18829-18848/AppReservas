@@ -1,0 +1,27 @@
+Enable docker wsl Unbuntu Integration (print enviada para o k7 no disc)
+Install k3d, helm, kubectl e k9s(optional)
+
+Comando para criar o cluster: 
+k3d cluster create mycluster (print enviada para o k7 no disc)
+
+Depois podemos fazer recuro ao comando: 
+kubectl get nodes
+para verificar se o cluster foi criado com sucesso e se está pronto a ser utilizado
+
+DEPLOY DOCS : https://medium.com/nerd-for-tech/deploying-rabbitmq-on-kubernetes-using-rabbitmq-cluster-operator-ef99f7a4e417
+Instalar o rabbit mq operator
+kubectl apply -f https://github.com/rabbitmq/cluster-operator/releases/latest/download/cluster-operator.yml
+
+Instalar rabbitmq cluster 
+kubectl apply -f /mnt/c/mei/semestre1/AppReservas/k8s/rabbitmqcluster.yaml (print enviada para o k7 no disc)
+
+Para aceder na web fazer port forward do serviço production-rabbitmqcluster na porta 15672
+
+
+https://betterprogramming.pub/efficient-logstash-deployment-in-kubernetes-968d7ebb5df2
+
+add the Elastic repo: helm repo add elastic https://helm.elastic.co
+install Logstash chart: helm install logstash elastic/logstash
+verify the Logstash pod is running with kubectl get po | grep logstash
+
+helm dep build appreservas
