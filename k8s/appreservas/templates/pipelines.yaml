@@ -2,14 +2,14 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: pipeline-config
+  name: logstash-pipeline
 data:
   main.conf: |
     input {
     rabbitmq {
         id => "rabbitmq_auth_logs"
         # connect to rabbit
-        host => "172.23.0.3"
+        host => 172.23.0.3
         port => 5672
         vhost => "/"
         # Create a new queue
@@ -17,6 +17,8 @@ data:
         durable => "false"
         # Take a copy of all messages with the "app_version_queue" routing key from the existing exchange
         exchange => "AuthProvider"
+        exchange_type => "topic"
+        durable => "false"
         key => "auth-log"
         # No ack will boost your perf
         ack => false
@@ -25,7 +27,7 @@ data:
     rabbitmq {
         id => "rabbitmq_appreservas_logs"
         # connect to rabbit
-        host => "172.23.0.3"
+        host => 172.23.0.3
         port => 5672
         vhost => "/"
         # Create a new queue
@@ -33,6 +35,8 @@ data:
         durable => "false"
         # Take a copy of all messages with the "app_version_queue" routing key from the existing exchange
         exchange => "AppReservas"
+        exchange_type => "topic"
+        durable => "false"
         key => "app-log"
         # No ack will boost your perf
         ack => false
@@ -42,16 +46,16 @@ data:
     
     output {
       if "auth" in [tags]{
-        elasticsearch {
-        hosts       => "https://search-appreservas-ln6bfecsbc5hb45wgbgtcdhpfi.eu-west-3.es.amazonaws.com:9200"
+        opensearch {
+        hosts       => "https://search-appreservas-ln6bfecsbc5hb45wgbgtcdhpfi.eu-west-3.es.amazonaws.com"
         user        => "appreservas"
         password    => "#appReservas2023"
         index       => "auth-logs-%{+YYYY.MM.dd}"
         }  
       }
       if "app" in [tags]{
-        elasticsearch {
-        hosts       => "https://search-appreservas-ln6bfecsbc5hb45wgbgtcdhpfi.eu-west-3.es.amazonaws.com:9200"
+        opensearch {
+        hosts       => "https://search-appreservas-ln6bfecsbc5hb45wgbgtcdhpfi.eu-west-3.es.amazonaws.com"
         user        => "appreservas"
         password    => "#appReservas2023"
         index       => "app-logs-%{+YYYY.MM.dd}"

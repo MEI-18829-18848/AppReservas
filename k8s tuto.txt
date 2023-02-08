@@ -25,3 +25,5 @@ install Logstash chart: helm install logstash elastic/logstash
 verify the Logstash pod is running with kubectl get po | grep logstash
 
 helm dep build appreservas
+
+https://coralogix.com/blog/elasticsearch-logstash-kibana-on-kubernetes/
