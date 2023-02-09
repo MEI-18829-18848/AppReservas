@@ -29,7 +29,7 @@ spec:
               protocol: TCP
           env:
           - name: RABBIT_MQ_IP
-            value: 172.23.0.2
+            value: "rabbitmq.default.svc.cluster.local"
         - name: {{ .Values.auth.name }}
           image: "{{ .Values.auth.repository }}:{{ .Values.auth.tag }}"
           imagePullPolicy: {{ .Values.auth.pullPolicy }}
@@ -39,4 +39,4 @@ spec:
               protocol: TCP
           env:
           - name: RABBIT_MQ_IP
-            value: 172.23.0.2
+            value: "rabbitmq.default.svc.cluster.local"

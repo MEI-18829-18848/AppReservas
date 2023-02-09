@@ -9,7 +9,7 @@ data:
     rabbitmq {
         id => "rabbitmq_auth_logs"
         # connect to rabbit
-        host => 172.23.0.3
+        host => "rabbitmq.default.svc.cluster.local"
         port => 5672
         vhost => "/"
         # Create a new queue
@@ -27,7 +27,7 @@ data:
     rabbitmq {
         id => "rabbitmq_appreservas_logs"
         # connect to rabbit
-        host => 172.23.0.3
+        host => "rabbitmq.default.svc.cluster.local"
         port => 5672
         vhost => "/"
         # Create a new queue
@@ -47,18 +47,22 @@ data:
     output {
       if "auth" in [tags]{
         opensearch {
-        hosts       => "https://search-appreservas-ln6bfecsbc5hb45wgbgtcdhpfi.eu-west-3.es.amazonaws.com"
+        hosts       => "https://search-appreservas-ln6bfecsbc5hb45wgbgtcdhpfi.eu-west-3.es.amazonaws.com:443"
         user        => "appreservas"
         password    => "#appReservas2023"
         index       => "auth-logs-%{+YYYY.MM.dd}"
+        ecs_compatibility => disabled
+        ssl_certificate_verification => false
         }  
       }
       if "app" in [tags]{
         opensearch {
-        hosts       => "https://search-appreservas-ln6bfecsbc5hb45wgbgtcdhpfi.eu-west-3.es.amazonaws.com"
+        hosts       => "https://search-appreservas-ln6bfecsbc5hb45wgbgtcdhpfi.eu-west-3.es.amazonaws.com:443"
         user        => "appreservas"
         password    => "#appReservas2023"
         index       => "app-logs-%{+YYYY.MM.dd}"
+        ecs_compatibility => disabled
+        ssl_certificate_verification => false
         }  
       }       
     }

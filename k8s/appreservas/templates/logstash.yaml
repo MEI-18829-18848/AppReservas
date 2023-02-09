@@ -20,7 +20,7 @@ spec:
           - containerPort: 5044
           env:
           - name: RABBIT_MQ_IP
-            value: 172.23.0.3
+            value: "rabbitmq.default.svc.cluster.local"
           resources: {}
           volumeMounts:
             - name: config-volume
